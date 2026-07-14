@@ -653,11 +653,11 @@ function App() {
             <div className="grid grid-cols-3 gap-4">
               {[
                 { name: "React / Next.js", value: "95%" },
-                { name: "TypeScript", value: "90%" },
-                { name: "Figma", value: "85%" },
-                { name: "HTML/CSS", value: "95%" },
-                { name: "Node.js", value: "80%" },
-                { name: "Git / CI/CD", value: "90%" }
+                { name: "Vue.js", value: "85%" },
+                { name: "Tailwind CSS", value: "95%" },
+                { name: "Backend (Node.js)", value: "90%" },
+                { name: "Docker", value: "80%" },
+                { name: "DevOps / CI/CD", value: "90%" }
               ].map((skill, i) => (
                 <div key={i} className="p-6 rounded-2xl bg-slate-50 dark:bg-neutral-900/30 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/50 transition-all text-center flex flex-col items-center justify-center gap-3 animated-gradient-border">
                   <div className="w-16 h-16 rounded-full border-4 border-emerald-500/20 dark:border-emerald-400/20 border-t-emerald-500 dark:border-t-emerald-400 flex items-center justify-center font-bold text-slate-800 dark:text-white text-sm">
