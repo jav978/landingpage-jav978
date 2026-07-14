@@ -7,6 +7,10 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
   
+  *, *::before, *::after {
+    transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, text-decoration-color 150ms ease-in-out, fill 150ms ease-in-out, stroke 150ms ease-in-out;
+  }
+
   h1, h2, h3 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     letter-spacing: -0.03em;

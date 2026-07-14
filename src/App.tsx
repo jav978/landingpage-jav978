@@ -213,7 +213,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans selection:bg-neutral-800 selection:text-white transition-colors duration-300 dark:bg-neutral-950 dark:text-neutral-100 light:bg-neutral-50 light:text-neutral-900 overflow-x-hidden">
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans selection:bg-neutral-800 selection:text-white transition-colors duration-150 dark:bg-neutral-950 dark:text-neutral-100 light:bg-neutral-50 light:text-neutral-900 overflow-x-hidden">
       
       {/* Header / Navbar */}
       <header
@@ -573,7 +573,7 @@ function App() {
                   {t.portfolio.project1.desc}
                 </p>
               </div>
-              <a href="#contact" className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-emerald-400 transition-colors">
+              <a href="https://colegiosantaluisa.dpdns.org/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-emerald-400 transition-colors">
                 <span>Ver proyecto</span>
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
