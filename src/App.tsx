@@ -642,7 +642,7 @@ function App() {
               </p>
               
               <div className="p-6 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-850 flex items-center gap-6">
-                <span className="text-5xl font-black text-emerald-500 dark:text-emerald-400">08</span>
+                <span className="text-5xl font-black text-emerald-500 dark:text-emerald-400">04</span>
                 <div className="text-xs text-slate-500 dark:text-neutral-400 font-medium">
                   AÑOS DE EXPERIENCIA<br />
                   <span className="text-emerald-600 dark:text-emerald-400 font-semibold">100% Clientes Satisfechos</span>
