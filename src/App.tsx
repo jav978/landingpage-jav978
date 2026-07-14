@@ -385,31 +385,31 @@ function App() {
             </div>
           </div>
 
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="relative w-[460px] h-[460px] md:w-[560px] md:h-[560px] flex items-center justify-center">
+          <div className="relative flex justify-center lg:justify-end mt-8 lg:mt-0">
+            <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[480px] md:h-[480px] lg:w-[560px] lg:h-[560px] flex items-center justify-center">
               {/* Circular backgrounds from Elito */}
               <div className="organic-circle-bg" />
               
               {/* Outer decorative items / tech badges styled like original but with new text */}
-              <div className="absolute top-[12%] left-[-4%] z-20 w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#00c8ff]/10 border border-[#00c8ff]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-bounce text-center px-1">
-                <span className="text-[9px] md:text-[10px] font-black text-[#00c8ff] uppercase tracking-wider">Design</span>
-                <span className="text-[10px] md:text-xs font-bold text-white leading-tight">UI · UX</span>
+              <div className="absolute top-[12%] left-[-4%] z-20 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-[#00c8ff]/10 border border-[#00c8ff]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-bounce text-center px-1">
+                <span className="text-[8px] md:text-[10px] font-black text-[#00c8ff] uppercase tracking-wider">Design</span>
+                <span className="text-[9px] md:text-xs font-bold text-white leading-tight">UI · UX</span>
               </div>
-              <div className="absolute top-[-3%] right-[12%] z-20 w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#ff9f00]/10 border border-[#ff9f00]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-pulse text-center px-1">
-                <span className="text-[9px] md:text-[10px] font-black text-[#ff9f00] uppercase tracking-wider">Code</span>
-                <span className="text-[10px] md:text-xs font-bold text-white leading-tight">React</span>
+              <div className="absolute top-[-3%] right-[12%] z-20 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-[#ff9f00]/10 border border-[#ff9f00]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-pulse text-center px-1">
+                <span className="text-[8px] md:text-[10px] font-black text-[#ff9f00] uppercase tracking-wider">Code</span>
+                <span className="text-[9px] md:text-xs font-bold text-white leading-tight">React</span>
               </div>
-              <div className="absolute bottom-[22%] left-[-6%] z-20 w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#ff3b30]/10 border border-[#ff3b30]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-pulse text-center px-1" style={{ animationDelay: '1s' }}>
-                <span className="text-[9px] md:text-[10px] font-black text-[#ff3b30] uppercase tracking-wider">DevOps</span>
-                <span className="text-[10px] md:text-xs font-bold text-white leading-tight">Cloud</span>
+              <div className="absolute bottom-[22%] left-[-6%] z-20 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-[#ff3b30]/10 border border-[#ff3b30]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-pulse text-center px-1" style={{ animationDelay: '1s' }}>
+                <span className="text-[8px] md:text-[10px] font-black text-[#ff3b30] uppercase tracking-wider">DevOps</span>
+                <span className="text-[9px] md:text-xs font-bold text-white leading-tight">Cloud</span>
               </div>
-              <div className="absolute bottom-[8%] right-[8%] z-20 px-5 py-2.5 rounded-2xl bg-neutral-900/95 border border-neutral-800 backdrop-blur-md flex items-center gap-2.5 shadow-2xl">
-                <span className="w-3 h-3 rounded-full bg-emerald-400 animate-ping" />
-                <span className="text-xs font-black text-emerald-400 uppercase tracking-wider">80% Dev</span>
+              <div className="absolute bottom-[8%] right-[8%] z-20 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-2xl bg-neutral-900/95 border border-neutral-800 backdrop-blur-md flex items-center gap-1.5 sm:gap-2.5 shadow-2xl">
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-400 animate-ping" />
+                <span className="text-[10px] sm:text-xs font-black text-emerald-400 uppercase tracking-wider">80% Dev</span>
               </div>
 
               {/* Main Circular Profile Image - adjusted for showing more body and scaled larger by 40% */}
-              <div className="relative w-[380px] h-[380px] md:w-[490px] md:h-[490px] rounded-full overflow-hidden border-[6px] border-neutral-900 shadow-2xl z-10">
+              <div className="relative w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] lg:w-[490px] lg:h-[490px] rounded-full overflow-hidden border-[6px] border-neutral-900 shadow-2xl z-10">
                 <img
                   src={heroImg}
                   alt="José Vásquez"
