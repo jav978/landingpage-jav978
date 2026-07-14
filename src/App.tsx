@@ -24,7 +24,7 @@ const translations = {
     nav: {
       home: "Inicio",
       services: "Servicios",
-      testimonials: "Testimonios",
+      portfolio: "Portafolio",
       contact: "Contacto",
       cta: "Contrátame"
     },
@@ -56,23 +56,23 @@ const translations = {
         desc: "Landing pages de alta conversión, hechas a medida de tu marca y optimizadas para velocidad y SEO."
       }
     },
-    testimonials: {
-      title: "Clientes que confían\nen mi trabajo",
-      subtitle: "Algunas palabras de personas con las que he tenido el placer de trabajar.",
-      emily: {
-        text: "José entregó exactamente lo que necesitábamos: un producto limpio, rápido y hermoso. Su ojo para el diseño y la calidad de su código son una combinación poco común.",
-        name: "Emily Johnson",
-        role: "Fundador de Startup"
+    portfolio: {
+      title: "Proyectos Destacados",
+      subtitle: "Algunos de los sistemas y aplicaciones web que he construido recientemente.",
+      project1: {
+        title: "Colegio Santa Lucía",
+        desc: "Landing page institucional moderna y optimizada para el colegio, con excelente rendimiento y diseño responsive.",
+        tag: "Landing Page"
       },
-      michael: {
-        text: "Trabajar con José fue muy fácil. Entendió nuestra visión desde el primer día y la convirtió en una experiencia pulida que nuestros usuarios aman.",
-        name: "Michael Chen",
-        role: "Product Manager"
+      project2: {
+        title: "Valet Parking",
+        desc: "Sistema web de gestión en tiempo real para servicios de aparcamiento y control de vehículos.",
+        tag: "Sistema de Gestión"
       },
-      sarah: {
-        text: "Profesional, creativo y confiable. José nos ayudó a repensar nuestra marca y reconstruir nuestro sitio desde cero con resultados excelentes.",
-        name: "Sarah Williams",
-        role: "Directora de Marketing"
+      project3: {
+        title: "Sistema Veterinario",
+        desc: "Plataforma de administración para clínicas veterinarias, control de citas, historias médicas y pacientes.",
+        tag: "Sistema de Gestión"
       }
     },
     contact: {
@@ -96,7 +96,7 @@ const translations = {
     nav: {
       home: "Home",
       services: "Services",
-      testimonials: "Testimonials",
+      portfolio: "Portfolio",
       contact: "Contact",
       cta: "Hire me"
     },
@@ -128,23 +128,23 @@ const translations = {
         desc: "High-converting landing pages tailored to your brand and optimized for speed and SEO."
       }
     },
-    testimonials: {
-      title: "Clients who trust\nmy work",
-      subtitle: "A few words from people I've had the pleasure of working with.",
-      emily: {
-        text: "José delivered exactly what we needed: a clean, fast, and beautiful product. His eye for design and code quality is a rare combination.",
-        name: "Emily Johnson",
-        role: "Startup Founder"
+    portfolio: {
+      title: "Featured Projects",
+      subtitle: "A selection of web systems and applications I have recently built.",
+      project1: {
+        title: "Santa Lucía School",
+        desc: "Modern and optimized institutional landing page for the school, featuring high performance and responsive design.",
+        tag: "Landing Page"
       },
-      michael: {
-        text: "Working with José was extremely easy. He understood our vision from day one and turned it into a polished experience our users love.",
-        name: "Michael Chen",
-        role: "Product Manager"
+      project2: {
+        title: "Valet Parking",
+        desc: "Real-time management web system for parking services and vehicle tracking.",
+        tag: "Management System"
       },
-      sarah: {
-        text: "Professional, creative, and reliable. José helped us rethink our brand and rebuild our site from scratch with excellent results.",
-        name: "Sarah Williams",
-        role: "Marketing Director"
+      project3: {
+        title: "Veterinary System",
+        desc: "Clinic administration platform for pet clinics, handling appointments, medical records, and patients.",
+        tag: "Management System"
       }
     },
     contact: {
@@ -236,8 +236,8 @@ function App() {
             <a href="#services" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">
               {t.nav.services}
             </a>
-            <a href="#testimonials" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">
-              {t.nav.testimonials}
+            <a href="#portfolio" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">
+              {t.nav.portfolio}
             </a>
             <a href="#contact" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">
               {t.nav.contact}
@@ -317,11 +317,11 @@ function App() {
               {t.nav.services}
             </a>
             <a
-              href="#testimonials"
+              href="#portfolio"
               onClick={() => setMobileMenuOpen(false)}
               className="text-base font-medium text-neutral-300 hover:text-white transition-colors"
             >
-              {t.nav.testimonials}
+              {t.nav.portfolio}
             </a>
             <a
               href="#contact"
@@ -538,8 +538,8 @@ function App() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 border-t border-neutral-900 bg-neutral-950 relative overflow-hidden">
+      {/* Portfolio Section (Replacing Testimonials) */}
+      <section id="portfolio" className="py-24 border-t border-neutral-900 bg-neutral-950 relative overflow-hidden">
         {/* Ambient Blur Backgrounds */}
         <div className="ambient-glow top-[20%] left-[8%] w-[260px] h-[260px] bg-neutral-500/25 dark:bg-white/20" />
         <div className="ambient-glow bottom-[15%] right-[8%] w-[310px] h-[310px] bg-neutral-500/25 dark:bg-white/20" />
@@ -548,70 +548,85 @@ function App() {
 
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-6">
-              {t.testimonials.title}
+              {t.portfolio.title}
             </h2>
             <p className="text-neutral-400 text-sm md:text-base">
-              {t.testimonials.subtitle}
+              {t.portfolio.subtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
-            {/* Testimonial 1 */}
-            <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-900 flex flex-col justify-between h-full backdrop-blur-sm">
+            {/* Project 1: Colegio Santa Lucía */}
+            <div className="group p-6 rounded-2xl bg-neutral-900/30 border border-neutral-900 hover:border-neutral-850 transition-all flex flex-col justify-between h-full backdrop-blur-sm">
               <div>
-                <MessageSquare className="w-8 h-8 text-neutral-700 mb-6" />
-                <p className="text-sm text-neutral-350 leading-relaxed italic mb-8">
-                  "{t.testimonials.emily.text}"
+                <div className="aspect-video w-full rounded-xl bg-neutral-950 mb-6 overflow-hidden flex items-center justify-center border border-neutral-850">
+                  <span className="text-xs font-bold text-neutral-600">Colegio Santa Lucía</span>
+                </div>
+                <div className="inline-flex px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold tracking-wide uppercase mb-4">
+                  {t.portfolio.project1.tag}
+                </div>
+                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
+                  {t.portfolio.project1.title}
+                </h3>
+                <p className="text-sm text-neutral-400 leading-relaxed mb-8">
+                  {t.portfolio.project1.desc}
                 </p>
               </div>
-              <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-full bg-neutral-850 flex items-center justify-center text-xs font-bold text-white">
-                  EJ
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-white">{t.testimonials.emily.name}</h4>
-                  <p className="text-[11px] text-neutral-500">{t.testimonials.emily.role}</p>
-                </div>
-              </div>
+              <a href="#contact" className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-emerald-400 transition-colors">
+                <span>Ver proyecto</span>
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
             </div>
 
-            {/* Testimonial 2 */}
-            <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-900 flex flex-col justify-between h-full backdrop-blur-sm">
+            {/* Project 2: Valet Parking */}
+            <div className="group p-6 rounded-2xl bg-neutral-900/30 border border-neutral-900 hover:border-neutral-850 transition-all flex flex-col justify-between h-full backdrop-blur-sm">
               <div>
-                <MessageSquare className="w-8 h-8 text-neutral-700 mb-6" />
-                <p className="text-sm text-neutral-350 leading-relaxed italic mb-8">
-                  "{t.testimonials.michael.text}"
+                <div className="aspect-video w-full rounded-xl bg-neutral-950 mb-6 overflow-hidden flex items-center justify-center border border-neutral-850">
+                  <span className="text-xs font-bold text-neutral-600">Valet Parking</span>
+                </div>
+                <div className="inline-flex px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold tracking-wide uppercase mb-4">
+                  {t.portfolio.project2.tag}
+                </div>
+                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
+                  {t.portfolio.project2.title}
+                </h3>
+                <p className="text-sm text-neutral-400 leading-relaxed mb-8">
+                  {t.portfolio.project2.desc}
                 </p>
               </div>
-              <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-full bg-neutral-850 flex items-center justify-center text-xs font-bold text-white">
-                  MC
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-white">{t.testimonials.michael.name}</h4>
-                  <p className="text-[11px] text-neutral-500">{t.testimonials.michael.role}</p>
-                </div>
-              </div>
+              <a href="#contact" className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-emerald-400 transition-colors">
+                <span>Ver proyecto</span>
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
             </div>
 
-            {/* Testimonial 3 */}
-            <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-900 flex flex-col justify-between h-full backdrop-blur-sm">
+            {/* Project 3: Sistema Veterinario */}
+            <div className="group p-6 rounded-2xl bg-neutral-900/30 border border-neutral-900 hover:border-neutral-850 transition-all flex flex-col justify-between h-full backdrop-blur-sm">
               <div>
-                <MessageSquare className="w-8 h-8 text-neutral-700 mb-6" />
-                <p className="text-sm text-neutral-350 leading-relaxed italic mb-8">
-                  "{t.testimonials.sarah.text}"
+                <div className="aspect-video w-full rounded-xl bg-neutral-950 mb-6 overflow-hidden flex items-center justify-center border border-neutral-850">
+                  <span className="text-xs font-bold text-neutral-600">Sistema Veterinario</span>
+                </div>
+                <div className="inline-flex px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold tracking-wide uppercase mb-4">
+                  {t.portfolio.project3.tag}
+                </div>
+                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
+                  {t.portfolio.project3.title}
+                </h3>
+                <p className="text-sm text-neutral-400 leading-relaxed mb-8">
+                  {t.portfolio.project3.desc}
                 </p>
               </div>
-              <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-full bg-neutral-850 flex items-center justify-center text-xs font-bold text-white">
-                  SW
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-white">{t.testimonials.sarah.name}</h4>
-                  <p className="text-[11px] text-neutral-500">{t.testimonials.sarah.role}</p>
-                </div>
-              </div>
+              <a href="#contact" className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-emerald-400 transition-colors">
+                <span>Ver proyecto</span>
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
             </div>
 
           </div>
