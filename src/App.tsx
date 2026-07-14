@@ -359,6 +359,9 @@ function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -400,13 +403,65 @@ function App() {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormSubmitted(false);
-      (e.target as HTMLFormElement).reset();
-    }, 3000);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+    try {
+      // Reemplaza TU_FORM_ID con el ID de formulario que te dio Formspree (ej. mqkvzprz)
+      const response = await fetch("https://formspree.io/f/mgogvnnd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        }),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      const data = await response.json();
+      if (response.ok && (data.success === "true" || data.ok === true)) {
+        setFormSubmitted(true);
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => {
+          setFormSubmitted(false);
+        }, 5000);
+      } else {
+        throw new Error(data.message || "Error al enviar el formulario");
+      }
+    } catch (error) {
+      clearTimeout(timeoutId);
+      console.error(error);
+      const err = error instanceof Error ? error : new Error(String(error));
+      let errorMessage = err.message;
+
+      const isNetworkError = err instanceof TypeError || 
+        err.name === "AbortError" ||
+        (err.message && /fetch|network|load|cors|abort|timed out/i.test(err.message));
+
+      if (isNetworkError) {
+        errorMessage = lang === "es"
+          ? "No se pudo conectar con el servidor de correos. Si usas un bloqueador de anuncios (como uBlock, AdBlock o Brave Shield) o no tienes conexión a internet, por favor desactívalo o revisa tu conexión e intenta de nuevo."
+          : "Could not connect to the mail server. If you use an adblocker (like uBlock, AdBlock, or Brave Shield) or have no internet connection, please disable it or check your connection and try again.";
+      } else if (!errorMessage) {
+        errorMessage = lang === "es"
+          ? "Hubo un error al enviar el mensaje. Por favor intente nuevamente."
+          : "There was an error sending your message. Please try again.";
+      }
+      setSubmitError(errorMessage);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -931,6 +986,8 @@ function App() {
                     type="text"
                     id="name"
                     required
+                    value={formData.name}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                     placeholder={t.contact.placeholderName}
                     className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-neutral-950 border border-slate-250 dark:border-neutral-850 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-neutral-600 focus:outline-none focus:border-slate-450 dark:focus:border-neutral-700 transition-colors text-sm"
                   />
@@ -944,6 +1001,8 @@ function App() {
                     type="email"
                     id="email"
                     required
+                    value={formData.email}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                     placeholder={t.contact.placeholderEmail}
                     className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-neutral-950 border border-slate-250 dark:border-neutral-850 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-neutral-600 focus:outline-none focus:border-slate-450 dark:focus:border-neutral-700 transition-colors text-sm"
                   />
@@ -957,6 +1016,8 @@ function App() {
                     id="message"
                     required
                     rows={5}
+                    value={formData.message}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
                     placeholder={t.contact.placeholderMessage}
                     className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-neutral-950 border border-slate-250 dark:border-neutral-850 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-neutral-600 focus:outline-none focus:border-slate-450 dark:focus:border-neutral-700 transition-colors text-sm resize-none"
                   ></textarea>
@@ -964,15 +1025,22 @@ function App() {
 
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-black font-semibold text-sm hover:bg-slate-800 dark:hover:bg-neutral-200 active:scale-99 transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full py-4 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-black font-semibold text-sm hover:bg-slate-800 dark:hover:bg-neutral-200 active:scale-99 transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="w-4 h-4" />
-                  <span>{formSubmitted ? t.contact.sending : t.contact.submit}</span>
+                  <span>{isSubmitting ? (lang === "es" ? "Enviando..." : "Sending...") : t.contact.submit}</span>
                 </button>
 
                 {formSubmitted && (
-                  <p className="text-center text-xs text-slate-550 dark:text-neutral-400 animate-pulse mt-2">
-                    {lang === "es" ? "¡Mensaje enviado con éxito!" : "Message sent successfully!"}
+                  <p className="text-center text-xs text-emerald-600 dark:text-emerald-400 font-bold animate-pulse mt-2">
+                    {lang === "es" ? "¡Mensaje enviado con éxito! Te contactaremos pronto." : "Message sent successfully! We will contact you soon."}
+                  </p>
+                )}
+
+                {submitError && (
+                  <p className="text-center text-xs text-red-500 font-bold mt-2">
+                    {submitError}
                   </p>
                 )}
 
