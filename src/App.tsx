@@ -14,7 +14,8 @@ import {
   Send,
   MessageSquare,
   Monitor,
-  ArrowUp
+  ArrowUp,
+  Server
 } from "lucide-react";
 import heroImg from "./assets/hero.png";
 import colegioPreview from "./assets/colegio_preview.png";
@@ -55,15 +56,15 @@ const translations = {
         desc: "Interfaces pensadas para el usuario, con jerarquía clara, flujos intuitivos y un lenguaje visual refinado."
       },
       landing: {
-        title: "Landing Pages",
-        desc: "Landing pages de alta conversión, hechas a medida de tu marca y optimizadas para velocidad y SEO."
+        title: "Desarrollo Backend",
+        desc: "Creación de APIs REST, bases de datos eficientes, seguridad, autenticación y lógica del lado del servidor robusta y escalable."
       }
     },
     portfolio: {
       title: "Proyectos Destacados",
       subtitle: "Algunos de los sistemas y aplicaciones web que he construido recientemente.",
       project1: {
-        title: "Colegio Santa Lucía",
+        title: "Colegio Santa Luisa",
         desc: "Landing page institucional moderna y optimizada para el colegio, con excelente rendimiento y diseño responsive.",
         tag: "Landing Page"
       },
@@ -127,15 +128,15 @@ const translations = {
         desc: "User-centered interfaces with clear hierarchy, intuitive flows, and a refined visual language."
       },
       landing: {
-        title: "Landing Pages",
-        desc: "High-converting landing pages tailored to your brand and optimized for speed and SEO."
+        title: "Backend Development",
+        desc: "Creation of REST APIs, efficient databases, security, authentication, and robust, scalable server-side logic."
       }
     },
     portfolio: {
       title: "Featured Projects",
       subtitle: "A selection of web systems and applications I have recently built.",
       project1: {
-        title: "Santa Lucía School",
+        title: "Santa Luisa School",
         desc: "Modern and optimized institutional landing page for the school, featuring high performance and responsive design.",
         tag: "Landing Page"
       },
@@ -362,6 +363,7 @@ function App() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [serviceFilter, setServiceFilter] = useState<"all" | "development" | "design">("all");
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -744,46 +746,73 @@ function App() {
 
             {/* Popular Services Filters */}
             <div className="flex justify-center gap-3 mt-8">
-              <button className="px-5 py-2 rounded-full text-xs font-bold bg-emerald-400 dark:bg-emerald-500 text-neutral-950 shadow-md cursor-pointer hover:bg-emerald-300 dark:hover:bg-emerald-400">
+              <button
+                onClick={() => setServiceFilter("all")}
+                className={`px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                  serviceFilter === "all"
+                    ? "bg-emerald-400 dark:bg-emerald-500 text-neutral-950 shadow-md"
+                    : "bg-slate-50 dark:bg-neutral-900 text-slate-700 dark:text-neutral-300 border border-slate-200 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800"
+                }`}
+              >
                 All
               </button>
-              <button className="px-5 py-2 rounded-full text-xs font-bold bg-slate-50 dark:bg-neutral-900 text-slate-700 dark:text-neutral-300 border border-slate-200 dark:border-neutral-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-neutral-800">
+              <button
+                onClick={() => setServiceFilter("development")}
+                className={`px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                  serviceFilter === "development"
+                    ? "bg-emerald-400 dark:bg-emerald-500 text-neutral-950 shadow-md"
+                    : "bg-slate-50 dark:bg-neutral-900 text-slate-700 dark:text-neutral-300 border border-slate-200 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800"
+                }`}
+              >
                 Development
               </button>
-              <button className="px-5 py-2 rounded-full text-xs font-bold bg-slate-50 dark:bg-neutral-900 text-slate-700 dark:text-neutral-300 border border-slate-200 dark:border-neutral-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-neutral-800">
+              <button
+                onClick={() => setServiceFilter("design")}
+                className={`px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                  serviceFilter === "design"
+                    ? "bg-emerald-400 dark:bg-emerald-500 text-neutral-950 shadow-md"
+                    : "bg-slate-50 dark:bg-neutral-900 text-slate-700 dark:text-neutral-300 border border-slate-200 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800"
+                }`}
+              >
                 Design
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 justify-center">
             
-            {/* Service 1: Web Dev */}
-            <div className="p-8 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/60 transition-all duration-300 group backdrop-blur-sm animated-gradient-border">
-              <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-neutral-950 flex items-center justify-center border border-slate-200 dark:border-neutral-850 mb-8 group-hover:scale-110 transition-transform">
-                <Code className="w-5 h-5 text-slate-600 dark:text-neutral-400" />
+            {/* Service 1: Web Dev (Development) */}
+            {(serviceFilter === "all" || serviceFilter === "development") && (
+              <div className="p-8 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/60 transition-all duration-300 group backdrop-blur-sm animated-gradient-border">
+                <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-neutral-950 flex items-center justify-center border border-slate-200 dark:border-neutral-850 mb-8 group-hover:scale-110 transition-transform">
+                  <Code className="w-5 h-5 text-slate-600 dark:text-neutral-400" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">{t.services.webDev.title}</h3>
+                <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed">{t.services.webDev.desc}</p>
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">{t.services.webDev.title}</h3>
-              <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed">{t.services.webDev.desc}</p>
-            </div>
+            )}
 
-            {/* Service 2: UI / UX */}
-            <div className="p-8 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/60 transition-all duration-300 group backdrop-blur-sm animated-gradient-border">
-              <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-neutral-950 flex items-center justify-center border border-slate-200 dark:border-neutral-850 mb-8 group-hover:scale-110 transition-transform">
-                <Palette className="w-5 h-5 text-slate-600 dark:text-neutral-400" />
+            {/* Service 2: UI / UX (Design) */}
+            {(serviceFilter === "all" || serviceFilter === "design") && (
+              <div className="p-8 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/60 transition-all duration-300 group backdrop-blur-sm animated-gradient-border">
+                <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-neutral-950 flex items-center justify-center border border-slate-200 dark:border-neutral-850 mb-8 group-hover:scale-110 transition-transform">
+                  <Palette className="w-5 h-5 text-slate-600 dark:text-neutral-400" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">{t.services.uiux.title}</h3>
+                <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed">{t.services.uiux.desc}</p>
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">{t.services.uiux.title}</h3>
-              <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed">{t.services.uiux.desc}</p>
-            </div>
+            )}
 
-            {/* Service 3: Landing Pages */}
-            <div className="p-8 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/60 transition-all duration-300 group backdrop-blur-sm animated-gradient-border">
-              <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-neutral-950 flex items-center justify-center border border-slate-200 dark:border-neutral-850 mb-8 group-hover:scale-110 transition-transform">
-                <Monitor className="w-5 h-5 text-slate-600 dark:text-neutral-400" />
+            {/* Service 3: Backend Development (Development) */}
+            {(serviceFilter === "all" || serviceFilter === "development") && (
+              <div className="p-8 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/60 transition-all duration-300 group backdrop-blur-sm animated-gradient-border">
+                <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-neutral-950 flex items-center justify-center border border-slate-200 dark:border-neutral-850 mb-8 group-hover:scale-110 transition-transform">
+                  <Server className="w-5 h-5 text-slate-600 dark:text-neutral-400" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">{t.services.landing.title}</h3>
+                <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed">{t.services.landing.desc}</p>
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">{t.services.landing.title}</h3>
-              <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed">{t.services.landing.desc}</p>
-            </div>
+            )}
 
           </div>
 
