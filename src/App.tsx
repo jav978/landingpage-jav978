@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import heroImg from "./assets/hero.png";
 import colegioPreview from "./assets/colegio_preview.png";
+import valetPreview from "./assets/valet_preview.png";
+import vetPreview from "./assets/vet_preview.png";
 
 // Translations dictionary
 const translations = {
@@ -782,8 +784,8 @@ function App() {
             {/* Project 2: Valet Parking */}
             <div className="group p-6 rounded-2xl bg-slate-50 dark:bg-neutral-900/30 border border-slate-200 dark:border-neutral-900 hover:border-slate-350 dark:hover:border-neutral-850 hover:shadow-lg dark:hover:shadow-black/30 transition-all flex flex-col justify-between h-full backdrop-blur-sm animated-gradient-border">
               <div>
-                <div className="aspect-video w-full rounded-xl bg-slate-100 dark:bg-neutral-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-neutral-850">
-                  <span className="text-xs font-bold text-slate-400 dark:text-neutral-600">Valet Parking</span>
+                <div className="aspect-video w-full rounded-xl bg-slate-100 dark:bg-neutral-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-neutral-850 relative">
+                  <img src={valetPreview} alt="Valet Parking" className="w-full h-full object-cover" />
                 </div>
                 <div className="inline-flex px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold tracking-wide uppercase mb-4">
                   {t.portfolio.project2.tag}
@@ -809,8 +811,8 @@ function App() {
             {/* Project 3: Sistema Veterinario */}
             <div className="group p-6 rounded-2xl bg-slate-50 dark:bg-neutral-900/30 border border-slate-200 dark:border-neutral-900 hover:border-slate-350 dark:hover:border-neutral-850 hover:shadow-lg dark:hover:shadow-black/30 transition-all flex flex-col justify-between h-full backdrop-blur-sm animated-gradient-border">
               <div>
-                <div className="aspect-video w-full rounded-xl bg-slate-100 dark:bg-neutral-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-neutral-850">
-                  <span className="text-xs font-bold text-slate-400 dark:text-neutral-600">Sistema Veterinario</span>
+                <div className="aspect-video w-full rounded-xl bg-slate-100 dark:bg-neutral-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-neutral-850 relative">
+                  <img src={vetPreview} alt="Sistema Veterinario" className="w-full h-full object-cover" />
                 </div>
                 <div className="inline-flex px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold tracking-wide uppercase mb-4">
                   {t.portfolio.project3.tag}
