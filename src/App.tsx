@@ -677,7 +677,7 @@ function App() {
         <a
           href="#home"
           aria-label="Back to Top"
-          className={`fixed bottom-6 right-6 z-50 inline-flex items-center justify-center rounded-full border border-slate-200 dark:border-neutral-850 bg-emerald-400 dark:bg-emerald-500 px-4 py-3 text-sm font-semibold text-black shadow-2xl shadow-black/20 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-emerald-300 ${isScrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
+          className={`fixed bottom-6 right-6 z-50 inline-flex items-center justify-center rounded-full border border-slate-200 dark:border-neutral-850 bg-emerald-400 dark:bg-emerald-500 px-4 py-4 text-sm font-semibold text-black shadow-2xl shadow-black/20 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-emerald-300 ${isScrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
         >
           <ArrowUp className="w-5 h-5" />
         </a>
