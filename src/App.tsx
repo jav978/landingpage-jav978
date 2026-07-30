@@ -13,7 +13,6 @@ import {
   MapPin, 
   Send,
   MessageSquare,
-  Monitor,
   ArrowUp,
   Server
 } from "lucide-react";
@@ -43,6 +42,7 @@ const translations = {
       roleDesignDesc: "UI - UX - Brand",
       roleCode: "CODE",
       roleCodeDesc: "React - TypeScript"
+      
     },
     services: {
       title: "Lo que hago,\ny cómo puedo ayudarte",
@@ -649,13 +649,13 @@ function App() {
                 <span className="text-[8px] md:text-[10px] font-black text-[#00c8ff] uppercase tracking-wider">Design</span>
                 <span className="text-[9px] md:text-xs font-bold text-white dark:text-white leading-tight">UI · UX</span>
               </div>
-              <div className="absolute top-[-3%] right-[12%] z-20 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-[#ff9f00]/10 border border-[#ff9f00]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-pulse text-center px-1">
+              <div className="absolute top-[-3%] right-[6%] z-20 w-14 h-14 sm:w-16 sm:h-16 md:w-30 md:h-30 rounded-full bg-[#ff9f00]/10 border border-[#ff9f00]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-pulse text-center px-1">
                 <span className="text-[8px] md:text-[10px] font-black text-[#ff9f00] uppercase tracking-wider">Code</span>
-                <span className="text-[9px] md:text-xs font-bold text-white dark:text-white leading-tight">React</span>
+                <span className="text-[9px] md:text-xs font-bold text-white dark:text-white leading-tight">React/Vue </span>
               </div>
               <div className="absolute bottom-[22%] left-[-6%] z-20 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-[#ff3b30]/10 border border-[#ff3b30]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-pulse text-center px-1" style={{ animationDelay: '1s' }}>
                 <span className="text-[8px] md:text-[10px] font-black text-[#ff3b30] uppercase tracking-wider">DevOps</span>
-                <span className="text-[9px] md:text-xs font-bold text-white dark:text-white leading-tight">Cloud</span>
+                <span className="text-[9px] md:text-xs font-bold text-white dark:text-white leading-tight">Cloud/Backend</span>
               </div>
               <div className="absolute bottom-[8%] right-[8%] z-20 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-2xl bg-white/95 dark:bg-neutral-900/95 border border-slate-200 dark:border-neutral-800 backdrop-blur-md flex items-center gap-1.5 sm:gap-2.5 shadow-2xl">
                 <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-400 animate-ping" />
