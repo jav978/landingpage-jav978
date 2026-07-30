@@ -14,7 +14,9 @@ import {
   Send,
   MessageSquare,
   ArrowUp,
-  Server
+  Server,
+  ExternalLink,
+  ChevronRight
 } from "lucide-react";
 import heroImg from "./assets/hero.png";
 import colegioPreview from "./assets/colegio_preview.png";
@@ -42,14 +44,13 @@ const translations = {
       roleDesignDesc: "UI - UX - Brand",
       roleCode: "CODE",
       roleCodeDesc: "React - TypeScript"
-      
     },
     services: {
       title: "Lo que hago,\ny cómo puedo ayudarte",
       subtitle: "Combino sensibilidad de diseño con ingeniería sólida para entregar productos que se ven increíbles y funcionan aún mejor.",
       webDev: {
         title: "Desarrollo Web",
-        desc: "Sitios y aplicaciones web modernas con React, TypeScript y código limpio y mantenible."
+        desc: "Sitios y aplicaciones web modernas con React, TypeScript y código limpio, eficiente y mantenible."
       },
       uiux: {
         title: "Diseño UI / UX",
@@ -66,7 +67,7 @@ const translations = {
       project1: {
         title: "Colegio Santa Luisa",
         desc: "Landing page institucional moderna y optimizada para el colegio, con excelente rendimiento y diseño responsive.",
-        tag: "Landing Page"
+        tag: "Landing Page & CRM"
       },
       project2: {
         title: "Valet Parking",
@@ -138,7 +139,7 @@ const translations = {
       project1: {
         title: "Santa Luisa School",
         desc: "Modern and optimized institutional landing page for the school, featuring high performance and responsive design.",
-        tag: "Landing Page"
+        tag: "Landing Page & CRM"
       },
       project2: {
         title: "Valet Parking",
@@ -377,7 +378,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -414,7 +415,6 @@ function App() {
     const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     try {
-      // Reemplaza TU_FORM_ID con el ID de formulario que te dio Formspree (ej. mqkvzprz)
       const response = await fetch("https://formspree.io/f/mgogvnnd", {
         method: "POST",
         headers: {
@@ -467,127 +467,137 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-neutral-950 text-slate-900 dark:text-neutral-100 font-sans selection:bg-neutral-200 dark:selection:bg-neutral-800 selection:text-neutral-900 dark:selection:text-white transition-colors duration-150 overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#07080c] text-slate-900 dark:text-slate-100 font-sans selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200 transition-colors duration-200 overflow-x-hidden bg-grid-pattern relative">
       
-      {/* Header / Navbar */}
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
-          isScrolled
-            ? "bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-slate-200 dark:border-neutral-800/50 py-4"
-            : "bg-transparent border-transparent py-6"
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-          <a href="#home" className="text-xl font-bold tracking-tight text-slate-900 dark:text-white hover:opacity-90 transition-opacity">
-            José Vásquez
+      {/* Floating Navbar Container */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 pt-3 pb-2 transition-all duration-300">
+        <div 
+          className={`max-w-6xl mx-auto rounded-full px-5 py-3 flex items-center justify-between transition-all duration-300 ${
+            isScrolled
+              ? "bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-xl shadow-indigo-500/5 dark:shadow-cyan-500/10"
+              : "bg-white/60 dark:bg-slate-950/50 backdrop-blur-lg border border-slate-200/50 dark:border-white/5"
+          }`}
+        >
+          <a href="#home" className="group flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
+            <span className="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-700 via-indigo-900 to-cyan-700 dark:from-white dark:via-cyan-300 dark:to-indigo-300 bg-clip-text text-transparent">
+              José Vásquez
+            </span>
           </a>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="#home" className="text-sm font-medium text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+          {/* Desktop Nav Links */}
+          <nav className="hidden md:flex items-center gap-7">
+            <a href="#home" className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
               {t.nav.home}
             </a>
-            <a href="#services" className="text-sm font-medium text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+            <a href="#services" className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
               {t.nav.services}
             </a>
-            <a href="#portfolio" className="text-sm font-medium text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+            <a href="#portfolio" className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
               {t.nav.portfolio}
             </a>
-            <a href="#contact" className="text-sm font-medium text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+            <a href="#contact" className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
               {t.nav.contact}
             </a>
           </nav>
 
-          <div className="hidden md:flex items-center gap-4">
-            {/* Language Selector Button */}
+          {/* Right Action Controls */}
+          <div className="hidden md:flex items-center gap-3">
+            {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 dark:border-neutral-800 bg-slate-100 dark:bg-neutral-900/50 text-xs font-semibold text-slate-700 dark:text-neutral-300 hover:bg-slate-200 dark:hover:bg-neutral-800 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-800/60 text-xs font-bold text-slate-700 dark:text-slate-200 hover:border-cyan-500/50 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all cursor-pointer shadow-sm"
+              title="Cambiar idioma / Switch language"
             >
-              <Globe className="w-3.5 h-3.5" />
+              <Globe className="w-3.5 h-3.5 text-indigo-500 dark:text-cyan-400" />
               <span>{lang === "es" ? "ES" : "EN"}</span>
             </button>
 
-            {/* Dark/Light mode toggle */}
+            {/* Light / Dark Mode Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full border border-slate-200 dark:border-neutral-800 bg-slate-100 dark:bg-neutral-900/50 text-slate-700 dark:text-neutral-300 hover:bg-slate-200 dark:hover:bg-neutral-800 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer"
+              className="p-2 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-800/60 text-slate-700 dark:text-slate-200 hover:border-amber-400/50 hover:text-amber-500 dark:hover:text-amber-300 transition-all cursor-pointer shadow-sm"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {theme === "dark" ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-600" />}
             </button>
 
             {/* CTA Header Button */}
             <a
               href="#contact"
-              className="px-5 py-2 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black text-sm font-semibold hover:bg-slate-800 dark:hover:bg-neutral-200 transition-all shadow-sm"
+              className="px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 dark:from-cyan-500 dark:to-indigo-600 text-white font-bold text-xs shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all"
             >
               {t.nav.cta}
             </a>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex items-center gap-3 md:hidden">
+          {/* Mobile Buttons */}
+          <div className="flex items-center gap-2.5 md:hidden">
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 dark:border-neutral-800 bg-slate-100 dark:bg-neutral-900/50 text-xs font-semibold text-slate-700 dark:text-neutral-300"
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-800/60 text-[11px] font-bold text-slate-700 dark:text-slate-200"
             >
-              <Globe className="w-3 h-3" />
+              <Globe className="w-3 h-3 text-cyan-500" />
               <span>{lang === "es" ? "ES" : "EN"}</span>
             </button>
 
             <button
               onClick={toggleTheme}
-              className="p-1.5 rounded-full border border-slate-200 dark:border-neutral-800 bg-slate-100 dark:bg-neutral-900/50 text-slate-700 dark:text-neutral-300"
+              className="p-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-800/60 text-slate-700 dark:text-slate-200"
+              aria-label="Toggle theme"
             >
-              {theme === "dark" ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+              {theme === "dark" ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-indigo-600" />}
             </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white"
+              className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:text-cyan-500 transition-colors"
               aria-label="Toggle Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu Panel */}
+        {/* Mobile Dropdown Menu Card */}
         {mobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-neutral-950 border-b border-slate-200 dark:border-neutral-850 px-6 py-6 flex flex-col gap-4 shadow-xl">
+          <div className="md:hidden max-w-6xl mx-auto mt-2 p-5 rounded-3xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-white/10 backdrop-blur-2xl shadow-2xl flex flex-col gap-3 transition-all animate-in fade-in slide-in-from-top-4">
             <a
               href="#home"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 dark:text-neutral-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+              className="px-4 py-2.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-500 transition-colors flex items-center justify-between"
             >
-              {t.nav.home}
+              <span>{t.nav.home}</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
             </a>
             <a
               href="#services"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 dark:text-neutral-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+              className="px-4 py-2.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-500 transition-colors flex items-center justify-between"
             >
-              {t.nav.services}
+              <span>{t.nav.services}</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
             </a>
             <a
               href="#portfolio"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 dark:text-neutral-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+              className="px-4 py-2.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-500 transition-colors flex items-center justify-between"
             >
-              {t.nav.portfolio}
+              <span>{t.nav.portfolio}</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
             </a>
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 dark:text-neutral-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+              className="px-4 py-2.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-500 transition-colors flex items-center justify-between"
             >
-              {t.nav.contact}
+              <span>{t.nav.contact}</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
             </a>
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full py-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black text-center text-sm font-semibold hover:bg-slate-800 dark:hover:bg-neutral-200 transition-all mt-2"
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 text-white text-center text-sm font-extrabold shadow-lg shadow-cyan-500/25 mt-1"
             >
               {t.nav.cta}
             </a>
@@ -596,74 +606,85 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
-        {/* Ambient Blur Backgrounds */}
-        <div className="ambient-glow top-[15%] left-[10%] w-[320px] h-[320px] bg-slate-300/30 dark:bg-neutral-500/25" />
-        <div className="ambient-glow bottom-[15%] right-[10%] w-[380px] h-[380px] bg-slate-300/30 dark:bg-neutral-500/25" />
+      <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 sm:pt-32 pb-16 overflow-hidden">
+        {/* Ambient Blur Background Spheres */}
+        <div className="ambient-glow top-[12%] left-[8%] w-[280px] sm:w-[420px] h-[280px] sm:h-[420px] bg-indigo-500/15 dark:bg-indigo-600/20" />
+        <div className="ambient-glow bottom-[12%] right-[5%] w-[300px] sm:w-[460px] h-[300px] sm:h-[460px] bg-cyan-500/15 dark:bg-cyan-500/20" />
+        <div className="ambient-glow top-[50%] left-[45%] w-[220px] sm:w-[350px] h-[220px] sm:h-[350px] bg-emerald-500/10 dark:bg-emerald-500/15" />
 
-        <div className="max-w-6xl mx-auto px-6 z-10 grid gap-12 items-center lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 z-10 grid gap-10 sm:gap-14 items-center lg:grid-cols-[1.15fr_0.85fr]">
           <div className="text-center lg:text-left lg:max-w-xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-slate-200 dark:border-neutral-800 bg-slate-100 dark:bg-neutral-900/50 text-[10px] md:text-xs font-semibold tracking-wider text-slate-600 dark:text-neutral-400 uppercase mb-8">
-              <Sparkles className="w-3.5 h-3.5 text-slate-500 dark:text-neutral-455" />
+            
+            {/* Top Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 dark:border-cyan-400/30 bg-cyan-500/10 dark:bg-cyan-500/15 text-[10px] sm:text-xs font-extrabold tracking-widest text-cyan-800 dark:text-cyan-300 uppercase mb-6 shadow-sm shadow-cyan-500/10 backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-300 animate-spin" style={{ animationDuration: '8s' }} />
               <span>{t.hero.badge}</span>
             </div>
 
-            {/* Title */}
-            <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto lg:mx-0 leading-tight mb-8">
+            {/* Main Headline */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto lg:mx-0 leading-[1.15] mb-6">
               {t.hero.title}
-              <span className="block underline decoration-slate-300 dark:decoration-neutral-700 underline-offset-8">
+              <span className="block bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 dark:from-cyan-400 dark:via-purple-400 dark:to-emerald-400 bg-clip-text text-transparent mt-1">
                 {t.hero.titleHighlight}
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base md:text-lg text-slate-600 dark:text-neutral-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-12">
+            <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-8">
               {t.hero.subtitle}
             </p>
 
             {/* Call to Actions */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
               <a
                 href="#contact"
-                className="px-8 py-3.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black font-semibold text-sm hover:bg-slate-800 dark:hover:bg-neutral-200 hover:scale-105 active:scale-95 transition-all shadow-md w-full sm:w-auto text-center"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 dark:from-cyan-500 dark:via-indigo-600 dark:to-purple-600 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-sm shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all text-center"
               >
                 {t.hero.ctaPrimary}
               </a>
               <a
                 href="#services"
-                className="px-8 py-3.5 rounded-full bg-slate-100 dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 text-slate-700 dark:text-neutral-300 font-semibold text-sm hover:bg-slate-200 dark:hover:bg-neutral-800 hover:text-slate-900 dark:hover:text-white transition-all w-full sm:w-auto text-center"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-cyan-300 transition-all backdrop-blur-md text-center shadow-sm"
               >
                 {t.hero.ctaSecondary}
               </a>
             </div>
           </div>
 
-          <div className="relative flex justify-center lg:justify-end mt-8 lg:mt-0">
-            <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[480px] md:h-[480px] lg:w-[560px] lg:h-[560px] flex items-center justify-center">
-              {/* Circular backgrounds from Elito */}
+          {/* Hero Profile Image Container & Floating Glass Badges */}
+          <div className="relative flex justify-center lg:justify-end mt-4 lg:mt-0">
+            <div className="relative w-[270px] h-[270px] sm:w-[360px] sm:h-[360px] md:w-[440px] md:h-[440px] lg:w-[520px] lg:h-[520px] flex items-center justify-center">
+              
+              {/* Outer Rotating Dashed Ring */}
               <div className="organic-circle-bg" />
               
-              {/* Outer decorative items / tech badges styled like original but with new text */}
-              <div className="absolute top-[12%] left-[-4%] z-20 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-[#00c8ff]/10 border border-[#00c8ff]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-bounce text-center px-1">
-                <span className="text-[8px] md:text-[10px] font-black text-[#00c8ff] uppercase tracking-wider">Design</span>
-                <span className="text-[9px] md:text-xs font-bold text-white dark:text-white leading-tight">UI · UX</span>
-              </div>
-              <div className="absolute top-[-3%] right-[6%] z-20 w-14 h-14 sm:w-16 sm:h-16 md:w-30 md:h-30 rounded-full bg-[#ff9f00]/10 border border-[#ff9f00]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-pulse text-center px-1">
-                <span className="text-[8px] md:text-[10px] font-black text-[#ff9f00] uppercase tracking-wider">Code</span>
-                <span className="text-[9px] md:text-xs font-bold text-white dark:text-white leading-tight">React/Vue </span>
-              </div>
-              <div className="absolute bottom-[22%] left-[-6%] z-20 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-[#ff3b30]/10 border border-[#ff3b30]/45 backdrop-blur-md flex flex-col items-center justify-center shadow-lg animate-pulse text-center px-1" style={{ animationDelay: '1s' }}>
-                <span className="text-[8px] md:text-[10px] font-black text-[#ff3b30] uppercase tracking-wider">DevOps</span>
-                <span className="text-[9px] md:text-xs font-bold text-white dark:text-white leading-tight">Cloud/Backend</span>
-              </div>
-              <div className="absolute bottom-[8%] right-[8%] z-20 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-2xl bg-white/95 dark:bg-neutral-900/95 border border-slate-200 dark:border-neutral-800 backdrop-blur-md flex items-center gap-1.5 sm:gap-2.5 shadow-2xl">
-                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-400 animate-ping" />
-                <span className="text-[10px] sm:text-xs font-black text-emerald-500 dark:text-emerald-400 uppercase tracking-wider">80% Dev</span>
+              {/* Floating Glass Badges */}
+              {/* 1. Design Badge */}
+              <div className="absolute top-[8%] left-[-2%] sm:left-[-4%] z-20 w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-2xl bg-cyan-500/15 dark:bg-cyan-950/70 border border-cyan-400/40 dark:border-cyan-400/50 backdrop-blur-xl flex flex-col items-center justify-center shadow-lg shadow-cyan-500/20 hero-card-anim delay-0 text-center px-1">
+                <span className="text-[8px] sm:text-[10px] font-black text-cyan-600 dark:text-cyan-300 uppercase tracking-wider">Design</span>
+                <span className="text-[9px] sm:text-xs font-bold text-slate-900 dark:text-white leading-tight">UI · UX</span>
               </div>
 
-              {/* Main Circular Profile Image - adjusted for showing more body and scaled larger by 40% */}
-              <div className="relative w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] lg:w-[490px] lg:h-[490px] rounded-full overflow-hidden border-[6px] border-slate-200 dark:border-neutral-900 shadow-2xl z-10">
+              {/* 2. Code Badge */}
+              <div className="absolute top-[-2%] right-[4%] sm:right-[6%] z-20 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl bg-amber-500/15 dark:bg-amber-950/70 border border-amber-400/40 dark:border-amber-400/50 backdrop-blur-xl flex flex-col items-center justify-center shadow-lg shadow-amber-500/20 hero-card-anim delay-200 text-center">
+                <span className="text-[8px] sm:text-[10px] font-black text-amber-600 dark:text-amber-400 uppercase tracking-wider">Code</span>
+                <span className="text-[9px] sm:text-xs font-bold text-slate-900 dark:text-white leading-tight">React / Vue</span>
+              </div>
+
+              {/* 3. DevOps Badge */}
+              <div className="absolute bottom-[20%] left-[-4%] sm:left-[-6%] z-20 px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl bg-purple-500/15 dark:bg-purple-950/70 border border-purple-400/40 dark:border-purple-400/50 backdrop-blur-xl flex flex-col items-center justify-center shadow-lg shadow-purple-500/20 hero-card-anim delay-400 text-center">
+                <span className="text-[8px] sm:text-[10px] font-black text-purple-600 dark:text-purple-300 uppercase tracking-wider">DevOps</span>
+                <span className="text-[9px] sm:text-xs font-bold text-slate-900 dark:text-white leading-tight">Cloud / Backend</span>
+              </div>
+
+              {/* 4. Live Dev Status Badge */}
+              <div className="absolute bottom-[6%] right-[4%] sm:right-[8%] z-20 px-3 py-1.5 sm:px-4 sm:py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-emerald-500/40 dark:border-emerald-400/40 backdrop-blur-xl flex items-center gap-2 shadow-xl shadow-emerald-500/20">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                <span className="text-[10px] sm:text-xs font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">80% Dev</span>
+              </div>
+
+              {/* Main Circular Profile Image with Glowing Border */}
+              <div className="relative w-[210px] h-[210px] sm:w-[290px] sm:h-[290px] md:w-[360px] md:h-[360px] lg:w-[440px] lg:h-[440px] rounded-full overflow-hidden border-4 sm:border-[6px] border-white/80 dark:border-slate-800 shadow-2xl z-10 organic-profile-frame">
                 <img
                   src={heroImg}
                   alt="José Vásquez"
@@ -674,40 +695,43 @@ function App() {
           </div>
         </div>
 
+        {/* Back to Top Floating Button */}
         <a
           href="#home"
           aria-label="Back to Top"
-          className={`fixed bottom-6 right-6 z-50 inline-flex items-center justify-center rounded-full border border-slate-200 dark:border-neutral-850 bg-emerald-400 dark:bg-emerald-500 px-4 py-4 text-sm font-semibold text-black shadow-2xl shadow-black/20 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-emerald-300 ${isScrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
+          className={`fixed bottom-6 right-6 z-50 inline-flex items-center justify-center rounded-full border border-cyan-500/30 bg-gradient-to-r from-cyan-400 to-emerald-400 p-3.5 text-slate-950 shadow-2xl shadow-cyan-500/30 backdrop-blur transition-all duration-300 hover:scale-110 hover:-translate-y-1 ${isScrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
         >
-          <ArrowUp className="w-5 h-5" />
+          <ArrowUp className="w-5 h-5 font-black" />
         </a>
       </section>
 
-      {/* My Advantage Section (Elito Style) */}
-      <section className="py-24 border-t border-slate-200 dark:border-neutral-900 bg-white dark:bg-neutral-950 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 z-10 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
+      {/* My Advantage & Skills Section */}
+      <section className="py-20 sm:py-24 border-t border-slate-200/80 dark:border-white/10 bg-white/50 dark:bg-slate-950/50 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 z-10 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 items-center">
+            
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-slate-200 dark:border-neutral-800 bg-slate-100 dark:bg-neutral-900/50 text-[10px] md:text-xs font-semibold tracking-wider text-slate-600 dark:text-neutral-400 uppercase mb-6">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-indigo-500/30 dark:border-indigo-400/30 bg-indigo-500/10 text-[10px] sm:text-xs font-extrabold tracking-wider text-indigo-700 dark:text-indigo-300 uppercase mb-4">
                 <span>My Advantage</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-5">
                 My Skills &<br />Advantage
               </h2>
-              <p className="text-slate-600 dark:text-neutral-400 text-sm md:text-base leading-relaxed mb-8">
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
                 He trabajado con diversas herramientas de diseño y desarrollo web para lograr entregar productos excelentes y eficientes.
               </p>
               
-              <div className="p-6 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-850 flex items-center gap-6">
-                <span className="text-5xl font-black text-emerald-500 dark:text-emerald-400">04</span>
-                <div className="text-xs text-slate-500 dark:text-neutral-400 font-medium">
+              <div className="p-6 rounded-3xl bg-gradient-to-br from-indigo-500/10 via-cyan-500/10 to-transparent border border-indigo-500/20 dark:border-indigo-400/30 flex items-center gap-6 shadow-xl backdrop-blur-md">
+                <span className="text-5xl font-black bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-cyan-400 dark:to-emerald-400 bg-clip-text text-transparent">04</span>
+                <div className="text-xs text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider leading-relaxed">
                   AÑOS DE EXPERIENCIA<br />
-                  <span className="text-emerald-600 dark:text-emerald-400 font-semibold">100% Clientes Satisfechos</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-extrabold">100% Clientes Satisfechos</span>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            {/* Skill Cards Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {[
                 { name: "React / Next.js", value: "95%" },
                 { name: "Vue.js", value: "85%" },
@@ -716,62 +740,69 @@ function App() {
                 { name: "Docker", value: "80%" },
                 { name: "DevOps / CI/CD", value: "90%" }
               ].map((skill, i) => (
-                <div key={i} className="p-6 rounded-2xl bg-slate-50 dark:bg-neutral-900/30 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/50 transition-all text-center flex flex-col items-center justify-center gap-3 animated-gradient-border">
-                  <div className="w-16 h-16 rounded-full border-4 border-emerald-500/20 dark:border-emerald-400/20 border-t-emerald-500 dark:border-t-emerald-400 flex items-center justify-center font-bold text-slate-800 dark:text-white text-sm">
+                <div 
+                  key={i} 
+                  className="p-5 rounded-2xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/50 dark:hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-500/10 transition-all text-center flex flex-col items-center justify-center gap-3 animated-gradient-border backdrop-blur-md group"
+                >
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-4 border-indigo-500/20 dark:border-indigo-400/20 border-t-cyan-500 dark:border-t-cyan-400 flex items-center justify-center font-extrabold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:scale-105 transition-transform">
                     {skill.value}
                   </div>
-                  <span className="text-xs font-semibold text-slate-700 dark:text-neutral-300">{skill.name}</span>
+                  <span className="text-xs font-bold text-slate-800 dark:text-slate-200">{skill.name}</span>
                 </div>
               ))}
             </div>
+
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 border-t border-slate-200 dark:border-neutral-900 bg-white dark:bg-neutral-950 relative overflow-hidden">
-        {/* Ambient Blur Backgrounds */}
-        <div className="ambient-glow top-[30%] right-[5%] w-[250px] h-[250px] bg-slate-300/30 dark:bg-neutral-500/25" />
-        <div className="ambient-glow bottom-[10%] left-[5%] w-[280px] h-[280px] bg-slate-300/30 dark:bg-neutral-500/25" />
+      <section id="services" className="py-20 sm:py-24 border-t border-slate-200/80 dark:border-white/10 bg-slate-50/50 dark:bg-[#07080c] relative overflow-hidden">
+        {/* Ambient Glows */}
+        <div className="ambient-glow top-[25%] right-[5%] w-[260px] h-[260px] bg-cyan-500/15 dark:bg-cyan-500/20" />
+        <div className="ambient-glow bottom-[15%] left-[5%] w-[280px] h-[280px] bg-indigo-500/15 dark:bg-indigo-500/20" />
 
-        <div className="max-w-6xl mx-auto px-6 z-10 relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 z-10 relative">
           
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white whitespace-pre-line mb-6">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-cyan-500/30 dark:border-cyan-400/30 bg-cyan-500/10 text-[10px] sm:text-xs font-extrabold tracking-wider text-cyan-800 dark:text-cyan-300 uppercase mb-3">
+              <span>{t.services.title.split('\n')[0]}</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white whitespace-pre-line mb-4">
               Popular Services
             </h2>
-            <p className="text-slate-600 dark:text-neutral-400 text-sm md:text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
               {t.services.subtitle}
             </p>
 
             {/* Popular Services Filters */}
-            <div className="flex justify-center gap-3 mt-8">
+            <div className="flex flex-wrap justify-center gap-2.5 mt-8">
               <button
                 onClick={() => setServiceFilter("all")}
-                className={`px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                className={`px-5 py-2.5 rounded-full text-xs font-extrabold transition-all cursor-pointer shadow-sm ${
                   serviceFilter === "all"
-                    ? "bg-emerald-400 dark:bg-emerald-500 text-neutral-950 shadow-md"
-                    : "bg-slate-50 dark:bg-neutral-900 text-slate-700 dark:text-neutral-300 border border-slate-200 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800"
+                    ? "bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-cyan-400 dark:to-emerald-400 text-white dark:text-slate-950 shadow-md shadow-cyan-500/20"
+                    : "bg-white/80 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800"
                 }`}
               >
                 All
               </button>
               <button
                 onClick={() => setServiceFilter("development")}
-                className={`px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                className={`px-5 py-2.5 rounded-full text-xs font-extrabold transition-all cursor-pointer shadow-sm ${
                   serviceFilter === "development"
-                    ? "bg-emerald-400 dark:bg-emerald-500 text-neutral-950 shadow-md"
-                    : "bg-slate-50 dark:bg-neutral-900 text-slate-700 dark:text-neutral-300 border border-slate-200 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800"
+                    ? "bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-cyan-400 dark:to-emerald-400 text-white dark:text-slate-950 shadow-md shadow-cyan-500/20"
+                    : "bg-white/80 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800"
                 }`}
               >
                 Development
               </button>
               <button
                 onClick={() => setServiceFilter("design")}
-                className={`px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                className={`px-5 py-2.5 rounded-full text-xs font-extrabold transition-all cursor-pointer shadow-sm ${
                   serviceFilter === "design"
-                    ? "bg-emerald-400 dark:bg-emerald-500 text-neutral-950 shadow-md"
-                    : "bg-slate-50 dark:bg-neutral-900 text-slate-700 dark:text-neutral-300 border border-slate-200 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800"
+                    ? "bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-cyan-400 dark:to-emerald-400 text-white dark:text-slate-950 shadow-md shadow-cyan-500/20"
+                    : "bg-white/80 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800"
                 }`}
               >
                 Design
@@ -779,38 +810,44 @@ function App() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             
-            {/* Service 1: Web Dev (Development) */}
+            {/* Service 1: Web Dev */}
             {(serviceFilter === "all" || serviceFilter === "development") && (
-              <div className="p-8 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/60 transition-all duration-300 group backdrop-blur-sm animated-gradient-border">
-                <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-neutral-950 flex items-center justify-center border border-slate-200 dark:border-neutral-850 mb-8 group-hover:scale-110 transition-transform">
-                  <Code className="w-5 h-5 text-slate-600 dark:text-neutral-400" />
+              <div className="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-indigo-500/40 dark:hover:border-cyan-400/40 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 group backdrop-blur-md animated-gradient-border flex flex-col justify-between">
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/15 to-cyan-500/15 border border-indigo-500/20 dark:border-cyan-400/30 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                    <Code className="w-6 h-6 text-indigo-600 dark:text-cyan-400" />
+                  </div>
+                  <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3">{t.services.webDev.title}</h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{t.services.webDev.desc}</p>
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">{t.services.webDev.title}</h3>
-                <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed">{t.services.webDev.desc}</p>
               </div>
             )}
 
-            {/* Service 2: UI / UX (Design) */}
+            {/* Service 2: UI / UX Design */}
             {(serviceFilter === "all" || serviceFilter === "design") && (
-              <div className="p-8 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/60 transition-all duration-300 group backdrop-blur-sm animated-gradient-border">
-                <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-neutral-950 flex items-center justify-center border border-slate-200 dark:border-neutral-850 mb-8 group-hover:scale-110 transition-transform">
-                  <Palette className="w-5 h-5 text-slate-600 dark:text-neutral-400" />
+              <div className="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-indigo-500/40 dark:hover:border-cyan-400/40 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 group backdrop-blur-md animated-gradient-border flex flex-col justify-between">
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/15 to-purple-500/15 border border-amber-500/20 dark:border-purple-400/30 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                    <Palette className="w-6 h-6 text-amber-600 dark:text-purple-400" />
+                  </div>
+                  <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3">{t.services.uiux.title}</h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{t.services.uiux.desc}</p>
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">{t.services.uiux.title}</h3>
-                <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed">{t.services.uiux.desc}</p>
               </div>
             )}
 
-            {/* Service 3: Backend Development (Development) */}
+            {/* Service 3: Backend Development */}
             {(serviceFilter === "all" || serviceFilter === "development") && (
-              <div className="p-8 rounded-2xl bg-slate-50 dark:bg-neutral-900/40 border border-slate-200 dark:border-neutral-900 hover:border-slate-300 dark:hover:border-neutral-850 hover:bg-slate-100 dark:hover:bg-neutral-900/60 transition-all duration-300 group backdrop-blur-sm animated-gradient-border">
-                <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-neutral-950 flex items-center justify-center border border-slate-200 dark:border-neutral-850 mb-8 group-hover:scale-110 transition-transform">
-                  <Server className="w-5 h-5 text-slate-600 dark:text-neutral-400" />
+              <div className="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-indigo-500/40 dark:hover:border-cyan-400/40 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 group backdrop-blur-md animated-gradient-border flex flex-col justify-between">
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/15 to-cyan-500/15 border border-emerald-500/20 dark:border-cyan-400/30 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                    <Server className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3">{t.services.landing.title}</h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{t.services.landing.desc}</p>
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">{t.services.landing.title}</h3>
-                <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed">{t.services.landing.desc}</p>
               </div>
             )}
 
@@ -819,19 +856,22 @@ function App() {
         </div>
       </section>
 
-      {/* Portfolio Section (Replacing Testimonials) */}
-      <section id="portfolio" className="py-24 border-t border-slate-200 dark:border-neutral-900 bg-white dark:bg-neutral-950 relative overflow-hidden">
-        {/* Ambient Blur Backgrounds */}
-        <div className="ambient-glow top-[20%] left-[8%] w-[260px] h-[260px] bg-slate-300/30 dark:bg-neutral-500/25" />
-        <div className="ambient-glow bottom-[15%] right-[8%] w-[310px] h-[310px] bg-slate-300/30 dark:bg-neutral-500/25" />
+      {/* Portfolio Section */}
+      <section id="portfolio" className="py-20 sm:py-24 border-t border-slate-200/80 dark:border-white/10 bg-white/50 dark:bg-slate-950/50 relative overflow-hidden">
+        {/* Ambient Glows */}
+        <div className="ambient-glow top-[20%] left-[8%] w-[260px] h-[260px] bg-indigo-500/15 dark:bg-indigo-500/20" />
+        <div className="ambient-glow bottom-[15%] right-[8%] w-[310px] h-[310px] bg-cyan-500/15 dark:bg-cyan-500/20" />
 
-        <div className="max-w-6xl mx-auto px-6 z-10 relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 z-10 relative">
 
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-indigo-500/30 dark:border-indigo-400/30 bg-indigo-500/10 text-[10px] sm:text-xs font-extrabold tracking-wider text-indigo-700 dark:text-indigo-300 uppercase mb-3">
+              <span>Portafolio</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
               {t.portfolio.title}
             </h2>
-            <p className="text-slate-600 dark:text-neutral-400 text-sm md:text-base">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
               {t.portfolio.subtitle}
             </p>
           </div>
@@ -839,83 +879,77 @@ function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             {/* Project 1: Colegio Santa Luisa */}
-            <div className="group p-6 rounded-2xl bg-slate-50 dark:bg-neutral-900/30 border border-slate-200 dark:border-neutral-900 hover:border-slate-350 dark:hover:border-neutral-850 hover:shadow-lg dark:hover:shadow-black/30 transition-all flex flex-col justify-between h-full backdrop-blur-sm animated-gradient-border">
+            <div className="group p-6 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between h-full backdrop-blur-md animated-gradient-border">
               <div>
-                <div className="aspect-video w-full rounded-xl bg-slate-100 dark:bg-neutral-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-neutral-850 relative">
+                <div className="aspect-video w-full rounded-2xl bg-slate-100 dark:bg-slate-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-white/10 relative group-hover:scale-[1.02] transition-transform">
                   <img src={colegioPreview} alt="Colegio Santa Luisa" className="w-full h-full object-cover" />
                 </div>
-                <div className="inline-flex px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold tracking-wide uppercase mb-4">
+                <div className="inline-flex px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-400/15 border border-cyan-500/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-300 text-[10px] font-extrabold tracking-wider uppercase mb-3">
                   {t.portfolio.project1.tag}
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                   {t.portfolio.project1.title}
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed mb-8">
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
                   {t.portfolio.project1.desc}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedProject(PROJECT_DETAILS.project1[lang])}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer bg-transparent border-0"
+                className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 dark:text-cyan-400 group-hover:text-indigo-500 dark:group-hover:text-cyan-300 transition-colors cursor-pointer bg-transparent border-0 pt-2"
               >
-                <span>Ver proyecto</span>
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                <span>Ver proyecto detallado</span>
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
 
             {/* Project 2: Valet Parking */}
-            <div className="group p-6 rounded-2xl bg-slate-50 dark:bg-neutral-900/30 border border-slate-200 dark:border-neutral-900 hover:border-slate-350 dark:hover:border-neutral-850 hover:shadow-lg dark:hover:shadow-black/30 transition-all flex flex-col justify-between h-full backdrop-blur-sm animated-gradient-border">
+            <div className="group p-6 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between h-full backdrop-blur-md animated-gradient-border">
               <div>
-                <div className="aspect-video w-full rounded-xl bg-slate-100 dark:bg-neutral-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-neutral-850 relative">
+                <div className="aspect-video w-full rounded-2xl bg-slate-100 dark:bg-slate-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-white/10 relative group-hover:scale-[1.02] transition-transform">
                   <img src={valetPreview} alt="Valet Parking" className="w-full h-full object-cover" />
                 </div>
-                <div className="inline-flex px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold tracking-wide uppercase mb-4">
+                <div className="inline-flex px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-400/15 border border-cyan-500/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-300 text-[10px] font-extrabold tracking-wider uppercase mb-3">
                   {t.portfolio.project2.tag}
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                   {t.portfolio.project2.title}
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed mb-8">
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
                   {t.portfolio.project2.desc}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedProject(PROJECT_DETAILS.project2[lang])}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer bg-transparent border-0"
+                className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 dark:text-cyan-400 group-hover:text-indigo-500 dark:group-hover:text-cyan-300 transition-colors cursor-pointer bg-transparent border-0 pt-2"
               >
-                <span>Ver proyecto</span>
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                <span>Ver proyecto detallado</span>
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
 
             {/* Project 3: Sistema Veterinario */}
-            <div className="group p-6 rounded-2xl bg-slate-50 dark:bg-neutral-900/30 border border-slate-200 dark:border-neutral-900 hover:border-slate-350 dark:hover:border-neutral-850 hover:shadow-lg dark:hover:shadow-black/30 transition-all flex flex-col justify-between h-full backdrop-blur-sm animated-gradient-border">
+            <div className="group p-6 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between h-full backdrop-blur-md animated-gradient-border">
               <div>
-                <div className="aspect-video w-full rounded-xl bg-slate-100 dark:bg-neutral-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-neutral-850 relative">
+                <div className="aspect-video w-full rounded-2xl bg-slate-100 dark:bg-slate-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-white/10 relative group-hover:scale-[1.02] transition-transform">
                   <img src={vetPreview} alt="Sistema Veterinario" className="w-full h-full object-cover" />
                 </div>
-                <div className="inline-flex px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold tracking-wide uppercase mb-4">
+                <div className="inline-flex px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-400/15 border border-cyan-500/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-300 text-[10px] font-extrabold tracking-wider uppercase mb-3">
                   {t.portfolio.project3.tag}
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                   {t.portfolio.project3.title}
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed mb-8">
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
                   {t.portfolio.project3.desc}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedProject(PROJECT_DETAILS.project3[lang])}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer bg-transparent border-0"
+                className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 dark:text-cyan-400 group-hover:text-indigo-500 dark:group-hover:text-cyan-300 transition-colors cursor-pointer bg-transparent border-0 pt-2"
               >
-                <span>Ver proyecto</span>
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                <span>Ver proyecto detallado</span>
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
 
@@ -925,76 +959,79 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 border-t border-slate-200 dark:border-neutral-900 bg-white dark:bg-neutral-950 relative overflow-hidden">
-        {/* Ambient Blur Backgrounds */}
-        <div className="ambient-glow top-[40%] right-[10%] w-[330px] h-[330px] bg-slate-300/30 dark:bg-neutral-500/25" />
-        <div className="ambient-glow bottom-[10%] left-[8%] w-[270px] h-[270px] bg-slate-300/30 dark:bg-neutral-500/25" />
+      <section id="contact" className="py-20 sm:py-24 border-t border-slate-200/80 dark:border-white/10 bg-slate-50/50 dark:bg-[#07080c] relative overflow-hidden">
+        {/* Ambient Glows */}
+        <div className="ambient-glow top-[30%] right-[8%] w-[330px] h-[330px] bg-cyan-500/15 dark:bg-cyan-500/20" />
+        <div className="ambient-glow bottom-[10%] left-[8%] w-[270px] h-[270px] bg-indigo-500/15 dark:bg-indigo-500/20" />
 
-        <div className="max-w-6xl mx-auto px-6 z-10 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 z-10 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-14 items-start">
             
             {/* Info panel */}
             <div className="lg:col-span-5">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-cyan-500/30 dark:border-cyan-400/30 bg-cyan-500/10 text-[10px] sm:text-xs font-extrabold tracking-wider text-cyan-800 dark:text-cyan-300 uppercase mb-4">
+                <span>Contacto</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
                 {t.contact.title}
               </h2>
-              <p className="text-slate-600 dark:text-neutral-400 text-sm md:text-base leading-relaxed mb-10">
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
                 {t.contact.subtitle}
               </p>
 
               <div className="flex flex-col gap-6">
                 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-neutral-900 flex items-center justify-center border border-slate-200 dark:border-neutral-850 text-slate-500 dark:text-neutral-400">
-                    <Mail className="w-4 h-4" />
+                  <div className="w-12 h-12 rounded-2xl bg-white/80 dark:bg-slate-900/80 flex items-center justify-center border border-slate-200 dark:border-white/10 text-cyan-600 dark:text-cyan-400 shadow-sm">
+                    <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-wider mb-1">{t.contact.email}</h4>
-                    <a href="mailto:jvasquez978@gmail.com" className="text-sm font-semibold text-slate-800 dark:text-white hover:text-slate-600 dark:hover:text-neutral-300 transition-colors">
+                    <h4 className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">{t.contact.email}</h4>
+                    <a href="mailto:jvasquez978@gmail.com" className="text-sm sm:text-base font-bold text-slate-900 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
                       jvasquez978@gmail.com
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-neutral-900 flex items-center justify-center border border-slate-200 dark:border-neutral-850 text-slate-500 dark:text-neutral-400">
-                    <Phone className="w-4 h-4" />
+                  <div className="w-12 h-12 rounded-2xl bg-white/80 dark:bg-slate-900/80 flex items-center justify-center border border-slate-200 dark:border-white/10 text-indigo-600 dark:text-indigo-400 shadow-sm">
+                    <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-wider mb-1">{t.contact.phone}</h4>
-                    <a href="tel:+584269217118" className="text-sm font-semibold text-slate-800 dark:text-white hover:text-slate-600 dark:hover:text-neutral-300 transition-colors">
+                    <h4 className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">{t.contact.phone}</h4>
+                    <a href="tel:+584269217118" className="text-sm sm:text-base font-bold text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                       +58 426 921 7118
                     </a>
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-2">
                   <a
                     href="https://wa.me/584269217118"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-emerald-500 text-black font-semibold text-sm hover:bg-emerald-400 transition-colors shadow-lg shadow-emerald-500/20"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm transition-all shadow-lg shadow-emerald-500/20 hover:scale-105"
                   >
                     <MessageSquare className="w-4 h-4" />
-                    WhatsApp
+                    WhatsApp Directo
                   </a>
                   <a
                     href="https://wa.me/584269217118?text=Hola%20José%2C%20quiero%20consultar%20sobre%20un%20proyecto"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-slate-200 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-900 text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-neutral-800 transition-colors"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-slate-900/80 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 font-bold text-sm transition-all"
                   >
-                    Mensaje rápido
+                    Mensaje Rápido
                   </a>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-neutral-900 flex items-center justify-center border border-slate-200 dark:border-neutral-850 text-slate-500 dark:text-neutral-400">
-                    <MapPin className="w-4 h-4" />
+                <div className="flex items-start gap-4 pt-2">
+                  <div className="w-12 h-12 rounded-2xl bg-white/80 dark:bg-slate-900/80 flex items-center justify-center border border-slate-200 dark:border-white/10 text-emerald-600 dark:text-emerald-400 shadow-sm">
+                    <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-wider mb-1">{t.contact.location}</h4>
-                    <p className="text-sm font-semibold text-slate-800 dark:text-white">
+                    <h4 className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">{t.contact.location}</h4>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white">
                       {t.contact.locationVal}
                     </p>
                   </div>
@@ -1005,10 +1042,10 @@ function App() {
 
             {/* Form panel */}
             <div className="lg:col-span-7">
-              <form onSubmit={handleContactSubmit} className="p-8 md:p-10 rounded-2xl bg-slate-50 dark:bg-neutral-900/30 border border-slate-200 dark:border-neutral-900 space-y-6 backdrop-blur-sm">
+              <form onSubmit={handleContactSubmit} className="p-7 sm:p-10 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 space-y-6 backdrop-blur-md shadow-xl animated-gradient-border">
                 
                 <div>
-                  <label htmlFor="name" className="block text-xs font-bold text-slate-500 dark:text-neutral-400 uppercase tracking-wider mb-2">
+                  <label htmlFor="name" className="block text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
                     {t.contact.labelName}
                   </label>
                   <input
@@ -1018,12 +1055,12 @@ function App() {
                     value={formData.name}
                     onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                     placeholder={t.contact.placeholderName}
-                    className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-neutral-950 border border-slate-250 dark:border-neutral-850 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-neutral-600 focus:outline-none focus:border-slate-450 dark:focus:border-neutral-700 transition-colors text-sm"
+                    className="w-full px-4 py-3.5 rounded-xl bg-white/90 dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 dark:focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all text-sm font-medium"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-xs font-bold text-slate-500 dark:text-neutral-400 uppercase tracking-wider mb-2">
+                  <label htmlFor="email" className="block text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
                     {t.contact.labelEmail}
                   </label>
                   <input
@@ -1033,12 +1070,12 @@ function App() {
                     value={formData.email}
                     onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                     placeholder={t.contact.placeholderEmail}
-                    className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-neutral-950 border border-slate-250 dark:border-neutral-850 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-neutral-600 focus:outline-none focus:border-slate-450 dark:focus:border-neutral-700 transition-colors text-sm"
+                    className="w-full px-4 py-3.5 rounded-xl bg-white/90 dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 dark:focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all text-sm font-medium"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-xs font-bold text-slate-500 dark:text-neutral-400 uppercase tracking-wider mb-2">
+                  <label htmlFor="message" className="block text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
                     {t.contact.labelMessage}
                   </label>
                   <textarea
@@ -1048,27 +1085,27 @@ function App() {
                     value={formData.message}
                     onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
                     placeholder={t.contact.placeholderMessage}
-                    className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-neutral-950 border border-slate-250 dark:border-neutral-850 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-neutral-600 focus:outline-none focus:border-slate-450 dark:focus:border-neutral-700 transition-colors text-sm resize-none"
+                    className="w-full px-4 py-3.5 rounded-xl bg-white/90 dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 dark:focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all text-sm font-medium resize-none"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-black font-semibold text-sm hover:bg-slate-800 dark:hover:bg-neutral-200 active:scale-99 transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="w-4 h-4" />
                   <span>{isSubmitting ? (lang === "es" ? "Enviando..." : "Sending...") : t.contact.submit}</span>
                 </button>
 
                 {formSubmitted && (
-                  <p className="text-center text-xs text-emerald-600 dark:text-emerald-400 font-bold animate-pulse mt-2">
+                  <p className="text-center text-xs text-emerald-600 dark:text-emerald-400 font-extrabold animate-pulse mt-2">
                     {lang === "es" ? "¡Mensaje enviado con éxito! Te contactaremos pronto." : "Message sent successfully! We will contact you soon."}
                   </p>
                 )}
 
                 {submitError && (
-                  <p className="text-center text-xs text-red-500 font-bold mt-2">
+                  <p className="text-center text-xs text-rose-500 font-bold mt-2">
                     {submitError}
                   </p>
                 )}
@@ -1081,34 +1118,35 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-slate-200 dark:border-neutral-900/60 bg-white/80 dark:bg-neutral-950/80">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-500 dark:text-neutral-500">
+      <footer className="py-10 border-t border-slate-200/80 dark:border-white/10 bg-white/80 dark:bg-slate-950/80">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-500 dark:text-slate-400 font-medium">
           <div>
             © {new Date().getFullYear()} José Vásquez. All rights reserved.
           </div>
-          <div className="flex items-center gap-4">
-            <a href="https://github.com/jav978" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-slate-400 dark:text-neutral-300 hover:text-slate-900 dark:hover:text-white transition-colors">
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          
+          <div className="flex items-center gap-5">
+            <a href="https://github.com/jav978" target="_blank" rel="noreferrer" aria-label="GitHub" className="p-2 rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:border-cyan-500/40 transition-all">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                 <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
               </svg>
             </a>
-            <a href="https://gitlab.com/jvasquez978" target="_blank" rel="noreferrer" aria-label="GitLab" className="text-slate-400 dark:text-neutral-300 hover:text-slate-900 dark:hover:text-white transition-colors">
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <a href="https://gitlab.com/jvasquez978" target="_blank" rel="noreferrer" aria-label="GitLab" className="p-2 rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:border-cyan-500/40 transition-all">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                 <path d="m23.955 13.587-1.342-4.135-2.664-8.189c-.135-.417-.724-.417-.86 0L16.42 9.447H7.579L4.914 1.263c-.135-.417-.724-.417-.86 0L1.386 9.452.044 13.587c-.153.47.014 1.011.412 1.299L12 23.361l11.544-8.475c.398-.288.565-.828.411-1.299"/>
               </svg>
             </a>
-            <a href="https://x.com/JoseAntonio978" target="_blank" rel="noreferrer" aria-label="X" className="text-slate-400 dark:text-neutral-300 hover:text-slate-900 dark:hover:text-white transition-colors">
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <a href="https://x.com/JoseAntonio978" target="_blank" rel="noreferrer" aria-label="X" className="p-2 rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:border-cyan-500/40 transition-all">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
             </a>
-            <a href="https://www.instagram.com/jav_978/" target="_blank" rel="noreferrer" aria-label="Instagram" className="text-slate-400 dark:text-neutral-300 hover:text-slate-900 dark:hover:text-white transition-colors">
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <a href="https://www.instagram.com/jav_978/" target="_blank" rel="noreferrer" aria-label="Instagram" className="p-2 rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:border-cyan-500/40 transition-all">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
               </svg>
             </a>
-            <a href="https://www.linkedin.com/in/jose-vasquez978" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-slate-400 dark:text-neutral-300 hover:text-slate-900 dark:hover:text-white transition-colors">
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <a href="https://www.linkedin.com/in/jose-vasquez978" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="p-2 rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:border-cyan-500/40 transition-all">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/>
               </svg>
             </a>
@@ -1118,20 +1156,20 @@ function App() {
 
       {/* Detailed Project Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/65 backdrop-blur-sm transition-opacity duration-300">
-          <div className="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-3xl border border-slate-200 dark:border-neutral-850 bg-white/95 dark:bg-neutral-900/95 text-slate-900 dark:text-neutral-100 p-6 md:p-10 shadow-2xl flex flex-col gap-6 backdrop-blur-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/75 backdrop-blur-xl transition-opacity duration-300">
+          <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-200 dark:border-white/15 bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-slate-100 p-6 sm:p-10 shadow-2xl flex flex-col gap-6 backdrop-blur-2xl">
             
             {/* Modal Header */}
-            <div className="flex items-start justify-between border-b border-slate-100 dark:border-neutral-800 pb-4">
+            <div className="flex items-start justify-between border-b border-slate-200/80 dark:border-white/10 pb-4">
               <div>
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-450 bg-emerald-500/10 px-2.5 py-1 rounded-full mb-2 inline-block">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-600 dark:text-cyan-300 bg-cyan-500/10 dark:bg-cyan-400/15 px-3 py-1 rounded-full mb-2 inline-block border border-cyan-500/20">
                   {selectedProject.tag}
                 </span>
-                <h3 className="text-2xl md:text-3xl font-black tracking-tight">{selectedProject.title}</h3>
+                <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">{selectedProject.title}</h3>
               </div>
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="p-2 rounded-full border border-slate-200 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                className="p-2 rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -1143,28 +1181,28 @@ function App() {
               {/* Left Column */}
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-neutral-500 mb-2">
+                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
                     {lang === "es" ? "Descripción del Proyecto" : "Project Description"}
                   </h4>
-                  <p className="text-sm md:text-base leading-relaxed text-slate-700 dark:text-neutral-300">
+                  <p className="text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">
                     {selectedProject.longDesc}
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-neutral-500 mb-2">
+                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
                     {lang === "es" ? "Filosofía y Propósito" : "Philosophy & Purpose"}
                   </h4>
-                  <p className="text-sm leading-relaxed text-slate-600 dark:text-neutral-450">
+                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                     {selectedProject.philosophy}
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-neutral-500 mb-3">
+                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
                     {lang === "es" ? "Características Clave" : "Key Features"}
                   </h4>
-                  <ul className="list-disc pl-5 space-y-1.5 text-sm text-slate-700 dark:text-neutral-350">
+                  <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 dark:text-slate-300">
                     {selectedProject.features.map((feature, index) => (
                       <li key={index}>{feature}</li>
                     ))}
@@ -1176,12 +1214,12 @@ function App() {
               <div className="space-y-6">
                 {/* Tech Stack */}
                 <div>
-                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-neutral-500 mb-3">
+                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
                     {lang === "es" ? "Tecnologías" : "Technologies"}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.techs.map((tech, index) => (
-                      <span key={index} className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-neutral-950 border border-slate-200 dark:border-neutral-800 text-slate-800 dark:text-neutral-300">
+                      <span key={index} className="px-3 py-1 text-xs font-bold rounded-lg bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200">
                         {tech}
                       </span>
                     ))}
@@ -1190,10 +1228,10 @@ function App() {
 
                 {/* Security */}
                 <div>
-                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-neutral-500 mb-3">
+                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
                     {lang === "es" ? "Seguridad y Autorización" : "Security & Auth"}
                   </h4>
-                  <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-600 dark:text-neutral-400">
+                  <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
                     {selectedProject.security.map((sec, index) => (
                       <li key={index}>{sec}</li>
                     ))}
@@ -1202,14 +1240,14 @@ function App() {
 
                 {/* Directory Architecture */}
                 <div>
-                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-neutral-500 mb-3">
+                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
                     {lang === "es" ? "Estructura del Proyecto" : "Project Structure"}
                   </h4>
-                  <div className="rounded-xl border border-slate-200 dark:border-neutral-800/80 bg-slate-50/50 dark:bg-neutral-950/50 p-3.5 space-y-2 text-xs font-mono">
+                  <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/50 p-4 space-y-2 text-xs font-mono">
                     {Object.entries(selectedProject.architecture).map(([path, desc], index) => (
-                      <div key={index} className="flex flex-col sm:flex-row sm:justify-between border-b border-slate-100 dark:border-neutral-850 pb-1.5 last:border-0 last:pb-0">
-                        <span className="text-emerald-600 dark:text-emerald-450 font-bold">{path}</span>
-                        <span className="text-slate-500 dark:text-neutral-500 text-[10px] sm:text-right">{desc}</span>
+                      <div key={index} className="flex flex-col sm:flex-row sm:justify-between border-b border-slate-100 dark:border-white/5 pb-2 last:border-0 last:pb-0">
+                        <span className="text-cyan-600 dark:text-cyan-400 font-bold">{path}</span>
+                        <span className="text-slate-500 dark:text-slate-400 text-[10px] sm:text-right">{desc}</span>
                       </div>
                     ))}
                   </div>
@@ -1217,11 +1255,11 @@ function App() {
               </div>
             </div>
 
-            {/* Modal Footer / Action */}
-            <div className="flex flex-col sm:flex-row items-center justify-end gap-3 border-t border-slate-100 dark:border-neutral-800 pt-4 mt-2">
+            {/* Modal Footer / Actions */}
+            <div className="flex flex-col sm:flex-row items-center justify-end gap-3 border-t border-slate-200/80 dark:border-white/10 pt-4 mt-2">
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="w-full sm:w-auto px-6 py-2.5 rounded-full border border-slate-200 dark:border-neutral-850 text-slate-700 dark:text-neutral-300 font-semibold text-xs hover:bg-slate-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer text-center"
+                className="w-full sm:w-auto px-6 py-2.5 rounded-full border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer text-center"
               >
                 {lang === "es" ? "Cerrar" : "Close"}
               </button>
@@ -1230,9 +1268,10 @@ function App() {
                   href={selectedProject.liveUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-emerald-500 text-black font-semibold text-xs hover:bg-emerald-400 transition-colors shadow-lg shadow-emerald-500/10 text-center"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-cyan-400 dark:to-emerald-400 text-white dark:text-slate-950 font-extrabold text-xs shadow-lg shadow-cyan-500/20 text-center flex items-center justify-center gap-1.5 hover:scale-105 transition-all"
                 >
-                  {lang === "es" ? "Ver Demo en Vivo" : "View Live Demo"}
+                  <span>{lang === "es" ? "Ver Demo en Vivo" : "View Live Demo"}</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               )}
             </div>
