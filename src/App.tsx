@@ -22,6 +22,7 @@ import heroImg from "./assets/hero.png";
 import colegioPreview from "./assets/colegio_preview.png";
 import valetPreview from "./assets/valet_preview.png";
 import vetPreview from "./assets/vet_preview.png";
+import electronicPreview from "./assets/electronic_shop_preview.png";
 
 // Translations dictionary
 const translations = {
@@ -78,6 +79,11 @@ const translations = {
         title: "Sistema Veterinario",
         desc: "Plataforma de administración para clínicas veterinarias, control de citas, historias médicas y pacientes.",
         tag: "Sistema de Gestión"
+      },
+      project4: {
+        title: "Electronic Shop",
+        desc: "Sistema integral Full-Stack de e-commerce de electrónica con Nuxt 3, FeathersJS v5, PostgreSQL, Redis y Socket.io.",
+        tag: "E-Commerce Full-Stack"
       }
     },
     contact: {
@@ -150,6 +156,11 @@ const translations = {
         title: "Veterinary System",
         desc: "Clinic administration platform for pet clinics, handling appointments, medical records, and patients.",
         tag: "Management System"
+      },
+      project4: {
+        title: "Electronic Shop",
+        desc: "Decoupled full-stack e-commerce system for consumer electronics built with Nuxt 3, FeathersJS v5, PostgreSQL, Redis, and Socket.io.",
+        tag: "Full-Stack E-Commerce"
       }
     },
     contact: {
@@ -349,6 +360,70 @@ const PROJECT_DETAILS: { [key: string]: { es: ProjectDetail; en: ProjectDetail }
         "app/": "Next.js app routing structures",
         "prisma/": "ORM declarations connecting to database engines",
         "services/": "Email and PDF export services"
+      }
+    }
+  },
+  project4: {
+    es: {
+      id: "project4",
+      title: "Electronic Shop",
+      tag: "E-Commerce Full-Stack",
+      shortDesc: "Sistema integral de comercio electrónico de arquitectura desacoplada con panel de administración, tiempo real y facturación PDF.",
+      longDesc: "Electronic Shop es una aplicación web moderna compuesta por un frontend responsivo desarrollado en Nuxt 3 / Vue 3 y un backend robusto basado en FeathersJS 5 con Prisma ORM sobre PostgreSQL. Incorpora soporte para caché con Redis, comunicación bidireccional en tiempo real con Socket.io y generación de facturas y reportes en PDF.",
+      philosophy: "Estructura desacoplada y escalable basada en Clean Architecture (domain, application, infrastructure, services) diseñada para soportar alto tráfico, almacenamiento en caché de alto rendimiento y gestión integral de inventario y pedidos.",
+      liveUrl: "https://electronic-shop-five-blush.vercel.app/",
+      techs: ["Nuxt 3", "Vue 3", "FeathersJS 5", "Prisma ORM v6", "PostgreSQL", "Redis", "Pinia", "Tailwind CSS", "Socket.io", "PDFKit"],
+      features: [
+        "Catálogo de Productos: Exploración por categorías, filtrado por precio/nombre y paginación",
+        "Ficha de Producto: Vista detallada con especificaciones técnicas en formato JSON y stock disponible",
+        "Carrito de Compras Persistente: Gestión dinámica con Pinia y cálculo automático de totales",
+        "Dashboard de Métricas: Visualización de ingresos totales, órdenes completadas y gráficos interactivos con Chart.js",
+        "Gestión de Órdenes e Inventario (CRUD): Control de productos y cambios de estados en tiempo real vía Socket.io",
+        "Reportes y Facturación: Exportación automática e impresión de comprobantes de compra en formato PDF (PDFKit)"
+      ],
+      security: [
+        "Autenticación y autorización mediante JWT (JSON Web Tokens)",
+        "Cifrado de contraseñas mediante bcryptjs",
+        "Control de acceso basado en roles (USER y ADMIN)",
+        "Protección y validación de endpoints en arquitectura desacoplada"
+      ],
+      architecture: {
+        "frontend/": "Aplicación Nuxt 3 (Vue 3, Pinia, Tailwind CSS, Socket.io client)",
+        "backend/domain/": "Entidades de negocio y reglas de dominio",
+        "backend/application/": "Casos de uso y lógica de aplicación",
+        "backend/infrastructure/": "Conexión a PostgreSQL (Prisma ORM), Redis y Socket.io",
+        "backend/services/": "Servicios de FeathersJS v5 para APIs REST y WebSockets"
+      }
+    },
+    en: {
+      id: "project4",
+      title: "Electronic Shop",
+      tag: "Full-Stack E-Commerce",
+      shortDesc: "Decoupled full-stack e-commerce system with admin panel, real-time sync, and PDF invoicing.",
+      longDesc: "Electronic Shop is a modern web application featuring a responsive frontend in Nuxt 3 / Vue 3 and a robust backend built on FeathersJS 5 with Prisma ORM over PostgreSQL. Features Redis caching, real-time Socket.io communication, and PDF invoice generation.",
+      philosophy: "Decoupled Clean Architecture (domain, application, infrastructure, services) designed for high-performance inventory management, real-time updates, and scalable e-commerce workflows.",
+      liveUrl: "https://electronic-shop-five-blush.vercel.app/",
+      techs: ["Nuxt 3", "Vue 3", "FeathersJS 5", "Prisma ORM v6", "PostgreSQL", "Redis", "Pinia", "Tailwind CSS", "Socket.io", "PDFKit"],
+      features: [
+        "Interactive product catalog with category filtering, search, and dynamic pagination",
+        "Product detail view with JSON technical specifications and live stock indicators",
+        "Persistent Pinia shopping cart with automated checkout total calculations",
+        "Administrative dashboard (/admin) with sales metrics charts via Chart.js",
+        "Real-time order state updates and product CRUD inventory management via Socket.io",
+        "Automated PDF receipt and sales report generation using PDFKit"
+      ],
+      security: [
+        "JWT (JSON Web Tokens) authentication and authorization",
+        "Secure password hashing via bcryptjs",
+        "Role-based access control (USER and ADMIN roles)",
+        "Input validation and decoupled architecture endpoint protection"
+      ],
+      architecture: {
+        "frontend/": "Nuxt 3 application (Vue 3, Pinia, Tailwind CSS, Socket.io client)",
+        "backend/domain/": "Domain entities and core business rules",
+        "backend/application/": "Use cases and application logic layer",
+        "backend/infrastructure/": "PostgreSQL (Prisma ORM), Redis, and Socket.io integration",
+        "backend/services/": "FeathersJS v5 REST & WebSocket services"
       }
     }
   }
@@ -876,7 +951,7 @@ function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* Project 1: Colegio Santa Luisa */}
             <div className="group p-6 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between h-full backdrop-blur-md animated-gradient-border">
@@ -946,6 +1021,31 @@ function App() {
               </div>
               <button
                 onClick={() => setSelectedProject(PROJECT_DETAILS.project3[lang])}
+                className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 dark:text-cyan-400 group-hover:text-indigo-500 dark:group-hover:text-cyan-300 transition-colors cursor-pointer bg-transparent border-0 pt-2"
+              >
+                <span>Ver proyecto detallado</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Project 4: Electronic Shop */}
+            <div className="group p-6 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between h-full backdrop-blur-md animated-gradient-border">
+              <div>
+                <div className="aspect-video w-full rounded-2xl bg-slate-100 dark:bg-slate-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-white/10 relative group-hover:scale-[1.02] transition-transform">
+                  <img src={electronicPreview} alt="Electronic Shop" className="w-full h-full object-cover" />
+                </div>
+                <div className="inline-flex px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-400/15 border border-cyan-500/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-300 text-[10px] font-extrabold tracking-wider uppercase mb-3">
+                  {t.portfolio.project4.tag}
+                </div>
+                <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                  {t.portfolio.project4.title}
+                </h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                  {t.portfolio.project4.desc}
+                </p>
+              </div>
+              <button
+                onClick={() => setSelectedProject(PROJECT_DETAILS.project4[lang])}
                 className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 dark:text-cyan-400 group-hover:text-indigo-500 dark:group-hover:text-cyan-300 transition-colors cursor-pointer bg-transparent border-0 pt-2"
               >
                 <span>Ver proyecto detallado</span>
