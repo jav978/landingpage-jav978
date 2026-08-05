@@ -16,7 +16,13 @@ import {
   ArrowUp,
   Server,
   ExternalLink,
-  ChevronRight
+  ChevronRight,
+  FileText,
+  Download,
+  Briefcase,
+  GraduationCap,
+  CheckCircle2,
+  User
 } from "lucide-react";
 import heroImg from "./assets/hero.png";
 import colegioPreview from "./assets/colegio_preview.png";
@@ -31,8 +37,28 @@ const translations = {
       home: "Inicio",
       services: "Servicios",
       portfolio: "Portafolio",
+      cv: "Curriculum Vitae",
       contact: "Contacto",
       cta: "Contrátame"
+    },
+    cv: {
+      button: "Curriculum Vitae",
+      downloadPdf: "Descargar CV (PDF)",
+      viewPdf: "Ver PDF Completo",
+      title: "Curriculum Vitae",
+      subtitle: "Desarrollador Full Stack · Administrador de Infraestructura IT · Soporte Técnico",
+      location: "Caracas, Distrito Capital",
+      summaryTitle: "Resumen Profesional",
+      summaryText: "Desarrollador Full Stack y administrador de infraestructura IT con más de 3 años combinando programación (Angular, NestJS, React) y gestión de redes y soporte técnico para más de 20 estaciones de trabajo. Lleva proyectos de principio a fin, desde el levantamiento de requerimientos hasta el despliegue en producción con Docker y bases de datos relacionales. Su experiencia paralela como instructor a 6 niveles educativos distintos aporta una capacidad probada para traducir requerimientos de negocio en soluciones técnicas claras.",
+      skillsTitle: "Habilidades Técnicas",
+      experienceTitle: "Experiencia Profesional",
+      educationTitle: "Formación Académica",
+      contactTitle: "Contacto & Redes",
+      webDev: "Desarrollo Web",
+      mobileDev: "Desarrollo Móvil",
+      databases: "Bases de Datos",
+      versionControl: "Control de Versiones",
+      infrastructure: "Infraestructura y Sistemas"
     },
     hero: {
       badge: "PROGRAMADOR & DISEÑADOR",
@@ -108,8 +134,28 @@ const translations = {
       home: "Home",
       services: "Services",
       portfolio: "Portfolio",
+      cv: "Curriculum Vitae",
       contact: "Contact",
       cta: "Hire me"
+    },
+    cv: {
+      button: "Curriculum Vitae",
+      downloadPdf: "Download CV (PDF)",
+      viewPdf: "View Full PDF",
+      title: "Curriculum Vitae",
+      subtitle: "Full Stack Developer · IT Infrastructure Administrator · Technical Support",
+      location: "Caracas, Capital District",
+      summaryTitle: "Professional Summary",
+      summaryText: "Full Stack Developer and IT infrastructure administrator with over 3 years combining software development (Angular, NestJS, React) and network management and tech support for 20+ workstations. Leads projects end-to-end, from requirements gathering to production deployment with Docker and relational databases. Parallel experience as an instructor across 6 educational levels brings a proven ability to translate business requirements into clear technical solutions.",
+      skillsTitle: "Technical Skills",
+      experienceTitle: "Professional Experience",
+      educationTitle: "Academic Education",
+      contactTitle: "Contact & Networks",
+      webDev: "Web Development",
+      mobileDev: "Mobile Development",
+      databases: "Databases",
+      versionControl: "Version Control",
+      infrastructure: "Infrastructure & Systems"
     },
     hero: {
       badge: "DEVELOPER & DESIGNER",
@@ -436,6 +482,7 @@ function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
+  const [isCvModalOpen, setIsCvModalOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -445,6 +492,7 @@ function App() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setSelectedProject(null);
+        setIsCvModalOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -571,6 +619,13 @@ function App() {
             <a href="#portfolio" className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
               {t.nav.portfolio}
             </a>
+            <button
+              onClick={() => setIsCvModalOpen(true)}
+              className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <FileText className="w-3.5 h-3.5 text-cyan-500" />
+              <span>{t.nav.cv}</span>
+            </button>
             <a href="#contact" className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
               {t.nav.contact}
             </a>
@@ -578,6 +633,16 @@ function App() {
 
           {/* Right Action Controls */}
           <div className="hidden md:flex items-center gap-3">
+            {/* CV Button */}
+            <button
+              onClick={() => setIsCvModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 dark:bg-cyan-500/15 text-xs font-bold text-cyan-700 dark:text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-500/50 transition-all cursor-pointer shadow-sm"
+              title={t.cv.button}
+            >
+              <FileText className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+              <span>{t.cv.button}</span>
+            </button>
+
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
@@ -661,6 +726,19 @@ function App() {
               <span>{t.nav.portfolio}</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </a>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setIsCvModalOpen(true);
+              }}
+              className="px-4 py-2.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-500 transition-colors flex items-center justify-between cursor-pointer w-full text-left"
+            >
+              <span className="flex items-center gap-2">
+                <FileText className="w-4 h-4 text-cyan-500" />
+                {t.nav.cv}
+              </span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </button>
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
@@ -717,9 +795,16 @@ function App() {
               >
                 {t.hero.ctaPrimary}
               </a>
+              <button
+                onClick={() => setIsCvModalOpen(true)}
+                className="w-full sm:w-auto px-7 py-4 rounded-full bg-white/90 dark:bg-slate-900/90 border border-cyan-500/40 text-slate-800 dark:text-slate-100 font-extrabold text-sm hover:bg-cyan-50 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all backdrop-blur-md text-center shadow-md flex items-center justify-center gap-2 cursor-pointer hover:scale-105 active:scale-95"
+              >
+                <FileText className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
+                <span>{t.cv.button}</span>
+              </button>
               <a
                 href="#services"
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-cyan-300 transition-all backdrop-blur-md text-center shadow-sm"
+                className="w-full sm:w-auto px-7 py-4 rounded-full bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-cyan-300 transition-all backdrop-blur-md text-center shadow-sm"
               >
                 {t.hero.ctaSecondary}
               </a>
@@ -1374,6 +1459,335 @@ function App() {
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               )}
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* Curriculum Vitae Modal */}
+      {isCvModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-xl transition-opacity duration-300">
+          <div className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl border border-slate-200 dark:border-white/15 bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-slate-100 p-5 sm:p-8 shadow-2xl flex flex-col gap-6 backdrop-blur-2xl">
+            
+            {/* Header */}
+            <div className="flex items-start justify-between border-b border-slate-200/80 dark:border-white/10 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-3 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-cyan-500/20 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 shrink-0">
+                  <FileText className="w-6 h-6 sm:w-7 sm:h-7" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-600 dark:text-cyan-300 bg-cyan-500/10 dark:bg-cyan-400/15 px-2.5 py-0.5 rounded-full border border-cyan-500/20">
+                      CV
+                    </span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-cyan-500" />
+                      {t.cv.location}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 via-cyan-600 to-emerald-600 dark:from-white dark:via-cyan-300 dark:to-emerald-300 bg-clip-text text-transparent mt-0.5">
+                    José Antonio Vásquez
+                  </h3>
+                  <p className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300">
+                    {t.cv.subtitle}
+                  </p>
+                </div>
+              </div>
+              
+              <button 
+                onClick={() => setIsCvModalOpen(false)}
+                className="p-2 rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                aria-label="Close CV Modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Top Toolbar / Action Bar */}
+            <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-slate-100/80 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10">
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                <span>{lang === "es" ? "Documento listo para descarga o lectura" : "Document ready for download or view"}</span>
+              </div>
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <a
+                  href="/CV_Jose_Antonio_Vasquez.pdf"
+                  download="CV_Jose_Antonio_Vasquez.pdf"
+                  className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 dark:from-cyan-400 dark:to-emerald-400 text-white dark:text-slate-950 font-extrabold text-xs shadow-md shadow-cyan-500/20 hover:scale-105 transition-all flex items-center justify-center gap-1.5"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>{t.cv.downloadPdf}</span>
+                </a>
+                <a
+                  href="/CV_Jose_Antonio_Vasquez.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 sm:flex-none px-4 py-2 rounded-xl border border-slate-300 dark:border-white/15 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-700 transition-all flex items-center justify-center gap-1.5"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>{t.cv.viewPdf}</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Modal Content Sections */}
+            <div className="space-y-6">
+              
+              {/* Contact Info Pills */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+                <a href="mailto:jvasquez978@gmail.com" className="p-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950/40 hover:border-cyan-500/50 transition-colors flex items-center gap-2 group">
+                  <Mail className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
+                  <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 truncate group-hover:text-cyan-500">jvasquez978@gmail.com</span>
+                </a>
+                <a href="tel:+5804269217118" className="p-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950/40 hover:border-cyan-500/50 transition-colors flex items-center gap-2 group">
+                  <Phone className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
+                  <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 truncate group-hover:text-cyan-500">+58 (0426) 921-71-18</span>
+                </a>
+                <a href="https://github.com/jav978" target="_blank" rel="noreferrer" className="p-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950/40 hover:border-cyan-500/50 transition-colors flex items-center gap-2 group">
+                  <Globe className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
+                  <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 truncate group-hover:text-cyan-500">github.com/jav978</span>
+                </a>
+                <a href="https://linkedin.com/in/jose-vasquez978" target="_blank" rel="noreferrer" className="p-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950/40 hover:border-cyan-500/50 transition-colors flex items-center gap-2 group">
+                  <User className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
+                  <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 truncate group-hover:text-cyan-500">linkedin.com/in/jose-vasquez978</span>
+                </a>
+              </div>
+
+              {/* Professional Summary */}
+              <div>
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2 flex items-center gap-2">
+                  <User className="w-4 h-4 text-cyan-500" />
+                  {t.cv.summaryTitle}
+                </h4>
+                <div className="p-4 rounded-2xl border border-indigo-500/20 bg-indigo-500/5 dark:bg-indigo-950/20 text-sm leading-relaxed text-slate-700 dark:text-slate-200">
+                  {t.cv.summaryText}
+                </div>
+              </div>
+
+              {/* Technical Skills */}
+              <div>
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3 flex items-center gap-2">
+                  <Code className="w-4 h-4 text-cyan-500" />
+                  {t.cv.skillsTitle}
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/50">
+                    <span className="text-xs font-extrabold text-cyan-600 dark:text-cyan-400 block mb-2">{t.cv.webDev}</span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["Angular", "AstroJS", "React", "Vue", "Next.js", "Nuxt", "Node.js", "NestJS", "FeathersJS", "Tailwind CSS"].map((skill, i) => (
+                        <span key={i} className="px-2.5 py-0.5 text-[11px] font-semibold rounded-md bg-cyan-500/10 text-cyan-800 dark:text-cyan-200 border border-cyan-500/20">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/50">
+                    <span className="text-xs font-extrabold text-amber-600 dark:text-amber-400 block mb-2">{t.cv.mobileDev} & {t.cv.databases}</span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["Flutter", "PostgreSQL", "MySQL", "SQL Server", "MongoDB"].map((skill, i) => (
+                        <span key={i} className="px-2.5 py-0.5 text-[11px] font-semibold rounded-md bg-amber-500/10 text-amber-800 dark:text-amber-200 border border-amber-500/20">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/50">
+                    <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 block mb-2">{t.cv.versionControl}</span>
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {lang === "es" 
+                        ? "Git y GitHub para gestión de repositorios y trabajo colaborativo en equipo." 
+                        : "Git and GitHub for repository management and collaborative teamwork."}
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/50">
+                    <span className="text-xs font-extrabold text-purple-600 dark:text-purple-400 block mb-2">{t.cv.infrastructure}</span>
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {lang === "es"
+                        ? "Docker, administración de entornos Linux (Ubuntu Budgie) y Windows, configuración de redes locales."
+                        : "Docker, administration of Linux (Ubuntu Budgie) and Windows environments, local network configuration."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Professional Experience */}
+              <div>
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4 flex items-center gap-2">
+                  <Briefcase className="w-4 h-4 text-cyan-500" />
+                  {t.cv.experienceTitle}
+                </h4>
+                <div className="space-y-5 relative before:absolute before:left-3 before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-cyan-500 before:via-indigo-500 before:to-transparent pl-8">
+                  
+                  {/* Job 1 */}
+                  <div className="relative">
+                    <div className="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full bg-cyan-500 ring-4 ring-cyan-500/20" />
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1.5">
+                      <h5 className="text-sm font-extrabold text-slate-900 dark:text-white">
+                        {lang === "es" ? "Desarrollador de Software Independiente" : "Independent Software Developer"}
+                      </h5>
+                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-300 border border-cyan-500/20 w-fit">
+                        2023 – {lang === "es" ? "Actualidad" : "Present"}
+                      </span>
+                    </div>
+                    <ul className="list-disc pl-4 space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+                      {lang === "es" ? (
+                        <>
+                          <li>Diseñó y desplegó un sistema de gestión integral para Valet Parking (Angular + NestJS), digitalizando el control de tickets y automatizando el cálculo de tarifas dinámicas.</li>
+                          <li>Desarrolló una plataforma médica para una clínica veterinaria, centralizando en un solo sistema la gestión de pacientes y el historial clínico.</li>
+                          <li>Gestionó el ciclo completo de proyectos web a medida —levantamiento de requerimientos, arquitectura frontend/backend y despliegue— para negocios locales.</li>
+                          <li>Orquestó entornos de prueba con Docker y bases de datos relacionales (PostgreSQL/MySQL), estandarizando la configuración de ambientes de desarrollo.</li>
+                        </>
+                      ) : (
+                        <>
+                          <li>Designed and deployed an end-to-end management system for Valet Parking (Angular + NestJS), digitalizing ticket control and automating dynamic rate calculation.</li>
+                          <li>Developed a medical platform for a veterinary clinic, centralizing patient management and clinical history in a single system.</li>
+                          <li>Managed the complete lifecycle of custom web projects —requirements gathering, frontend/backend architecture, and deployment— for local businesses.</li>
+                          <li>Orchestrated testing environments with Docker and relational databases (PostgreSQL/MySQL), standardizing development setup.</li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+
+                  {/* Job 2 */}
+                  <div className="relative">
+                    <div className="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full bg-indigo-500 ring-4 ring-indigo-500/20" />
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1.5">
+                      <h5 className="text-sm font-extrabold text-slate-900 dark:text-white">
+                        {lang === "es" ? "Instructor de Informática y Soporte Técnico" : "Computer Instructor & Tech Support"}
+                        <span className="font-normal text-slate-500 dark:text-slate-400"> | U.E. Colegio Santa Luisa</span>
+                      </h5>
+                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 border border-indigo-500/20 w-fit">
+                        2020 – {lang === "es" ? "Presente" : "Present"}
+                      </span>
+                    </div>
+                    <ul className="list-disc pl-4 space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+                      {lang === "es" ? (
+                        <>
+                          <li>Administra la infraestructura de red de la institución y un laboratorio de 21 estaciones de trabajo, implementando políticas de acceso y monitoreo con Veyon.</li>
+                          <li>Imparte clases de informática a estudiantes de 6 niveles educativos (desde preescolar hasta 5to año de bachillerato), formando alfabetización digital en toda la matrícula.</li>
+                          <li>Lidera el desarrollo del nuevo portal web institucional y blog de actividades (Astro + Supabase + PostgreSQL), centralizando la comunicación digital.</li>
+                        </>
+                      ) : (
+                        <>
+                          <li>Manages institutional network infrastructure and a 21-workstation lab, implementing access policies and monitoring via Veyon.</li>
+                          <li>Teaches computer science across 6 educational levels (from preschool to 12th grade), fostering digital literacy school-wide.</li>
+                          <li>Leads the development of the new institutional web portal and activity blog (Astro + Supabase + PostgreSQL), centralizing digital communication.</li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+
+                  {/* Job 3 */}
+                  <div className="relative">
+                    <div className="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20" />
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1.5">
+                      <h5 className="text-sm font-extrabold text-slate-900 dark:text-white">
+                        {lang === "es" ? "Técnico Supervisor (E)" : "Supervisor Technician (E)"}
+                        <span className="font-normal text-slate-500 dark:text-slate-400"> | CORPOELEC</span>
+                      </h5>
+                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 border border-emerald-500/20 w-fit">
+                        2013 – 2016
+                      </span>
+                    </div>
+                    <ul className="list-disc pl-4 space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+                      {lang === "es" ? (
+                        <>
+                          <li>Supervisó la Sala de Control (CECON), monitoreando de forma ininterrumpida sistemas de circuito cerrado (CCTV) y contraincendios.</li>
+                          <li>Redactó informes de análisis de riesgo y coordinó al personal de seguridad a su cargo.</li>
+                        </>
+                      ) : (
+                        <>
+                          <li>Supervised the Control Room (CECON), providing continuous monitoring of CCTV and fire protection systems.</li>
+                          <li>Drafted risk analysis reports and coordinated assigned security personnel.</li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+
+                  {/* Job 4 */}
+                  <div className="relative">
+                    <div className="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full bg-amber-500 ring-4 ring-amber-500/20" />
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1.5">
+                      <h5 className="text-sm font-extrabold text-slate-900 dark:text-white">
+                        {lang === "es" ? "Operador Sala de Control" : "Control Room Operator"}
+                        <span className="font-normal text-slate-500 dark:text-slate-400"> | M.P.P.E.E.</span>
+                      </h5>
+                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 border border-amber-500/20 w-fit">
+                        2012 – 2013
+                      </span>
+                    </div>
+                    <ul className="list-disc pl-4 space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+                      {lang === "es" ? (
+                        <>
+                          <li>Coordinó apoyo logístico con organismos de seguridad e inspeccionó instalaciones físicas de forma periódica.</li>
+                        </>
+                      ) : (
+                        <>
+                          <li>Coordinated logistical support with security agencies and conducted periodic physical facility inspections.</li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Education */}
+              <div>
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3 flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-cyan-500" />
+                  {t.cv.educationTitle}
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="p-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/50">
+                    <span className="text-xs font-extrabold text-indigo-600 dark:text-indigo-400 block mb-1">
+                      {lang === "es" ? "Ingeniería de Sistemas" : "Systems Engineering"}
+                    </span>
+                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300">Universidad Nacional Abierta (UNA)</p>
+                    <span className="text-[10px] font-bold text-cyan-600 dark:text-cyan-400 mt-1 inline-block bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+                      {lang === "es" ? "En curso" : "In progress"}
+                    </span>
+                  </div>
+
+                  <div className="p-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/50">
+                    <span className="text-xs font-extrabold text-cyan-600 dark:text-cyan-400 block mb-1">
+                      {lang === "es" ? "TSU en Informática" : "Associate Degree in Computer Science"}
+                    </span>
+                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300">Instituto Universitario de Gerencia y Tecnología (IUGT)</p>
+                    <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mt-1 inline-block bg-slate-500/10 px-2 py-0.5 rounded border border-slate-500/20">
+                      {lang === "es" ? "6to semestre cursado" : "6th semester completed"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Modal Footer / Actions */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-200/80 dark:border-white/10 pt-4 mt-2">
+              <span className="text-xs text-slate-500 dark:text-slate-400 hidden sm:inline-block">
+                José Antonio Vásquez — {t.cv.subtitle}
+              </span>
+              <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
+                <button 
+                  onClick={() => setIsCvModalOpen(false)}
+                  className="px-6 py-2.5 rounded-full border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                >
+                  {lang === "es" ? "Cerrar" : "Close"}
+                </button>
+                <a
+                  href="/CV_Jose_Antonio_Vasquez.pdf"
+                  download="CV_Jose_Antonio_Vasquez.pdf"
+                  className="px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 dark:from-cyan-400 dark:to-emerald-400 text-white dark:text-slate-950 font-extrabold text-xs shadow-lg shadow-cyan-500/20 text-center flex items-center justify-center gap-1.5 hover:scale-105 transition-all"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>{t.cv.downloadPdf}</span>
+                </a>
+              </div>
             </div>
 
           </div>
