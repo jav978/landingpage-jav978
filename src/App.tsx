@@ -98,7 +98,7 @@ const translations = {
       },
       project2: {
         title: "Valet Parking",
-        desc: "Sistema web de gestión en tiempo real para servicios de aparcamiento y control de vehículos.",
+        desc: "Sistema web de gestión en tiempo real para servicios de estacionamiento y control de vehículos.",
         tag: "Sistema de Gestión"
       },
       project3: {
@@ -306,10 +306,10 @@ const PROJECT_DETAILS: { [key: string]: { es: ProjectDetail; en: ProjectDetail }
       id: "project2",
       title: "Valet Parking System",
       tag: "Sistema de Gestión",
-      shortDesc: "Sistema web de gestión en tiempo real para servicios de aparcamiento y control de vehículos.",
+      shortDesc: "Sistema web de gestión en tiempo real para servicios de estacionamiento y control de vehículos.",
       longDesc: "Un sistema web en tiempo real desarrollado para agilizar y digitalizar las operaciones de valet parking. Permite a los operadores registrar el ingreso de vehículos, gestionar tarifas dinámicas, enviar alertas de retiro automático y coordinar a los choferes en tiempo real.",
       philosophy: "Maximizar la eficiencia operativa reduciendo tiempos de espera y automatizando el cálculo de costos con total transparencia para el cliente.",
-      liveUrl: "#",
+      liveUrl: "https://parking-valet-v1-0-git-develop-jose-vasquezs-projects.vercel.app/",
       techs: ["React", "Node.js", "WebSockets", "Tailwind CSS", "PostgreSQL"],
       features: [
         "Actualizaciones de estado de vehículos en tiempo real vía WebSockets",
@@ -335,7 +335,7 @@ const PROJECT_DETAILS: { [key: string]: { es: ProjectDetail; en: ProjectDetail }
       shortDesc: "Real-time web management system for valet services and vehicle tracking.",
       longDesc: "A real-time web application developed to streamline and digitize valet parking operations. Enables operators to log vehicle check-ins, manage dynamic fees, trigger automated retrieval alerts, and coordinate drivers on the fly.",
       philosophy: "Maximize operational efficiency, minimize customer wait times, and automate cost calculations with total transparency.",
-      liveUrl: "#",
+      liveUrl: "https://parking-valet-v1-0-git-develop-jose-vasquezs-projects.vercel.app/",
       techs: ["React", "Node.js", "WebSockets", "Tailwind CSS", "PostgreSQL"],
       features: [
         "Real-time vehicle status updates using WebSocket synchronization",
@@ -650,7 +650,7 @@ function App() {
               title="Cambiar idioma / Switch language"
             >
               <Globe className="w-3.5 h-3.5 text-indigo-500 dark:text-cyan-400" />
-              <span>{lang === "es" ? "ES" : "EN"}</span>
+              <span>{lang === "es" ? "EN" : "ES"}</span>
             </button>
 
             {/* Light / Dark Mode Toggle */}
@@ -678,7 +678,7 @@ function App() {
               className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-800/60 text-[11px] font-bold text-slate-700 dark:text-slate-200"
             >
               <Globe className="w-3 h-3 text-cyan-500" />
-              <span>{lang === "es" ? "ES" : "EN"}</span>
+              <span>{lang === "es" ? "EN" : "ES"}</span>
             </button>
 
             <button
