@@ -97,7 +97,7 @@ const translations = {
         tag: "Landing Page & CRM"
       },
       project2: {
-        title: "Valet Parking",
+        title: "Servicio de Estacionamiento",
         desc: "Sistema web de gestión en tiempo real para servicios de estacionamiento y control de vehículos.",
         tag: "Sistema de Gestión"
       },
@@ -304,10 +304,10 @@ const PROJECT_DETAILS: { [key: string]: { es: ProjectDetail; en: ProjectDetail }
   project2: {
     es: {
       id: "project2",
-      title: "Valet Parking System",
+      title: "Servicio de Estacionamiento",
       tag: "Sistema de Gestión",
       shortDesc: "Sistema web de gestión en tiempo real para servicios de estacionamiento y control de vehículos.",
-      longDesc: "Un sistema web en tiempo real desarrollado para agilizar y digitalizar las operaciones de valet parking. Permite a los operadores registrar el ingreso de vehículos, gestionar tarifas dinámicas, enviar alertas de retiro automático y coordinar a los choferes en tiempo real.",
+      longDesc: "Un sistema web en tiempo real desarrollado para agilizar y digitalizar las operaciones de servicio de estacionamiento. Permite a los operadores registrar el ingreso de vehículos, gestionar tarifas dinámicas, enviar alertas de retiro automático y coordinar a los choferes en tiempo real.",
       philosophy: "Maximizar la eficiencia operativa reduciendo tiempos de espera y automatizando el cálculo de costos con total transparencia para el cliente.",
       liveUrl: "https://parking-valet-v1-0-git-develop-jose-vasquezs-projects.vercel.app/",
       techs: ["React", "Node.js", "WebSockets", "Tailwind CSS", "PostgreSQL"],
