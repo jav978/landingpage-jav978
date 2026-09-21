@@ -22,13 +22,22 @@ import {
   Briefcase,
   GraduationCap,
   CheckCircle2,
-  User
+  User,
+  ShieldCheck,
+  Layers,
+  Cpu,
+  Database,
+  Terminal,
+  BookOpen,
+  Check
 } from "lucide-react";
 import heroImg from "./assets/hero.png";
+import schoolManagementPreview from "./assets/school_management_preview.png";
 import colegioPreview from "./assets/colegio_preview.png";
 import valetPreview from "./assets/valet_preview.png";
 import vetPreview from "./assets/vet_preview.png";
 import electronicPreview from "./assets/electronic_shop_preview.png";
+import schoolLogo from "./assets/logocolegio.png";
 
 // Translations dictionary
 const translations = {
@@ -89,44 +98,54 @@ const translations = {
       }
     },
     advantage: {
-      badge: "Mis Habilidades",
-      title: "Habilidades &\nVentajas",
-      desc: "He trabajado con diversas herramientas de diseño y desarrollo web para lograr entregar productos excelentes, escalables y eficientes.",
+      badge: "Competencias Técnicas",
+      title: "Stack Tecnológico &\nCapacidades",
+      desc: "Arquitectura frontend de alto rendimiento combinada con ingeniería backend robusta, comunicación en tiempo real y despliegue continuo en producción.",
       years: "04",
       yearsText: "AÑOS DE EXPERIENCIA",
-      satisfaction: "100% Clientes Satisfechos",
-      skills: [
-        { name: "React / Next.js", value: "95%" },
-        { name: "Vue.js", value: "85%" },
-        { name: "Tailwind CSS", value: "95%" },
-        { name: "Backend (Node.js)", value: "90%" },
-        { name: "Docker", value: "80%" },
-        { name: "DevOps / CI/CD", value: "90%" }
+      satisfaction: "100% Proyectos en Producción",
+      categories: [
+        {
+          title: "Frontend & UI Engineering",
+          desc: "Aplicaciones reactivas, diseño ultra-fluido y SSR.",
+          skills: ["React 19", "Next.js", "Nuxt 4", "Vue 3", "TypeScript", "Tailwind CSS v4", "Pinia"]
+        },
+        {
+          title: "Backend & Tiempo Real",
+          desc: "APIs robustas, WebSockets bidireccionales y Clean Architecture.",
+          skills: ["Node.js", "Feathers.js 5", "Express", "WebSockets / Socket.io", "Clean Architecture", "REST APIs"]
+        },
+        {
+          title: "Bases de Datos & Persistencia",
+          desc: "Modelado relacional, cachés y ORMs modernos.",
+          skills: ["PostgreSQL", "Knex.js", "MongoDB", "Redis", "Prisma ORM", "Supabase"]
+        },
+        {
+          title: "DevOps & Seguridad",
+          desc: "Contenedores, CI/CD, pruebas automatizadas y autenticación 2FA.",
+          skills: ["Docker", "Fly.io", "Vercel", "Playwright E2E", "JWT / 2FA TOTP", "Linux Admin"]
+        }
       ]
     },
     portfolio: {
-      title: "Proyectos Destacados",
-      subtitle: "Algunos de los sistemas y aplicaciones web que he construido recientemente.",
-      viewProject: "Ver proyecto detallado",
-      project1: {
-        title: "Colegio Santa Luisa",
-        desc: "Landing page institucional moderna y optimizada para el colegio, con excelente rendimiento y diseño responsive.",
-        tag: "Landing Page & CRM"
+      badge: "Portafolio de Proyectos",
+      title: "Sistemas & Soluciones Web",
+      subtitle: "Plataformas de alta complejidad desplegadas en producción: ERPs académicos, comercio electrónico y sistemas operativos en tiempo real.",
+      viewProject: "Ficha Técnica",
+      liveDemo: "Ver en Vivo",
+      liveBadge: "En Producción",
+      flagshipBadge: "PROYECTO INSIGNIA",
+      categories: {
+        all: "Todos",
+        erp: "Sistemas ERP & Gestión",
+        ecommerce: "E-Commerce",
+        web: "Web & Landing"
       },
-      project2: {
-        title: "Servicio de Estacionamiento",
-        desc: "Sistema web de gestión en tiempo real para servicios de estacionamiento y control de vehículos.",
-        tag: "Sistema de Gestión"
-      },
-      project3: {
-        title: "Sistema Veterinario",
-        desc: "Plataforma de administración para clínicas veterinarias, control de citas, historias médicas y pacientes.",
-        tag: "Sistema de Gestión"
-      },
-      project4: {
-        title: "Electronic Shop",
-        desc: "Sistema integral Full-Stack de e-commerce de electrónica con Nuxt 3, FeathersJS v5, PostgreSQL, Redis y Socket.io.",
-        tag: "E-Commerce Full-Stack"
+      modalTabs: {
+        overview: "Visión General",
+        modules: "Módulos Clave",
+        architecture: "Arquitectura",
+        security: "Seguridad & Stack"
       }
     },
     contact: {
@@ -203,44 +222,54 @@ const translations = {
       }
     },
     advantage: {
-      badge: "My Advantage",
-      title: "My Skills &\nAdvantage",
-      desc: "I have worked with diverse web design and development tools to deliver excellent, scalable, and high-performance products.",
+      badge: "Technical Competencies",
+      title: "Tech Stack &\nCore Capabilities",
+      desc: "High-performance frontend architecture combined with robust backend engineering, real-time communication, and continuous production deployment.",
       years: "04",
       yearsText: "YEARS OF EXPERIENCE",
-      satisfaction: "100% Satisfied Clients",
-      skills: [
-        { name: "React / Next.js", value: "95%" },
-        { name: "Vue.js", value: "85%" },
-        { name: "Tailwind CSS", value: "95%" },
-        { name: "Backend (Node.js)", value: "90%" },
-        { name: "Docker", value: "80%" },
-        { name: "DevOps / CI/CD", value: "90%" }
+      satisfaction: "100% Projects in Production",
+      categories: [
+        {
+          title: "Frontend & UI Engineering",
+          desc: "Reactive, ultra-fluid interfaces and SSR applications.",
+          skills: ["React 19", "Next.js", "Nuxt 4", "Vue 3", "TypeScript", "Tailwind CSS v4", "Pinia"]
+        },
+        {
+          title: "Backend & Real-Time",
+          desc: "Scalable services, bi-directional WebSockets, and Clean Architecture.",
+          skills: ["Node.js", "Feathers.js 5", "Express", "WebSockets / Socket.io", "Clean Architecture", "REST APIs"]
+        },
+        {
+          title: "Databases & Persistence",
+          desc: "Relational modeling, high-speed caching, and modern ORMs.",
+          skills: ["PostgreSQL", "Knex.js", "MongoDB", "Redis", "Prisma ORM", "Supabase"]
+        },
+        {
+          title: "DevOps & Security",
+          desc: "Containerization, CI/CD, automated E2E testing, and 2FA.",
+          skills: ["Docker", "Fly.io", "Vercel", "Playwright E2E", "JWT / 2FA TOTP", "Linux Admin"]
+        }
       ]
     },
     portfolio: {
-      title: "Featured Projects",
-      subtitle: "A selection of web systems and applications I have recently built.",
-      viewProject: "View detailed project",
-      project1: {
-        title: "Santa Luisa School",
-        desc: "Modern and optimized institutional landing page for the school, featuring high performance and responsive design.",
-        tag: "Landing Page & CRM"
+      badge: "Project Portfolio",
+      title: "Systems & Web Solutions",
+      subtitle: "High-complexity platforms deployed to production: academic ERPs, full-stack e-commerce, and real-time operational systems.",
+      viewProject: "Technical Specs",
+      liveDemo: "Live Demo",
+      liveBadge: "Live in Production",
+      flagshipBadge: "FEATURED PROJECT",
+      categories: {
+        all: "All",
+        erp: "ERP & Management",
+        ecommerce: "E-Commerce",
+        web: "Web & Landing"
       },
-      project2: {
-        title: "Valet Parking",
-        desc: "Real-time management web system for parking services and vehicle tracking.",
-        tag: "Management System"
-      },
-      project3: {
-        title: "Veterinary System",
-        desc: "Clinic administration platform for pet clinics, handling appointments, medical records, and patients.",
-        tag: "Management System"
-      },
-      project4: {
-        title: "Electronic Shop",
-        desc: "Decoupled full-stack e-commerce system for consumer electronics built with Nuxt 3, FeathersJS v5, PostgreSQL, Redis, and Socket.io.",
-        tag: "Full-Stack E-Commerce"
+      modalTabs: {
+        overview: "Overview",
+        modules: "Key Modules",
+        architecture: "Architecture",
+        security: "Security & Stack"
       }
     },
     contact: {
@@ -266,180 +295,110 @@ interface ProjectDetail {
   id: string;
   title: string;
   tag: string;
+  category: "erp" | "ecommerce" | "web";
   shortDesc: string;
   longDesc: string;
   philosophy: string;
   liveUrl: string;
+  backendUrl?: string;
+  isFlagship?: boolean;
+  image: string;
   techs: string[];
   features: string[];
   security: string[];
   architecture: { [key: string]: string };
 }
 
+const PROJECT_KEYS = ["school_management", "project4", "project3", "project2", "project1"] as const;
+
 const PROJECT_DETAILS: { [key: string]: { es: ProjectDetail; en: ProjectDetail } } = {
-  project1: {
+  school_management: {
     es: {
-      id: "project1",
-      title: "Colegio Santa Luisa",
-      tag: "Landing Page & CRM",
-      shortDesc: "Plataforma web institucional con Landing Page pública y CRM Administrativo optimizado.",
-      longDesc: "Este proyecto consiste en una plataforma web institucional que incluye una Landing Page pública y un Panel de Administración (CRM Administrativo) diseñado para gestionar la presencia digital de centros educativos. Funciona bajo un esquema de marca blanca, permitiendo ser reutilizado y adaptado de forma rápida para cualquier institución escolar.",
-      philosophy: "Diseñado como plantilla de marca blanca reutilizable. Permite a múltiples usuarios gestionar comunicados, blogs, noticias y parámetros de configuración según roles específicos.",
-      liveUrl: "https://colegiosantaluisa.dpdns.org/",
-      techs: ["Astro 6", "Supabase", "PostgreSQL", "Tailwind CSS v4", "Bcryptjs", "TypeScript"],
+      id: "school_management",
+      title: "U.E. Colegio \"Santa Luisa\" - Sistema de Gestión Escolar",
+      tag: "ERP Escolar & SIS",
+      category: "erp",
+      isFlagship: true,
+      image: schoolManagementPreview,
+      shortDesc: "Sistema integral de gestión académica, control de estudios, evaluaciones, asistencia en tiempo real y cobranzas de colegiaturas con 2FA.",
+      longDesc: "Plataforma web unificada de alta densidad operativa (ACERO Terminal) diseñada para centralizar y modernizar todos los procesos académicos, administrativos y financieros de la U.E. Colegio 'Santa Luisa'. Construida sobre Nuxt 4 y Feathers.js 5 con PostgreSQL, erradica hojas de cálculo aisladas mediante expedientes digitales de alumnos (SIS), control de asistencia diaria por aula, libro de evaluaciones ponderadas con generación de boletines oficiales MPPE, cobro de colegiaturas con emisión de recibos y autenticación multifactor (2FA / TOTP) mediante códigos QR institucionales.",
+      philosophy: "Máxima densidad operativa, velocidad y scanabilidad para secretaría y coordinadores. Diseñada respetando los rituales académicos reales del colegio y la normativa educativa, asegurando trazabilidad absoluta de notas y cobranzas.",
+      liveUrl: "https://gestionescolarcolegiosantaluisa.vercel.app/auth/login",
+      backendUrl: "https://school-backend-9e07b02c-badb-4ddd-94ca-afd4d8aca2bd.fly.dev",
+      techs: ["Nuxt 4", "Vue 3", "Feathers.js 5", "Knex.js", "PostgreSQL", "Tailwind CSS v4", "Nuxt UI", "DaisyUI", "Pinia", "WebSockets", "2FA / TOTP", "HTML2PDF", "Playwright", "Fly.io", "Vercel"],
       features: [
-        "Renderizado híbrido en servidor (SSR) en Astro 6",
-        "CRM Administrativo privado para la gestión de contenidos y comunicados",
-        "Base de datos relacional PostgreSQL con Supabase",
-        "Diseño responsivo móvil-primero con Tailwind CSS v4"
+        "Dashboard Analítico Institucional: métricas en tiempo real de 1,260 estudiantes, 224 profesores, 840 familias y balance de ingresos vs gastos",
+        "Portal Institucional Multi-Rol con control de accesos RBAC (Directivos, Profesores, Representantes y Estudiantes)",
+        "Autenticación de Alta Seguridad con 2FA: verificación en dos pasos basada en TOTP con vinculación por código QR institucional",
+        "Expediente Digital del Estudiante (SIS): ficha personal, matrículas, historial académico y datos familiares",
+        "Control de Estudio, Calificaciones y Boletas: ponderación por lapsos pedagógicos y emisión de boletines oficiales MPPE",
+        "Control de Asistencia Diaria en Tiempo Real: pase de lista por aula y asignatura con gestión de justificaciones y retardos",
+        "Horarios, Planificación Académica y Aulas: matriz interactiva por grado, sección, profesor e instalaciones",
+        "Generador de Exámenes, Diplomas, Certificados y Útiles Escolares",
+        "Gestión Financiera de Colegiaturas: control de pagos, gastos operativos, emisión de recibos y solvencias",
+        "Carnetización Estudiantil con Código QR institucional embebido",
+        "Tablón de Anuncios y Calendario de Eventos: circulares oficiales y efemérides institucionales"
       ],
       security: [
-        "Encriptación segura de contraseñas con Bcryptjs (10 salt rounds)",
-        "Flujo de sesión personalizado desacoplado de Supabase Auth",
-        "Tokens de sesión seguros almacenados en cookies HttpOnly y Secure",
-        "Restricciones y autorización granular de acciones por roles (Admin, Editor)"
+        "Autenticación JWT con rotación de tokens, expiración configurada y aislamiento de sesiones",
+        "Autenticación de doble factor (2FA / TOTP) estándar RFC 6238 implementada con otplib y códigos QR",
+        "Cifrado de contraseñas de máxima seguridad mediante Bcryptjs (10 salt rounds)",
+        "Control de acceso basado en roles (RBAC) validado en cada servicio REST y canal WebSocket",
+        "Protección perimetral con cabeceras Helmet, rate limiting por IP (Express Rate Limit) y CORS estricto",
+        "Validación exhaustiva de esquemas y sanitización de datos de entrada con TypeBox"
       ],
       architecture: {
-        "src/components/": "Componentes de interfaz pública y administrativa",
-        "src/layouts/": "Plantillas generales del sitio",
-        "src/lib/": "Lógica de base de datos y esquemas de validación",
-        "src/pages/": "Enrutamiento basado en archivos (Astro routes)"
+        "frontend/app.vue": "Entrada principal y envoltorio global con Nuxt UI v4 y DaisyUI",
+        "frontend/pages/": "Vistas de autenticación, dashboard, estudiantes, calificaciones, asistencia y finanzas",
+        "frontend/stores/": "Gestión de estado global reactivo con Pinia (@pinia/nuxt)",
+        "backend/index.js": "Servidor Feathers.js 5 REST & WebSockets en Node.js desplegado en Fly.io",
+        "backend/services/": "Servicios de negocio, endpoints REST y hooks de autorización",
+        "backend/migrations/": "Migraciones de base de datos relacional PostgreSQL con Knex.js",
+        "tests/e2e/": "Suite de 28 especificaciones de pruebas end-to-end con Playwright"
       }
     },
     en: {
-      id: "project1",
-      title: "Santa Luisa School",
-      tag: "Landing Page & CRM",
-      shortDesc: "Institutional web platform featuring a public landing page and optimized administrative CRM.",
-      longDesc: "This project consists of an institutional web platform including a public Landing Page and a private Administration Panel (Administrative CRM) designed to manage educational centers' digital presence. It works under a white-label template scheme, allowing rapid reuse and adaptation.",
-      philosophy: "Designed as a reusable white-label template. Enables multiple users to manage announcements, blogs, news, and system parameters according to specific roles.",
-      liveUrl: "https://colegiosantaluisa.dpdns.org/",
-      techs: ["Astro 6", "Supabase", "PostgreSQL", "Tailwind CSS v4", "Bcryptjs", "TypeScript"],
+      id: "school_management",
+      title: "Santa Luisa School - Academic Management System",
+      tag: "School ERP & SIS",
+      category: "erp",
+      isFlagship: true,
+      image: schoolManagementPreview,
+      shortDesc: "Comprehensive K-12 school management platform handling academics, student dossiers, attendance, gradebook, and tuition billing with 2FA.",
+      longDesc: "Unified high-density academic management terminal (ACERO) engineered to centralize and streamline administrative, academic, and financial workflows for Santa Luisa School. Built with Nuxt 4 and Feathers.js 5 backed by PostgreSQL, it replaces fragmented spreadsheets with digital student dossiers (SIS), real-time classroom attendance logging, weighted evaluation gradebooks emitting official MPPE report cards, tuition fee management with receipt generation, and two-factor authentication (2FA/TOTP) via QR codes.",
+      philosophy: "Operational density, speed, and scanability for school leadership and clerical staff. Designed around genuine school rituals and educational compliance, ensuring absolute auditability across grading and billing.",
+      liveUrl: "https://gestionescolarcolegiosantaluisa.vercel.app/auth/login",
+      backendUrl: "https://school-backend-9e07b02c-badb-4ddd-94ca-afd4d8aca2bd.fly.dev",
+      techs: ["Nuxt 4", "Vue 3", "Feathers.js 5", "Knex.js", "PostgreSQL", "Tailwind CSS v4", "Nuxt UI", "DaisyUI", "Pinia", "WebSockets", "2FA / TOTP", "HTML2PDF", "Playwright", "Fly.io", "Vercel"],
       features: [
-        "Hybrid Server-Side Rendering (SSR) in Astro 6",
-        "Private Administrative CRM to manage blogs and school announcements",
-        "Relational database storage with PostgreSQL and Supabase",
-        "Mobile-first responsive design with Tailwind CSS v4"
+        "Institutional Analytics Dashboard: Real-time telemetry for 1,260 students, 224 teachers, 840 families, and revenue vs expenses",
+        "Multi-Role Institutional Portal: Granular RBAC access for Directors, Teachers, Parents, and Students",
+        "2FA Security Authentication: Two-factor verification (TOTP) via institutional QR code scanning",
+        "Student Information System (SIS): Digital dossiers, enrollment history, and guardian contact data",
+        "Gradebook & Evaluation Engine: Weighted grading periods, automated GPA calculations, and official report cards",
+        "Real-Time Daily Attendance: Classroom roll-call tracking by subject and section, with tardiness and excuse logging",
+        "Weekly Timetable Scheduler & Facilities: Interactive matrix organized by grade, section, classroom, and teacher",
+        "Exam Generator, Diplomas, Certificates, and School Supply Lists",
+        "Tuition & Finance Management: Payment balance tracking, operating expenses, invoice receipts, and clearances",
+        "Student ID Badges with embedded institutional QR codes",
+        "Notice Board & Academic Event Calendar: Official school circulars and date reminders"
       ],
       security: [
-        "Secure password hashing via Bcryptjs (10 salt rounds)",
-        "Custom session token workflow decoupled from default Supabase Auth",
-        "Secure HttpOnly, Secure, and SameSite Lax cookie session storage",
-        "Granular role-based access control (Admin, Editor) on routes/endpoints"
+        "Secure JWT authentication with token rotation, controlled expiration, and session isolation",
+        "Two-Factor Authentication (2FA / TOTP) based on RFC 6238 using otplib and QR codes",
+        "High-security password hashing with Bcryptjs (10 salt rounds)",
+        "Role-Based Access Control (RBAC) strictly enforced across REST services and WebSocket events",
+        "Edge security headers via Helmet, IP rate limiting (Express Rate Limit), and strict CORS rules",
+        "Type-safe input schema validation and payload sanitization using TypeBox"
       ],
       architecture: {
-        "src/components/": "Reusable UI and administration elements",
-        "src/layouts/": "Page layouts for public and admin views",
-        "src/lib/": "Database clients, auth helpers, and schemas",
-        "src/pages/": "File-based routing structure"
-      }
-    }
-  },
-  project2: {
-    es: {
-      id: "project2",
-      title: "Servicio de Estacionamiento",
-      tag: "Sistema de Gestión",
-      shortDesc: "Sistema web de gestión en tiempo real para servicios de estacionamiento y control de vehículos.",
-      longDesc: "Un sistema web en tiempo real desarrollado para agilizar y digitalizar las operaciones de servicio de estacionamiento. Permite a los operadores registrar el ingreso de vehículos, gestionar tarifas dinámicas, enviar alertas de retiro automático y coordinar a los choferes en tiempo real.",
-      philosophy: "Maximizar la eficiencia operativa reduciendo tiempos de espera y automatizando el cálculo de costos con total transparencia para el cliente.",
-      liveUrl: "https://parking-valet-v1-0-git-develop-jose-vasquezs-projects.vercel.app/",
-      techs: ["React", "Node.js", "WebSockets", "Tailwind CSS", "PostgreSQL"],
-      features: [
-        "Actualizaciones de estado de vehículos en tiempo real vía WebSockets",
-        "Cálculo de tarifas dinámicas y automatizadas según tiempo transcurrido",
-        "Módulo de notificaciones SMS/WhatsApp automáticas para clientes",
-        "Panel interactivo para administración de ubicaciones y espacios disponibles"
-      ],
-      security: [
-        "Autenticación segura JWT para operarios y administradores",
-        "Control de accesos basado en permisos según turno y locación",
-        "Auditoría completa de transacciones y estados de llaves"
-      ],
-      architecture: {
-        "backend/": "API Server con Express y WebSockets",
-        "frontend/": "Single Page Application (SPA) con React y Tailwind",
-        "database/": "Esquema relacional para historial de vehículos y facturación"
-      }
-    },
-    en: {
-      id: "project2",
-      title: "Valet Parking System",
-      tag: "Management System",
-      shortDesc: "Real-time web management system for valet services and vehicle tracking.",
-      longDesc: "A real-time web application developed to streamline and digitize valet parking operations. Enables operators to log vehicle check-ins, manage dynamic fees, trigger automated retrieval alerts, and coordinate drivers on the fly.",
-      philosophy: "Maximize operational efficiency, minimize customer wait times, and automate cost calculations with total transparency.",
-      liveUrl: "https://parking-valet-v1-0-git-develop-jose-vasquezs-projects.vercel.app/",
-      techs: ["React", "Node.js", "WebSockets", "Tailwind CSS", "PostgreSQL"],
-      features: [
-        "Real-time vehicle status updates using WebSocket synchronization",
-        "Dynamic fee calculation based on parking elapsed time",
-        "Automated SMS/WhatsApp notification module for car retrieval",
-        "Interactive dashboard to monitor active parking lots and spaces"
-      ],
-      security: [
-        "Secure JWT authentication for operators and admins",
-        "Location and shift-based permission access control",
-        "Complete transaction log and key status audit trail"
-      ],
-      architecture: {
-        "backend/": "Express API server with WebSocket support",
-        "frontend/": "React client with responsive Tailwind layout",
-        "database/": "Relational schema storing tickets, cash logs, and driver history"
-      }
-    }
-  },
-  project3: {
-    es: {
-      id: "project3",
-      title: "Sistema Veterinario (MedVet)",
-      tag: "Sistema de Gestión",
-      shortDesc: "Plataforma de administración para clínicas veterinarias, control de citas, historias médicas y pacientes.",
-      longDesc: "Un CRM integral diseñado para clínicas y consultorios veterinarios. Permite llevar el registro clínico detallado de mascotas, calendarizar citas de vacunas y cirugías, gestionar el inventario de medicamentos y administrar la facturación y fichas de clientes.",
-      philosophy: "Unificar el historial médico y la administración clínica en una única interfaz intuitiva para mejorar el cuidado del paciente y la gestión del negocio.",
-      liveUrl: "https://medvet-system.vercel.app/",
-      techs: ["React", "Next.js", "MongoDB", "Tailwind CSS", "Prisma"],
-      features: [
-        "Historia clínica digital detallada de mascotas por especie y raza",
-        "Calendario inteligente de citas y recordatorios de vacunación automáticos",
-        "Gestión de inventario de medicamentos con alertas de stock mínimo",
-        "Módulo de facturación e integración de recetas médicas en PDF"
-      ],
-      security: [
-        "Acceso seguro de médicos y personal administrativo mediante OAuth2",
-        "Historial médico inmutable protegido contra modificaciones no autorizadas",
-        "Cumplimiento de normativas de protección de datos de clientes"
-      ],
-      architecture: {
-        "app/": "Componentes de Next.js (App Router)",
-        "prisma/": "Esquemas y base de datos relacional MongoDB",
-        "services/": "Integración para generación de PDFs y envío de correos"
-      }
-    },
-    en: {
-      id: "project3",
-      title: "Veterinary System (MedVet)",
-      tag: "Management System",
-      shortDesc: "Clinic administration platform for pet clinics, handling appointments, medical records, and patients.",
-      longDesc: "A comprehensive CRM designed for veterinary clinics. Manages detailed pet medical records, schedules vaccine and surgery appointments, monitors drug store inventory, and automates client invoicing.",
-      philosophy: "Unify medical history and clinical business administration into a single, intuitive interface to improve patient care.",
-      liveUrl: "https://medvet-system.vercel.app/",
-      techs: ["React", "Next.js", "MongoDB", "Tailwind CSS", "Prisma"],
-      features: [
-        "Digital pet medical record system detailing species and breeds",
-        "Smart appointment scheduler with automated email reminders",
-        "Drug store inventory tracking with low-stock warnings",
-        "Invoicing module with PDF prescription generator"
-      ],
-      security: [
-        "Secure OAuth2 authentication for doctors and administrators",
-        "Immutable patient record updates to protect medical history integrity",
-        "Data protection policies for client contact information"
-      ],
-      architecture: {
-        "app/": "Next.js app routing structures",
-        "prisma/": "ORM declarations connecting to database engines",
-        "services/": "Email and PDF export services"
+        "frontend/app.vue": "Application root entry point and layout wrapper using Nuxt UI and DaisyUI",
+        "frontend/pages/": "Modular views for authentication, dashboard, SIS dossiers, grades, and billing",
+        "frontend/stores/": "Reactive state management via Pinia (@pinia/nuxt)",
+        "backend/index.js": "Feathers.js 5 REST & WebSockets server on Node.js deployed on Fly.io",
+        "backend/services/": "Business services, data hooks, and role authorization pipelines",
+        "backend/migrations/": "PostgreSQL schema migrations and relationship builders via Knex.js",
+        "tests/e2e/": "Automated end-to-end test suite containing 28 Playwright specs"
       }
     }
   },
@@ -448,9 +407,12 @@ const PROJECT_DETAILS: { [key: string]: { es: ProjectDetail; en: ProjectDetail }
       id: "project4",
       title: "Electronic Shop",
       tag: "E-Commerce Full-Stack",
+      category: "ecommerce",
+      isFlagship: false,
+      image: electronicPreview,
       shortDesc: "Sistema integral de comercio electrónico de arquitectura desacoplada con panel de administración, tiempo real y facturación PDF.",
       longDesc: "Electronic Shop es una aplicación web moderna compuesta por un frontend responsivo desarrollado en Nuxt 3 / Vue 3 y un backend robusto basado en FeathersJS 5 con Prisma ORM sobre PostgreSQL. Incorpora soporte para caché con Redis, comunicación bidireccional en tiempo real con Socket.io y generación de facturas y reportes en PDF.",
-      philosophy: "Estructura desacoplada y escalable basada en Clean Architecture (domain, application, infrastructure, services) diseñada para soportar alto tráfico, almacenamiento en caché de alto rendimiento y gestión integral de inventario y pedidos.",
+      philosophy: "Estructura desacoplada y escalable basada en Clean Architecture diseñada para soportar alto tráfico, almacenamiento en caché de alto rendimiento y gestión integral de inventario y pedidos.",
       liveUrl: "https://electronic-shop-five-blush.vercel.app/",
       techs: ["Nuxt 3", "Vue 3", "FeathersJS 5", "Prisma ORM v6", "PostgreSQL", "Redis", "Pinia", "Tailwind CSS", "Socket.io", "PDFKit"],
       features: [
@@ -479,9 +441,12 @@ const PROJECT_DETAILS: { [key: string]: { es: ProjectDetail; en: ProjectDetail }
       id: "project4",
       title: "Electronic Shop",
       tag: "Full-Stack E-Commerce",
+      category: "ecommerce",
+      isFlagship: false,
+      image: electronicPreview,
       shortDesc: "Decoupled full-stack e-commerce system with admin panel, real-time sync, and PDF invoicing.",
       longDesc: "Electronic Shop is a modern web application featuring a responsive frontend in Nuxt 3 / Vue 3 and a robust backend built on FeathersJS 5 with Prisma ORM over PostgreSQL. Features Redis caching, real-time Socket.io communication, and PDF invoice generation.",
-      philosophy: "Decoupled Clean Architecture (domain, application, infrastructure, services) designed for high-performance inventory management, real-time updates, and scalable e-commerce workflows.",
+      philosophy: "Decoupled Clean Architecture designed for high-performance inventory management, real-time updates, and scalable e-commerce workflows.",
       liveUrl: "https://electronic-shop-five-blush.vercel.app/",
       techs: ["Nuxt 3", "Vue 3", "FeathersJS 5", "Prisma ORM v6", "PostgreSQL", "Redis", "Pinia", "Tailwind CSS", "Socket.io", "PDFKit"],
       features: [
@@ -506,6 +471,190 @@ const PROJECT_DETAILS: { [key: string]: { es: ProjectDetail; en: ProjectDetail }
         "backend/services/": "FeathersJS v5 REST & WebSocket services"
       }
     }
+  },
+  project3: {
+    es: {
+      id: "project3",
+      title: "Sistema Veterinario (MedVet)",
+      tag: "Gestión Clínica & CRM",
+      category: "erp",
+      isFlagship: false,
+      image: vetPreview,
+      shortDesc: "Plataforma de administración para clínicas veterinarias, control de citas, historias médicas y pacientes.",
+      longDesc: "Un CRM integral diseñado para clínicas y consultorios veterinarios. Permite llevar el registro clínico detallado de mascotas, calendarizar citas de vacunas y cirugías, gestionar el inventario de medicamentos y administrar la facturación y fichas de clientes.",
+      philosophy: "Unificar el historial médico y la administración clínica en una única interfaz intuitiva para mejorar el cuidado del paciente y la gestión del negocio.",
+      liveUrl: "https://medvet-system.vercel.app/",
+      techs: ["React", "Next.js", "MongoDB", "Tailwind CSS", "Prisma"],
+      features: [
+        "Historia clínica digital detallada de mascotas por especie y raza",
+        "Calendario inteligente de citas y recordatorios de vacunación automáticos",
+        "Gestión de inventario de medicamentos con alertas de stock mínimo",
+        "Módulo de facturación e integración de recetas médicas en PDF"
+      ],
+      security: [
+        "Acceso seguro de médicos y personal administrativo mediante OAuth2",
+        "Historial médico inmutable protegido contra modificaciones no autorizadas",
+        "Cumplimiento de normativas de protección de datos de clientes"
+      ],
+      architecture: {
+        "app/": "Componentes de Next.js (App Router)",
+        "prisma/": "Esquemas y base de datos relacional MongoDB",
+        "services/": "Integración para generación de PDFs y envío de correos"
+      }
+    },
+    en: {
+      id: "project3",
+      title: "Veterinary System (MedVet)",
+      tag: "Clinic Management & CRM",
+      category: "erp",
+      isFlagship: false,
+      image: vetPreview,
+      shortDesc: "Clinic administration platform for pet clinics, handling appointments, medical records, and patients.",
+      longDesc: "A comprehensive CRM designed for veterinary clinics. Manages detailed pet medical records, schedules vaccine and surgery appointments, monitors drug store inventory, and automates client invoicing.",
+      philosophy: "Unify medical history and clinical business administration into a single, intuitive interface to improve patient care.",
+      liveUrl: "https://medvet-system.vercel.app/",
+      techs: ["React", "Next.js", "MongoDB", "Tailwind CSS", "Prisma"],
+      features: [
+        "Digital pet medical record system detailing species and breeds",
+        "Smart appointment scheduler with automated email reminders",
+        "Drug store inventory tracking with low-stock warnings",
+        "Invoicing module with PDF prescription generator"
+      ],
+      security: [
+        "Secure OAuth2 authentication for doctors and administrators",
+        "Immutable patient record updates to protect medical history integrity",
+        "Data protection policies for client contact information"
+      ],
+      architecture: {
+        "app/": "Next.js app routing structures",
+        "prisma/": "ORM declarations connecting to database engines",
+        "services/": "Email and PDF export services"
+      }
+    }
+  },
+  project2: {
+    es: {
+      id: "project2",
+      title: "Servicio de Estacionamiento (Valet Parking)",
+      tag: "Sistema en Tiempo Real",
+      category: "erp",
+      isFlagship: false,
+      image: valetPreview,
+      shortDesc: "Sistema web de gestión en tiempo real para servicios de estacionamiento y control de vehículos.",
+      longDesc: "Un sistema web en tiempo real desarrollado para agilizar y digitalizar las operaciones de servicio de estacionamiento. Permite a los operadores registrar el ingreso de vehículos, gestionar tarifas dinámicas, enviar alertas de retiro automático y coordinar a los choferes en tiempo real.",
+      philosophy: "Maximizar la eficiencia operativa reduciendo tiempos de espera y automatizando el cálculo de costos con total transparencia para el cliente.",
+      liveUrl: "https://parking-valet-v1-0-git-develop-jose-vasquezs-projects.vercel.app/",
+      techs: ["React", "Node.js", "WebSockets", "Tailwind CSS", "PostgreSQL"],
+      features: [
+        "Actualizaciones de estado de vehículos en tiempo real vía WebSockets",
+        "Cálculo de tarifas dinámicas y automatizadas según tiempo transcurrido",
+        "Módulo de notificaciones SMS/WhatsApp automáticas para clientes",
+        "Panel interactivo para administración de ubicaciones y espacios disponibles"
+      ],
+      security: [
+        "Autenticación segura JWT para operarios y administradores",
+        "Control de accesos basado en permisos según turno y locación",
+        "Auditoría completa de transacciones y estados de llaves"
+      ],
+      architecture: {
+        "backend/": "API Server con Express y WebSockets",
+        "frontend/": "Single Page Application (SPA) con React y Tailwind",
+        "database/": "Esquema relacional para historial de vehículos y facturación"
+      }
+    },
+    en: {
+      id: "project2",
+      title: "Valet Parking System",
+      tag: "Real-Time Management",
+      category: "erp",
+      isFlagship: false,
+      image: valetPreview,
+      shortDesc: "Real-time web management system for valet services and vehicle tracking.",
+      longDesc: "A real-time web application developed to streamline and digitize valet parking operations. Enables operators to log vehicle check-ins, manage dynamic fees, trigger automated retrieval alerts, and coordinate drivers on the fly.",
+      philosophy: "Maximize operational efficiency, minimize customer wait times, and automate cost calculations with total transparency.",
+      liveUrl: "https://parking-valet-v1-0-git-develop-jose-vasquezs-projects.vercel.app/",
+      techs: ["React", "Node.js", "WebSockets", "Tailwind CSS", "PostgreSQL"],
+      features: [
+        "Real-time vehicle status updates using WebSocket synchronization",
+        "Dynamic fee calculation based on parking elapsed time",
+        "Automated SMS/WhatsApp notification module for car retrieval",
+        "Interactive dashboard to monitor active parking lots and spaces"
+      ],
+      security: [
+        "Secure JWT authentication for operators and admins",
+        "Location and shift-based permission access control",
+        "Complete transaction log and key status audit trail"
+      ],
+      architecture: {
+        "backend/": "Express API server with WebSocket support",
+        "frontend/": "React client with responsive Tailwind layout",
+        "database/": "Relational schema storing tickets, cash logs, and driver history"
+      }
+    }
+  },
+  project1: {
+    es: {
+      id: "project1",
+      title: "U.E. Colegio \"Santa Luisa\" - Portal Web",
+      tag: "Portal Web Institucional",
+      category: "web",
+      isFlagship: false,
+      image: colegioPreview,
+      shortDesc: "Plataforma web institucional con Landing Page pública y CRM Administrativo optimizado.",
+      longDesc: "Este proyecto consiste en una plataforma web institucional que incluye una Landing Page pública y un Panel de Administración (CRM Administrativo) diseñado para gestionar la presencia digital del centro educativo, noticias, comunicados y admisiones.",
+      philosophy: "Diseñado como plantilla de marca blanca reutilizable. Permite a múltiples usuarios gestionar comunicados, blogs, noticias y parámetros de configuración según roles específicos.",
+      liveUrl: "https://colegiosantaluisa.dpdns.org/",
+      techs: ["Astro 6", "Supabase", "PostgreSQL", "Tailwind CSS v4", "Bcryptjs", "TypeScript"],
+      features: [
+        "Renderizado híbrido en servidor (SSR) en Astro 6",
+        "CRM Administrativo privado para la gestión de contenidos y comunicados",
+        "Base de datos relacional PostgreSQL con Supabase",
+        "Diseño responsivo móvil-primero con Tailwind CSS v4"
+      ],
+      security: [
+        "Encriptación segura de contraseñas con Bcryptjs (10 salt rounds)",
+        "Flujo de sesión personalizado desacoplado de Supabase Auth",
+        "Tokens de sesión seguros almacenados en cookies HttpOnly y Secure",
+        "Restricciones y autorización granular de acciones por roles (Admin, Editor)"
+      ],
+      architecture: {
+        "src/components/": "Componentes de interfaz pública y administrativa",
+        "src/layouts/": "Plantillas generales del sitio",
+        "src/lib/": "Lógica de base de datos y esquemas de validación",
+        "src/pages/": "Enrutamiento basado en archivos (Astro routes)"
+      }
+    },
+    en: {
+      id: "project1",
+      title: "Santa Luisa School - Web Portal",
+      tag: "Institutional Web Portal",
+      category: "web",
+      isFlagship: false,
+      image: colegioPreview,
+      shortDesc: "Institutional web platform featuring a public landing page and optimized administrative CRM.",
+      longDesc: "This project consists of an institutional web platform including a public Landing Page and a private Administration Panel (Administrative CRM) designed to manage the school's digital presence, announcements, and admissions.",
+      philosophy: "Designed as a reusable white-label template. Enables multiple users to manage announcements, blogs, news, and system parameters according to specific roles.",
+      liveUrl: "https://colegiosantaluisa.dpdns.org/",
+      techs: ["Astro 6", "Supabase", "PostgreSQL", "Tailwind CSS v4", "Bcryptjs", "TypeScript"],
+      features: [
+        "Hybrid Server-Side Rendering (SSR) in Astro 6",
+        "Private Administrative CRM to manage blogs and school announcements",
+        "Relational database storage with PostgreSQL and Supabase",
+        "Mobile-first responsive design with Tailwind CSS v4"
+      ],
+      security: [
+        "Secure password hashing via Bcryptjs (10 salt rounds)",
+        "Custom session token workflow decoupled from default Supabase Auth",
+        "Secure HttpOnly, Secure, and SameSite Lax cookie session storage",
+        "Granular role-based access control (Admin, Editor) on routes/endpoints"
+      ],
+      architecture: {
+        "src/components/": "Reusable UI and administration elements",
+        "src/layouts/": "Page layouts for public and admin views",
+        "src/lib/": "Database clients, auth helpers, and schemas",
+        "src/pages/": "File-based routing structure"
+      }
+    }
   }
 };
 
@@ -514,8 +663,11 @@ function App() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
+  const [projectModalTab, setProjectModalTab] = useState<"overview" | "modules" | "architecture" | "security">("overview");
+  const [portfolioFilter, setPortfolioFilter] = useState<"all" | "erp" | "ecommerce" | "web">("all");
   const [isCvModalOpen, setIsCvModalOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -535,7 +687,8 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      setIsScrolled(window.scrollY > 20);
+      setShowBackToTop(window.scrollY > 300);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -635,7 +788,7 @@ function App() {
       <header className="fixed top-0 left-0 right-0 z-50 pt-3 pb-2 transition-all duration-300 pointer-events-none">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pointer-events-auto">
           <div
-            className={`w-full rounded-full px-5 py-3 flex items-center justify-between transition-all duration-300 ${isScrolled
+            className={`w-full rounded-full px-4 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between transition-all duration-300 ${isScrolled
                 ? "bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-xl shadow-indigo-500/5 dark:shadow-cyan-500/10"
                 : "bg-white/60 dark:bg-slate-950/50 backdrop-blur-lg border border-slate-200/50 dark:border-white/5"
               }`}
@@ -643,13 +796,13 @@ function App() {
             <a href="#home" className="group flex items-center gap-2 flex-shrink-0">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
               <img src="/favicon.png" alt="Logo" className="h-6 w-6 rounded-full transition-transform duration-300 hover:scale-110 active:scale-95" />
-              <span className="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-700 via-indigo-900 to-cyan-700 dark:from-white dark:via-cyan-300 dark:to-indigo-300 bg-clip-text text-transparent whitespace-nowrap">
+              <span className="text-base sm:text-lg lg:text-xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-700 via-indigo-900 to-cyan-700 dark:from-white dark:via-cyan-300 dark:to-indigo-300 bg-clip-text text-transparent whitespace-nowrap">
                 José Vásquez
               </span>
             </a>
 
-            {/* Desktop Nav Links */}
-            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+            {/* Desktop Nav Links (Visible only from lg: 1024px onwards) */}
+            <nav className="hidden lg:flex items-center gap-5 xl:gap-8">
               <a href="#home" className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors whitespace-nowrap">
                 {t.nav.home}
               </a>
@@ -664,12 +817,12 @@ function App() {
               </a>
             </nav>
 
-            {/* Right Action Controls */}
-            <div className="hidden md:flex items-center gap-2.5 lg:gap-3 flex-shrink-0">
+            {/* Right Action Controls (Desktop lg:) */}
+            <div className="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0">
               {/* CV Button */}
               <button
                 onClick={() => setIsCvModalOpen(true)}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 dark:bg-cyan-500/15 text-xs font-bold text-cyan-700 dark:text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-500/50 transition-all cursor-pointer shadow-sm whitespace-nowrap"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 dark:bg-cyan-500/15 text-xs font-bold text-cyan-700 dark:text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-500/50 transition-all cursor-pointer shadow-sm whitespace-nowrap"
                 title={t.cv.button}
               >
                 <FileText className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
@@ -698,14 +851,14 @@ function App() {
               {/* CTA Header Button */}
               <a
                 href="#contact"
-                className="px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 dark:from-cyan-500 dark:to-indigo-600 text-white font-bold text-xs shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all whitespace-nowrap"
+                className="px-4 xl:px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 dark:from-cyan-500 dark:to-indigo-600 text-white font-bold text-xs shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all whitespace-nowrap"
               >
                 {t.nav.cta}
               </a>
             </div>
 
-            {/* Mobile Buttons */}
-            <div className="flex items-center gap-2.5 md:hidden">
+            {/* Mobile & Tablet Portrait Menu Toggle (< lg) */}
+            <div className="flex items-center gap-2 sm:gap-2.5 lg:hidden">
               <button
                 onClick={toggleLanguage}
                 className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-800/60 text-[11px] font-bold text-slate-700 dark:text-slate-200"
@@ -732,9 +885,9 @@ function App() {
             </div>
           </div>
 
-          {/* Mobile Dropdown Menu Card */}
+          {/* Mobile & Tablet Dropdown Menu Card */}
           {mobileMenuOpen && (
-            <div className="md:hidden w-full mt-2 p-5 rounded-3xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-white/10 backdrop-blur-2xl shadow-2xl flex flex-col gap-3 transition-all animate-in fade-in slide-in-from-top-4">
+            <div className="lg:hidden w-full mt-2 p-5 rounded-3xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-white/10 backdrop-blur-2xl shadow-2xl flex flex-col gap-3 transition-all animate-in fade-in slide-in-from-top-4">
               <a
                 href="#home"
                 onClick={() => setMobileMenuOpen(false)}
@@ -793,13 +946,13 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center pt-32 sm:pt-36 md:pt-40 pb-16 overflow-hidden scroll-mt-28">
+      <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 sm:pt-32 md:pt-36 lg:pt-36 pb-16 lg:pb-24 overflow-hidden scroll-mt-28">
         {/* Ambient Blur Background Spheres */}
         <div className="ambient-glow top-[12%] left-[8%] w-[280px] sm:w-[420px] h-[280px] sm:h-[420px] bg-indigo-500/15 dark:bg-indigo-600/20" />
         <div className="ambient-glow bottom-[12%] right-[5%] w-[300px] sm:w-[460px] h-[300px] sm:h-[460px] bg-cyan-500/15 dark:bg-cyan-500/20" />
         <div className="ambient-glow top-[50%] left-[45%] w-[220px] sm:w-[350px] h-[220px] sm:h-[350px] bg-emerald-500/10 dark:bg-emerald-500/15" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 z-10 grid gap-10 sm:gap-14 items-center lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 z-10 grid gap-8 sm:gap-12 items-center lg:grid-cols-[1.15fr_0.85fr]">
           <div className="text-center lg:text-left lg:max-w-xl">
 
             {/* Top Badge */}
@@ -825,7 +978,7 @@ function App() {
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
               <a
                 href="#contact"
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 dark:from-cyan-500 dark:via-indigo-600 dark:to-purple-600 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-sm shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all text-center"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-cyan-500 dark:to-indigo-600 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-sm shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all text-center"
               >
                 {t.hero.ctaPrimary}
               </a>
@@ -847,38 +1000,38 @@ function App() {
 
           {/* Hero Profile Image Container & Floating Glass Badges */}
           <div className="relative flex justify-center lg:justify-end mt-4 lg:mt-0">
-            <div className="relative w-[270px] h-[270px] sm:w-[360px] sm:h-[360px] md:w-[440px] md:h-[440px] lg:w-[520px] lg:h-[520px] flex items-center justify-center">
+            <div className="relative w-[260px] h-[260px] sm:w-[330px] sm:h-[330px] md:w-[390px] md:h-[390px] lg:w-[460px] lg:h-[460px] flex items-center justify-center">
 
               {/* Outer Rotating Dashed Ring */}
               <div className="organic-circle-bg" />
 
               {/* Floating Glass Badges */}
               {/* 1. Design Badge */}
-              <div className="absolute top-[8%] left-[-2%] sm:left-[-4%] z-20 w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-2xl bg-cyan-500/15 dark:bg-cyan-950/70 border border-cyan-400/40 dark:border-cyan-400/50 backdrop-blur-xl flex flex-col items-center justify-center shadow-lg shadow-cyan-500/20 hero-card-anim delay-0 text-center px-1">
+              <div className="absolute top-[8%] left-[-2%] sm:left-[-4%] lg:left-[-6%] z-20 w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-2xl bg-cyan-500/15 dark:bg-cyan-950/70 border border-cyan-400/40 dark:border-cyan-400/50 backdrop-blur-xl flex flex-col items-center justify-center shadow-lg shadow-cyan-500/20 hero-card-anim delay-0 text-center px-1">
                 <span className="text-[8px] sm:text-[10px] font-black text-cyan-600 dark:text-cyan-300 uppercase tracking-wider">Design</span>
                 <span className="text-[9px] sm:text-xs font-bold text-slate-900 dark:text-white leading-tight">UI · UX</span>
               </div>
 
               {/* 2. Code Badge */}
-              <div className="absolute top-[-2%] right-[4%] sm:right-[6%] z-20 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl bg-amber-500/15 dark:bg-amber-950/70 border border-amber-400/40 dark:border-amber-400/50 backdrop-blur-xl flex flex-col items-center justify-center shadow-lg shadow-amber-500/20 hero-card-anim delay-200 text-center">
+              <div className="absolute top-[-2%] right-[2%] sm:right-[4%] lg:right-[4%] z-20 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl bg-amber-500/15 dark:bg-amber-950/70 border border-amber-400/40 dark:border-amber-400/50 backdrop-blur-xl flex flex-col items-center justify-center shadow-lg shadow-amber-500/20 hero-card-anim delay-200 text-center">
                 <span className="text-[8px] sm:text-[10px] font-black text-amber-600 dark:text-amber-400 uppercase tracking-wider">Code</span>
                 <span className="text-[9px] sm:text-xs font-bold text-slate-900 dark:text-white leading-tight">React / Vue</span>
               </div>
 
               {/* 3. DevOps Badge */}
-              <div className="absolute bottom-[20%] left-[-4%] sm:left-[-6%] z-20 px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl bg-purple-500/15 dark:bg-purple-950/70 border border-purple-400/40 dark:border-purple-400/50 backdrop-blur-xl flex flex-col items-center justify-center shadow-lg shadow-purple-500/20 hero-card-anim delay-400 text-center">
+              <div className="absolute bottom-[18%] left-[-4%] sm:left-[-6%] lg:left-[-8%] z-20 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl bg-purple-500/15 dark:bg-purple-950/70 border border-purple-400/40 dark:border-purple-400/50 backdrop-blur-xl flex flex-col items-center justify-center shadow-lg shadow-purple-500/20 hero-card-anim delay-400 text-center">
                 <span className="text-[8px] sm:text-[10px] font-black text-purple-600 dark:text-purple-300 uppercase tracking-wider">DevOps</span>
                 <span className="text-[9px] sm:text-xs font-bold text-slate-900 dark:text-white leading-tight">Cloud / Backend</span>
               </div>
 
               {/* 4. Live Dev Status Badge */}
-              <div className="absolute bottom-[6%] right-[4%] sm:right-[8%] z-20 px-3 py-1.5 sm:px-4 sm:py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-emerald-500/40 dark:border-emerald-400/40 backdrop-blur-xl flex items-center gap-2 shadow-xl shadow-emerald-500/20">
+              <div className="absolute bottom-[6%] right-[2%] sm:right-[4%] lg:right-[4%] z-20 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-emerald-500/40 dark:border-emerald-400/40 backdrop-blur-xl flex items-center gap-2 shadow-xl shadow-emerald-500/20">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
                 <span className="text-[10px] sm:text-xs font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">100% Dev</span>
               </div>
 
               {/* Main Circular Profile Image with Glowing Border */}
-              <div className="relative w-[210px] h-[210px] sm:w-[290px] sm:h-[290px] md:w-[360px] md:h-[360px] lg:w-[440px] lg:h-[440px] rounded-full overflow-hidden border-4 sm:border-[6px] border-white/80 dark:border-slate-800 shadow-2xl z-10 organic-profile-frame">
+              <div className="relative w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[310px] md:h-[310px] lg:w-[380px] lg:h-[380px] rounded-full overflow-hidden border-4 sm:border-[6px] border-white/80 dark:border-slate-800 shadow-2xl z-10 organic-profile-frame">
                 <img
                   src={heroImg}
                   alt="José Vásquez"
@@ -890,22 +1043,31 @@ function App() {
         </div>
 
         {/* Back to Top Floating Button */}
-        <a
-          href="#home"
-          aria-label="Back to Top"
-          className={`fixed bottom-6 right-6 z-50 inline-flex items-center justify-center rounded-full border border-cyan-500/30 bg-gradient-to-r from-cyan-400 to-emerald-400 p-3.5 text-slate-950 shadow-2xl shadow-cyan-500/30 backdrop-blur transition-all duration-300 hover:scale-110 hover:-translate-y-1 ${isScrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label={lang === "es" ? "Volver arriba" : "Back to top"}
+          title={lang === "es" ? "Volver arriba" : "Back to top"}
+          className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 inline-flex items-center justify-center rounded-full p-2.5 sm:p-3.5 backdrop-blur-md shadow-lg transition-all duration-300 cursor-pointer border ${showBackToTop
+              ? "opacity-35 hover:opacity-100 active:opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 translate-y-4 pointer-events-none"
+            } bg-slate-200/50 dark:bg-slate-900/50 text-slate-700 dark:text-cyan-300 border-slate-300/50 dark:border-white/15 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-indigo-600 hover:text-white hover:border-cyan-400 hover:shadow-cyan-500/30 hover:scale-110 hover:-translate-y-1 active:bg-gradient-to-r active:from-cyan-400 active:to-emerald-400 active:text-slate-950 active:scale-95`}
         >
-          <ArrowUp className="w-5 h-5 font-black" />
-        </a>
+          <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
+        </button>
       </section>
 
       {/* My Advantage & Skills Section */}
       <section className="py-20 sm:py-24 border-t border-slate-200/80 dark:border-white/10 bg-white/50 dark:bg-slate-950/50 relative overflow-hidden scroll-mt-24">
+        {/* Ambient Glows */}
+        <div className="ambient-glow top-[20%] right-[10%] w-[320px] h-[320px] bg-indigo-500/10 dark:bg-indigo-500/15" />
+        <div className="ambient-glow bottom-[15%] left-[10%] w-[320px] h-[320px] bg-cyan-500/10 dark:bg-cyan-500/15" />
+
         <div className="max-w-6xl mx-auto px-4 sm:px-6 z-10 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-14 items-center">
 
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-indigo-500/30 dark:border-indigo-400/30 bg-indigo-500/10 text-[10px] sm:text-xs font-extrabold tracking-wider text-indigo-700 dark:text-indigo-300 uppercase mb-4">
+                <Cpu className="w-3.5 h-3.5" />
                 <span>{t.advantage.badge}</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white whitespace-pre-line mb-5">
@@ -915,28 +1077,49 @@ function App() {
                 {t.advantage.desc}
               </p>
 
-              <div className="p-6 rounded-3xl bg-gradient-to-br from-indigo-500/10 via-cyan-500/10 to-transparent border border-indigo-500/20 dark:border-indigo-400/30 flex items-center gap-6 shadow-xl backdrop-blur-md">
-                <span className="text-5xl font-black bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-cyan-400 dark:to-emerald-400 bg-clip-text text-transparent">{t.advantage.years}</span>
-                <div className="text-xs text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider leading-relaxed">
-                  {t.advantage.yearsText}<br />
-                  <span className="text-emerald-600 dark:text-emerald-400 font-extrabold">{t.advantage.satisfaction}</span>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-5 rounded-3xl bg-gradient-to-br from-indigo-500/10 via-cyan-500/10 to-transparent border border-indigo-500/20 dark:border-indigo-400/30 flex flex-col justify-center shadow-lg backdrop-blur-md">
+                  <span className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-cyan-400 dark:to-emerald-400 bg-clip-text text-transparent">{t.advantage.years}</span>
+                  <span className="text-[11px] text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider mt-1">{t.advantage.yearsText}</span>
+                </div>
+                <div className="p-5 rounded-3xl bg-gradient-to-br from-emerald-500/10 via-cyan-500/10 to-transparent border border-emerald-500/20 dark:border-emerald-400/30 flex flex-col justify-center shadow-lg backdrop-blur-md">
+                  <span className="text-4xl sm:text-5xl font-black text-emerald-600 dark:text-emerald-400">100%</span>
+                  <span className="text-[11px] text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider mt-1">{t.advantage.satisfaction}</span>
                 </div>
               </div>
             </div>
 
-            {/* Skill Cards Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {t.advantage.skills.map((skill, i) => (
-                <div
-                  key={i}
-                  className="p-5 rounded-2xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/50 dark:hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-500/10 transition-all text-center flex flex-col items-center justify-center gap-3 animated-gradient-border backdrop-blur-md group"
-                >
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-4 border-indigo-500/20 dark:border-indigo-400/20 border-t-cyan-500 dark:border-t-cyan-400 flex items-center justify-center font-extrabold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:scale-105 transition-transform">
-                    {skill.value}
+            {/* Technical Capabilities Matrix */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {t.advantage.categories.map((cat, i) => {
+                const icons = [
+                  <Code className="w-5 h-5 text-cyan-500 dark:text-cyan-400" />,
+                  <Server className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />,
+                  <Database className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />,
+                  <ShieldCheck className="w-5 h-5 text-amber-500 dark:text-amber-400" />
+                ];
+                return (
+                  <div
+                    key={i}
+                    className="p-5 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/50 dark:hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between animated-gradient-border backdrop-blur-md group"
+                  >
+                    <div>
+                      <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800/80 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        {icons[i % icons.length]}
+                      </div>
+                      <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-1.5">{cat.title}</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">{cat.desc}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100 dark:border-white/5">
+                      {cat.skills.map((skill, si) => (
+                        <span key={si} className="text-[10.5px] font-semibold px-2 py-0.5 rounded-md bg-slate-100/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <span className="text-xs font-bold text-slate-800 dark:text-slate-200">{skill.name}</span>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
           </div>
@@ -1072,9 +1255,9 @@ function App() {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 z-10 relative">
 
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-center max-w-2xl mx-auto mb-10">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-indigo-500/30 dark:border-indigo-400/30 bg-indigo-500/10 text-[10px] sm:text-xs font-extrabold tracking-wider text-indigo-700 dark:text-indigo-300 uppercase mb-3">
-              <span>Portafolio</span>
+              <span>{t.portfolio.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
               {t.portfolio.title}
@@ -1084,108 +1267,219 @@ function App() {
             </p>
           </div>
 
+          {/* Category Filter Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+            {(["all", "erp", "ecommerce", "web"] as const).map((catKey) => {
+              const isActive = portfolioFilter === catKey;
+              return (
+                <button
+                  key={catKey}
+                  onClick={() => setPortfolioFilter(catKey)}
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer border ${
+                    isActive
+                      ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 border-slate-900 dark:border-white shadow-md shadow-indigo-500/10 scale-105"
+                      : "bg-white/70 dark:bg-slate-900/60 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:border-cyan-500/40 hover:text-cyan-600 dark:hover:text-cyan-400"
+                  }`}
+                >
+                  {t.portfolio.categories[catKey]}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Flagship Hero Card: U.E. Colegio Santa Luisa - Sistema de Gestión Escolar */}
+          {(portfolioFilter === "all" || portfolioFilter === "erp") && (
+            <div className="mb-12 rounded-3xl border-2 border-cyan-500/30 dark:border-cyan-400/30 bg-white/90 dark:bg-slate-900/80 backdrop-blur-xl p-6 sm:p-8 lg:p-10 shadow-2xl shadow-cyan-500/10 relative overflow-hidden group">
+              {/* Subtle accent glow */}
+              <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-cyan-500/10 via-indigo-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
+                {/* Left Column: Interactive Screenshot & Status */}
+                <div className="lg:col-span-7 flex flex-col gap-4">
+                  <div className="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-white/15 bg-slate-950 shadow-xl group-hover:border-cyan-500/50 transition-all">
+                    <img
+                      src={schoolManagementPreview}
+                      alt={PROJECT_DETAILS.school_management[lang].title}
+                      className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-500"
+                    />
+                    {/* Live Badge Overlay */}
+                    <div className="absolute top-3.5 left-3.5 flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-emerald-500/40 text-[11px] font-extrabold text-emerald-400 shadow-lg">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 absolute left-3.5" />
+                      <span className="pl-2">{t.portfolio.liveBadge} (Vercel)</span>
+                    </div>
+
+                    {/* School badge */}
+                    <div className="absolute bottom-3.5 right-3.5 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/15 text-[11px] font-bold text-slate-200 shadow-lg">
+                      <img src={schoolLogo} alt="Logo Colegio Santa Luisa" className="w-4 h-4 object-contain" />
+                      <span>U.E. Colegio Santa Luisa</span>
+                    </div>
+                  </div>
+
+                  {/* Architecture quick strip */}
+                  <div className="hidden sm:grid grid-cols-3 gap-2.5 text-center">
+                    <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/5">
+                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Frontend</div>
+                      <div className="text-xs font-bold text-slate-800 dark:text-slate-200">Nuxt 4 + Vue 3</div>
+                    </div>
+                    <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/5">
+                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Backend</div>
+                      <div className="text-xs font-bold text-slate-800 dark:text-slate-200">Feathers 5 · Fly.io</div>
+                    </div>
+                    <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/5">
+                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Database</div>
+                      <div className="text-xs font-bold text-slate-800 dark:text-slate-200">PostgreSQL + Knex</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column: Information & Actions */}
+                <div className="lg:col-span-5 flex flex-col justify-between h-full space-y-5">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <span className="px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/40 text-amber-600 dark:text-amber-400 text-[10px] font-black tracking-wider uppercase">
+                        ⭐ {t.portfolio.flagshipBadge}
+                      </span>
+                      <span className="px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-400/15 border border-cyan-500/30 text-cyan-700 dark:text-cyan-300 text-[10px] font-extrabold tracking-wider uppercase">
+                        {PROJECT_DETAILS.school_management[lang].tag}
+                      </span>
+                    </div>
+
+                    <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-3">
+                      {PROJECT_DETAILS.school_management[lang].title}
+                    </h3>
+
+                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                      {PROJECT_DETAILS.school_management[lang].shortDesc}
+                    </p>
+
+                    {/* Operational Highlights Pills */}
+                    <div className="space-y-2 mb-5">
+                      <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
+                        <CheckCircle2 className="w-4 h-4 text-cyan-500 shrink-0" />
+                        <span>{lang === "es" ? "Expediente Digital SIS & Matrícula Escolar" : "Digital SIS Student Dossiers & Enrollment"}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
+                        <CheckCircle2 className="w-4 h-4 text-cyan-500 shrink-0" />
+                        <span>{lang === "es" ? "Libro de Calificaciones MPPE & Boletines PDF" : "MPPE Gradebook & PDF Report Cards"}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
+                        <CheckCircle2 className="w-4 h-4 text-cyan-500 shrink-0" />
+                        <span>{lang === "es" ? "Asistencia Diaria por Aula y Horarios Semanales" : "Classroom Attendance & Weekly Timetable"}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
+                        <CheckCircle2 className="w-4 h-4 text-cyan-500 shrink-0" />
+                        <span>{lang === "es" ? "Cobranzas de Colegiaturas & Seguridad 2FA (TOTP)" : "Tuition Billing & 2FA (TOTP) Security"}</span>
+                      </div>
+                    </div>
+
+                    {/* Tech Badges */}
+                    <div className="flex flex-wrap gap-1.5 mb-6">
+                      {["Nuxt 4", "Vue 3", "Feathers.js 5", "PostgreSQL", "Knex.js", "Tailwind CSS v4", "2FA / TOTP", "Playwright"].map((tech, idx) => (
+                        <span key={idx} className="px-2.5 py-0.5 text-[11px] font-bold rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Primary & Secondary Actions */}
+                  <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+                    <a
+                      href="https://gestionescolarcolegiosantaluisa.vercel.app/auth/login"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full sm:w-auto flex-1 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-black text-xs shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-95 transition-all text-center flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>{lang === "es" ? "Probar Sistema en Vivo" : "Try Live Demo"}</span>
+                    </a>
+                    <button
+                      onClick={() => {
+                        setSelectedProject(PROJECT_DETAILS.school_management[lang]);
+                        setProjectModalTab("overview");
+                      }}
+                      className="w-full sm:w-auto px-5 py-3.5 rounded-2xl border border-slate-300 dark:border-white/15 bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02]"
+                    >
+                      <FileText className="w-3.5 h-3.5 text-cyan-500" />
+                      <span>{t.portfolio.viewProject}</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Other Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {PROJECT_KEYS.filter((key) => {
+              const proj = PROJECT_DETAILS[key][lang];
+              if (proj.isFlagship) {
+                return false;
+              }
+              if (portfolioFilter === "all") return true;
+              return proj.category === portfolioFilter;
+            }).map((key) => {
+              const project = PROJECT_DETAILS[key][lang];
+              return (
+                <div
+                  key={key}
+                  className="group p-6 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between h-full backdrop-blur-md animated-gradient-border"
+                >
+                  <div>
+                    <div className="aspect-video w-full rounded-2xl bg-slate-100 dark:bg-slate-950 mb-5 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-white/10 relative group-hover:scale-[1.02] transition-transform">
+                      <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="inline-flex px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-400/15 border border-cyan-500/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-300 text-[10px] font-extrabold tracking-wider uppercase mb-3 max-w-full truncate">
+                      {project.tag}
+                    </div>
+                    <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                      {project.shortDesc}
+                    </p>
+                    <div className="flex flex-wrap gap-1 mb-4">
+                      {project.techs.slice(0, 3).map((tech, idx) => (
+                        <span key={idx} className="px-2 py-0.5 text-[10px] font-semibold rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                          {tech}
+                        </span>
+                      ))}
+                      {project.techs.length > 3 && (
+                        <span className="px-2 py-0.5 text-[10px] font-semibold rounded bg-slate-100 dark:bg-slate-800 text-slate-500">
+                          +{project.techs.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </div>
 
-            {/* Project 1: Colegio Santa Luisa */}
-            <div className="group p-6 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between h-full backdrop-blur-md animated-gradient-border">
-              <div>
-                <div className="aspect-video w-full rounded-2xl bg-slate-100 dark:bg-slate-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-white/10 relative group-hover:scale-[1.02] transition-transform">
-                  <img src={colegioPreview} alt="Colegio Santa Luisa" className="w-full h-full object-cover" />
+                  <div className="pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-2">
+                    <button
+                      onClick={() => {
+                        setSelectedProject(project);
+                        setProjectModalTab("overview");
+                      }}
+                      className="inline-flex items-center gap-1.5 text-xs font-extrabold text-indigo-600 dark:text-cyan-400 group-hover:text-indigo-500 dark:group-hover:text-cyan-300 transition-colors cursor-pointer bg-transparent border-0"
+                    >
+                      <span>{t.portfolio.viewProject}</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                    {project.liveUrl && project.liveUrl !== "#" && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 text-[11px] font-bold text-slate-500 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                        title={t.portfolio.liveDemo}
+                      >
+                        <span>Demo</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    )}
+                  </div>
                 </div>
-                <div className="inline-flex px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-400/15 border border-cyan-500/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-300 text-[10px] font-extrabold tracking-wider uppercase mb-3 max-w-full truncate">
-                  {t.portfolio.project1.tag}
-                </div>
-                <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-                  {t.portfolio.project1.title}
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                  {t.portfolio.project1.desc}
-                </p>
-              </div>
-              <button
-                onClick={() => setSelectedProject(PROJECT_DETAILS.project1[lang])}
-                className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 dark:text-cyan-400 group-hover:text-indigo-500 dark:group-hover:text-cyan-300 transition-colors cursor-pointer bg-transparent border-0 pt-2"
-              >
-                <span>{t.portfolio.viewProject}</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Project 2: Valet Parking */}
-            <div className="group p-6 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between h-full backdrop-blur-md animated-gradient-border">
-              <div>
-                <div className="aspect-video w-full rounded-2xl bg-slate-100 dark:bg-slate-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-white/10 relative group-hover:scale-[1.02] transition-transform">
-                  <img src={valetPreview} alt="Valet Parking" className="w-full h-full object-cover" />
-                </div>
-                <div className="inline-flex px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-400/15 border border-cyan-500/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-300 text-[10px] font-extrabold tracking-wider uppercase mb-3 max-w-full truncate">
-                  {t.portfolio.project2.tag}
-                </div>
-                <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-                  {t.portfolio.project2.title}
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                  {t.portfolio.project2.desc}
-                </p>
-              </div>
-              <button
-                onClick={() => setSelectedProject(PROJECT_DETAILS.project2[lang])}
-                className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 dark:text-cyan-400 group-hover:text-indigo-500 dark:group-hover:text-cyan-300 transition-colors cursor-pointer bg-transparent border-0 pt-2"
-              >
-                <span>{t.portfolio.viewProject}</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Project 3: Sistema Veterinario */}
-            <div className="group p-6 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between h-full backdrop-blur-md animated-gradient-border">
-              <div>
-                <div className="aspect-video w-full rounded-2xl bg-slate-100 dark:bg-slate-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-white/10 relative group-hover:scale-[1.02] transition-transform">
-                  <img src={vetPreview} alt="Sistema Veterinario" className="w-full h-full object-cover" />
-                </div>
-                <div className="inline-flex px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-400/15 border border-cyan-500/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-300 text-[10px] font-extrabold tracking-wider uppercase mb-3 max-w-full truncate">
-                  {t.portfolio.project3.tag}
-                </div>
-                <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-                  {t.portfolio.project3.title}
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                  {t.portfolio.project3.desc}
-                </p>
-              </div>
-              <button
-                onClick={() => setSelectedProject(PROJECT_DETAILS.project3[lang])}
-                className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 dark:text-cyan-400 group-hover:text-indigo-500 dark:group-hover:text-cyan-300 transition-colors cursor-pointer bg-transparent border-0 pt-2"
-              >
-                <span>{t.portfolio.viewProject}</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Project 4: Electronic Shop */}
-            <div className="group p-6 rounded-3xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between h-full backdrop-blur-md animated-gradient-border">
-              <div>
-                <div className="aspect-video w-full rounded-2xl bg-slate-100 dark:bg-slate-950 mb-6 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-white/10 relative group-hover:scale-[1.02] transition-transform">
-                  <img src={electronicPreview} alt="Electronic Shop" className="w-full h-full object-cover" />
-                </div>
-                <div className="inline-flex px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-400/15 border border-cyan-500/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-300 text-[10px] font-extrabold tracking-wider uppercase mb-3 max-w-full truncate">
-                  {t.portfolio.project4.tag}
-                </div>
-                <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-                  {t.portfolio.project4.title}
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                  {t.portfolio.project4.desc}
-                </p>
-              </div>
-              <button
-                onClick={() => setSelectedProject(PROJECT_DETAILS.project4[lang])}
-                className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 dark:text-cyan-400 group-hover:text-indigo-500 dark:group-hover:text-cyan-300 transition-colors cursor-pointer bg-transparent border-0 pt-2"
-              >
-                <span>{t.portfolio.viewProject}</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-
+              );
+            })}
           </div>
 
         </div>
@@ -1232,15 +1526,15 @@ function App() {
                   </div>
                   <div>
                     <h4 className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">{t.contact.phone}</h4>
-                    <a href="tel:+584269217118" className="text-sm sm:text-base font-bold text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                      +58 426 921 7118
+                    <a href="tel:+584265217116" className="text-sm sm:text-base font-bold text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                      +58 426 521 7116
                     </a>
                   </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-2">
                   <a
-                    href="https://wa.me/584269217118"
+                    href="https://wa.me/584265217116"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm transition-all shadow-lg shadow-emerald-500/20 hover:scale-105"
@@ -1249,7 +1543,7 @@ function App() {
                     WhatsApp Directo
                   </a>
                   <a
-                    href="https://wa.me/584269217118?text=Hola%20José%2C%20quiero%20consultar%20sobre%20un%20proyecto"
+                    href="https://wa.me/584265217116?text=Hola%20José%2C%20quiero%20consultar%20sobre%20un%20proyecto"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-slate-900/80 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 font-bold text-sm transition-all"
@@ -1325,7 +1619,7 @@ function App() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-cyan-500 dark:to-indigo-600 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="w-4 h-4" />
                   <span>{isSubmitting ? (lang === "es" ? "Enviando..." : "Sending...") : t.contact.submit}</span>
@@ -1390,14 +1684,21 @@ function App() {
       {/* Detailed Project Modal */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/75 backdrop-blur-xl transition-opacity duration-300">
-          <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-200 dark:border-white/15 bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-slate-100 p-6 sm:p-10 shadow-2xl flex flex-col gap-6 backdrop-blur-2xl">
+          <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-200 dark:border-white/15 bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-slate-100 p-6 sm:p-8 shadow-2xl flex flex-col gap-6 backdrop-blur-2xl">
 
             {/* Modal Header */}
             <div className="flex items-start justify-between border-b border-slate-200/80 dark:border-white/10 pb-4">
               <div>
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-600 dark:text-cyan-300 bg-cyan-500/10 dark:bg-cyan-400/15 px-3 py-1 rounded-full mb-2 inline-block border border-cyan-500/20">
-                  {selectedProject.tag}
-                </span>
+                <div className="flex items-center gap-2 mb-2 flex-wrap">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-600 dark:text-cyan-300 bg-cyan-500/10 dark:bg-cyan-400/15 px-3 py-1 rounded-full border border-cyan-500/20">
+                    {selectedProject.tag}
+                  </span>
+                  {selectedProject.isFlagship && (
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-600 dark:text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+                      ⭐ {t.portfolio.flagshipBadge}
+                    </span>
+                  )}
+                </div>
                 <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">{selectedProject.title}</h3>
               </div>
               <button
@@ -1409,104 +1710,255 @@ function App() {
               </button>
             </div>
 
-            {/* Modal Body */}
-            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8">
-              {/* Left Column */}
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
-                    {lang === "es" ? "Descripción del Proyecto" : "Project Description"}
-                  </h4>
-                  <p className="text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">
-                    {selectedProject.longDesc}
-                  </p>
+            {/* Modal Tabs Navigation */}
+            <div className="flex items-center gap-2 border-b border-slate-200/80 dark:border-white/10 pb-3 overflow-x-auto">
+              <button
+                onClick={() => setProjectModalTab("overview")}
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  projectModalTab === "overview"
+                    ? "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 shadow-sm"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>{t.portfolio.modalTabs.overview}</span>
+              </button>
+
+              <button
+                onClick={() => setProjectModalTab("modules")}
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  projectModalTab === "modules"
+                    ? "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 shadow-sm"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                <Layers className="w-3.5 h-3.5" />
+                <span>{t.portfolio.modalTabs.modules}</span>
+              </button>
+
+              <button
+                onClick={() => setProjectModalTab("architecture")}
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  projectModalTab === "architecture"
+                    ? "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 shadow-sm"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                <Terminal className="w-3.5 h-3.5" />
+                <span>{t.portfolio.modalTabs.architecture}</span>
+              </button>
+
+              <button
+                onClick={() => setProjectModalTab("security")}
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  projectModalTab === "security"
+                    ? "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 shadow-sm"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>{t.portfolio.modalTabs.security}</span>
+              </button>
+            </div>
+
+            {/* Modal Body: Dynamic Tab Content */}
+            {projectModalTab === "overview" && (
+              <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
+                      {lang === "es" ? "Descripción del Proyecto" : "Project Description"}
+                    </h4>
+                    <p className="text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                      {selectedProject.longDesc}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
+                      {lang === "es" ? "Filosofía y Propósito" : "Philosophy & Purpose"}
+                    </h4>
+                    <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                      {selectedProject.philosophy}
+                    </p>
+                  </div>
+
+                  {/* Deployed Environments / Endpoints */}
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-white/10 space-y-3">
+                    <h4 className="text-xs font-black uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                      {lang === "es" ? "Entornos Desplegados" : "Deployed Environments"}
+                    </h4>
+                    <div className="space-y-2 text-xs">
+                      {selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
+                        <div className="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                            <span className="font-bold">Frontend (Vercel):</span>
+                          </div>
+                          <a
+                            href={selectedProject.liveUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-cyan-600 dark:text-cyan-400 hover:underline truncate font-mono text-[11px] max-w-[200px] sm:max-w-[280px]"
+                          >
+                            {selectedProject.liveUrl}
+                          </a>
+                        </div>
+                      )}
+                      {selectedProject.backendUrl && (
+                        <div className="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-indigo-400" />
+                            <span className="font-bold">Backend API (Fly.io):</span>
+                          </div>
+                          <a
+                            href={selectedProject.backendUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-indigo-600 dark:text-indigo-400 hover:underline truncate font-mono text-[11px] max-w-[200px] sm:max-w-[280px]"
+                          >
+                            {selectedProject.backendUrl}
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
-                <div>
-                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
-                    {lang === "es" ? "Filosofía y Propósito" : "Philosophy & Purpose"}
-                  </h4>
-                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                    {selectedProject.philosophy}
-                  </p>
-                </div>
+                <div className="space-y-6">
+                  {/* Preview Image */}
+                  <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-white/15 bg-slate-950 shadow-md">
+                    <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-auto object-cover" />
+                  </div>
 
-                <div>
-                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-                    {lang === "es" ? "Características Clave" : "Key Features"}
-                  </h4>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 dark:text-slate-300">
-                    {selectedProject.features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
-                    ))}
-                  </ul>
+                  {/* Core Tech Stack */}
+                  <div>
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                      {lang === "es" ? "Stack Tecnológico Principal" : "Core Tech Stack"}
+                    </h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {selectedProject.techs.map((tech, index) => (
+                        <span key={index} className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
+            )}
 
-              {/* Right Column */}
+            {projectModalTab === "modules" && (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    {lang === "es" ? "Módulos y Capacidades Operativas" : "Operational Modules & Features"}
+                  </h4>
+                  <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                    {selectedProject.features.length} {lang === "es" ? "módulos verificados" : "verified modules"}
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                  {selectedProject.features.map((feature, index) => (
+                    <div
+                      key={index}
+                      className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 flex items-start gap-3 hover:border-cyan-500/30 transition-colors"
+                    >
+                      <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
+                        <Check className="w-4 h-4" />
+                      </div>
+                      <p className="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed">
+                        {feature}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {projectModalTab === "architecture" && (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    {lang === "es" ? "Estructura de Directorios & Responsabilidades" : "Directory Architecture & Responsibilities"}
+                  </h4>
+                  <span className="text-[11px] font-mono text-cyan-600 dark:text-cyan-400 font-bold">
+                    Clean Architecture
+                  </span>
+                </div>
+                <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/70 dark:bg-slate-950/70 p-5 space-y-3 font-mono text-xs">
+                  {Object.entries(selectedProject.architecture).map(([path, desc], index) => (
+                    <div key={index} className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-200/50 dark:border-white/5 pb-2.5 last:border-0 last:pb-0 gap-1 sm:gap-4">
+                      <span className="text-cyan-700 dark:text-cyan-400 font-bold tracking-tight">{path}</span>
+                      <span className="text-slate-600 dark:text-slate-300 font-sans text-xs sm:text-right">{desc}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {projectModalTab === "security" && (
               <div className="space-y-6">
-                {/* Tech Stack */}
                 <div>
                   <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-                    {lang === "es" ? "Tecnologías" : "Technologies"}
+                    {lang === "es" ? "Arquitectura de Seguridad y Políticas" : "Security Architecture & Policies"}
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {selectedProject.security.map((sec, index) => (
+                      <div
+                        key={index}
+                        className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 flex items-start gap-3"
+                      >
+                        <div className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5">
+                          <ShieldCheck className="w-4 h-4" />
+                        </div>
+                        <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                          {sec}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                    {lang === "es" ? "Ecosistema Tecnológico Completo" : "Full Technology Ecosystem"}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.techs.map((tech, index) => (
-                      <span key={index} className="px-3 py-1 text-xs font-bold rounded-lg bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200">
+                      <span key={index} className="px-3 py-1.5 text-xs font-bold rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 shadow-sm">
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
-
-                {/* Security */}
-                <div>
-                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-                    {lang === "es" ? "Seguridad y Autorización" : "Security & Auth"}
-                  </h4>
-                  <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
-                    {selectedProject.security.map((sec, index) => (
-                      <li key={index}>{sec}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Directory Architecture */}
-                <div>
-                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-                    {lang === "es" ? "Estructura del Proyecto" : "Project Structure"}
-                  </h4>
-                  <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/50 p-4 space-y-2 text-xs font-mono">
-                    {Object.entries(selectedProject.architecture).map(([path, desc], index) => (
-                      <div key={index} className="flex flex-col sm:flex-row sm:justify-between border-b border-slate-100 dark:border-white/5 pb-2 last:border-0 last:pb-0">
-                        <span className="text-cyan-600 dark:text-cyan-400 font-bold">{path}</span>
-                        <span className="text-slate-500 dark:text-slate-400 text-[10px] sm:text-right">{desc}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
-            </div>
+            )}
 
             {/* Modal Footer / Actions */}
-            <div className="flex flex-col sm:flex-row items-center justify-end gap-3 border-t border-slate-200/80 dark:border-white/10 pt-4 mt-2">
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="w-full sm:w-auto px-6 py-2.5 rounded-full border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer text-center"
-              >
-                {lang === "es" ? "Cerrar" : "Close"}
-              </button>
-              {selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
-                <a
-                  href={selectedProject.liveUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-cyan-400 dark:to-emerald-400 text-white dark:text-slate-950 font-extrabold text-xs shadow-lg shadow-cyan-500/20 text-center flex items-center justify-center gap-1.5 hover:scale-105 transition-all"
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-200/80 dark:border-white/10 pt-4 mt-2">
+              <div className="text-xs text-slate-400 dark:text-slate-500 hidden sm:block">
+                {selectedProject.isFlagship && "★ Sistema Institucional en Producción Activa"}
+              </div>
+              <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto justify-end">
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-full border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer text-center"
                 >
-                  <span>{lang === "es" ? "Ver Demo en Vivo" : "View Live Demo"}</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              )}
+                  {lang === "es" ? "Cerrar" : "Close"}
+                </button>
+                {selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
+                  <a
+                    href={selectedProject.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-xs shadow-lg shadow-cyan-500/20 text-center flex items-center justify-center gap-1.5 hover:scale-105 transition-all cursor-pointer"
+                  >
+                    <span>{lang === "es" ? "Ver Demo en Vivo" : "View Live Demo"}</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
             </div>
 
           </div>

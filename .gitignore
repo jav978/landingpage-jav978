@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Agent & workspace configurations
+.agents
+.claude
+design-plans
+skills-lock.json
