@@ -1683,11 +1683,17 @@ function App() {
 
       {/* Detailed Project Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/75 backdrop-blur-xl transition-opacity duration-300">
-          <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-200 dark:border-white/15 bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-slate-100 p-6 sm:p-8 shadow-2xl flex flex-col gap-6 backdrop-blur-2xl">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-xl transition-opacity duration-300"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-3xl border border-slate-200 dark:border-white/15 bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-slate-100 shadow-2xl backdrop-blur-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
 
             {/* Modal Header */}
-            <div className="flex items-start justify-between border-b border-slate-200/80 dark:border-white/10 pb-4">
+            <div className="shrink-0 flex items-start justify-between border-b border-slate-200/80 dark:border-white/10 p-6 sm:p-8 pb-4">
               <div>
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-600 dark:text-cyan-300 bg-cyan-500/10 dark:bg-cyan-400/15 px-3 py-1 rounded-full border border-cyan-500/20">
@@ -1703,7 +1709,7 @@ function App() {
               </div>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="p-2 rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="p-2 rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer shrink-0 ml-4"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -1711,239 +1717,248 @@ function App() {
             </div>
 
             {/* Modal Tabs Navigation */}
-            <div className="flex items-center gap-2 border-b border-slate-200/80 dark:border-white/10 pb-3 overflow-x-auto">
-              <button
-                onClick={() => setProjectModalTab("overview")}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                  projectModalTab === "overview"
-                    ? "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 shadow-sm"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                }`}
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>{t.portfolio.modalTabs.overview}</span>
-              </button>
+            <div className="shrink-0 px-6 sm:px-8 py-3 border-b border-slate-200/80 dark:border-white/10 bg-slate-50/70 dark:bg-slate-950/40">
+              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+                <button
+                  type="button"
+                  onClick={() => setProjectModalTab("overview")}
+                  className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+                    projectModalTab === "overview"
+                      ? "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/40 shadow-sm"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/50 border border-transparent"
+                  }`}
+                >
+                  <BookOpen className="w-4 h-4 shrink-0" />
+                  <span>{t.portfolio.modalTabs.overview}</span>
+                </button>
 
-              <button
-                onClick={() => setProjectModalTab("modules")}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                  projectModalTab === "modules"
-                    ? "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 shadow-sm"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                }`}
-              >
-                <Layers className="w-3.5 h-3.5" />
-                <span>{t.portfolio.modalTabs.modules}</span>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setProjectModalTab("modules")}
+                  className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+                    projectModalTab === "modules"
+                      ? "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/40 shadow-sm"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/50 border border-transparent"
+                  }`}
+                >
+                  <Layers className="w-4 h-4 shrink-0" />
+                  <span>{t.portfolio.modalTabs.modules}</span>
+                </button>
 
-              <button
-                onClick={() => setProjectModalTab("architecture")}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                  projectModalTab === "architecture"
-                    ? "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 shadow-sm"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                }`}
-              >
-                <Terminal className="w-3.5 h-3.5" />
-                <span>{t.portfolio.modalTabs.architecture}</span>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setProjectModalTab("architecture")}
+                  className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+                    projectModalTab === "architecture"
+                      ? "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/40 shadow-sm"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/50 border border-transparent"
+                  }`}
+                >
+                  <Terminal className="w-4 h-4 shrink-0" />
+                  <span>{t.portfolio.modalTabs.architecture}</span>
+                </button>
 
-              <button
-                onClick={() => setProjectModalTab("security")}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                  projectModalTab === "security"
-                    ? "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 shadow-sm"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                }`}
-              >
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>{t.portfolio.modalTabs.security}</span>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setProjectModalTab("security")}
+                  className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+                    projectModalTab === "security"
+                      ? "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/40 shadow-sm"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/50 border border-transparent"
+                  }`}
+                >
+                  <ShieldCheck className="w-4 h-4 shrink-0" />
+                  <span>{t.portfolio.modalTabs.security}</span>
+                </button>
+              </div>
             </div>
 
-            {/* Modal Body: Dynamic Tab Content */}
-            {projectModalTab === "overview" && (
-              <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
-                      {lang === "es" ? "Descripción del Proyecto" : "Project Description"}
-                    </h4>
-                    <p className="text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">
-                      {selectedProject.longDesc}
-                    </p>
+            {/* Modal Body: Scrollable Tab Content Container */}
+            <div className="flex-1 overflow-y-auto p-6 sm:p-8 modal-scrollbar min-h-0">
+              {projectModalTab === "overview" && (
+                <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
+                        {lang === "es" ? "Descripción del Proyecto" : "Project Description"}
+                      </h4>
+                      <p className="text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                        {selectedProject.longDesc}
+                      </p>
+                    </div>
+
+                    <div>
+                      <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
+                        {lang === "es" ? "Filosofía y Propósito" : "Philosophy & Purpose"}
+                      </h4>
+                      <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                        {selectedProject.philosophy}
+                      </p>
+                    </div>
+
+                    {/* Deployed Environments / Endpoints */}
+                    <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-white/10 space-y-3">
+                      <h4 className="text-xs font-black uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                        {lang === "es" ? "Entornos Desplegados" : "Deployed Environments"}
+                      </h4>
+                      <div className="space-y-2 text-xs">
+                        {selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
+                          <div className="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5">
+                            <div className="flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                              <span className="font-bold">Frontend (Vercel):</span>
+                            </div>
+                            <a
+                              href={selectedProject.liveUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-cyan-600 dark:text-cyan-400 hover:underline truncate font-mono text-[11px] max-w-[200px] sm:max-w-[280px]"
+                            >
+                              {selectedProject.liveUrl}
+                            </a>
+                          </div>
+                        )}
+                        {selectedProject.backendUrl && (
+                          <div className="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5">
+                            <div className="flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-indigo-400" />
+                              <span className="font-bold">Backend API (Fly.io):</span>
+                            </div>
+                            <a
+                              href={selectedProject.backendUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-indigo-600 dark:text-indigo-400 hover:underline truncate font-mono text-[11px] max-w-[200px] sm:max-w-[280px]"
+                            >
+                              {selectedProject.backendUrl}
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
-                  <div>
-                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
-                      {lang === "es" ? "Filosofía y Propósito" : "Philosophy & Purpose"}
-                    </h4>
-                    <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                      {selectedProject.philosophy}
-                    </p>
-                  </div>
+                  <div className="space-y-6">
+                    {/* Preview Image */}
+                    <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-white/15 bg-slate-950 shadow-md">
+                      <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-auto object-cover" />
+                    </div>
 
-                  {/* Deployed Environments / Endpoints */}
-                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-white/10 space-y-3">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
-                      {lang === "es" ? "Entornos Desplegados" : "Deployed Environments"}
-                    </h4>
-                    <div className="space-y-2 text-xs">
-                      {selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
-                        <div className="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                            <span className="font-bold">Frontend (Vercel):</span>
-                          </div>
-                          <a
-                            href={selectedProject.liveUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-cyan-600 dark:text-cyan-400 hover:underline truncate font-mono text-[11px] max-w-[200px] sm:max-w-[280px]"
-                          >
-                            {selectedProject.liveUrl}
-                          </a>
-                        </div>
-                      )}
-                      {selectedProject.backendUrl && (
-                        <div className="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-indigo-400" />
-                            <span className="font-bold">Backend API (Fly.io):</span>
-                          </div>
-                          <a
-                            href={selectedProject.backendUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-indigo-600 dark:text-indigo-400 hover:underline truncate font-mono text-[11px] max-w-[200px] sm:max-w-[280px]"
-                          >
-                            {selectedProject.backendUrl}
-                          </a>
-                        </div>
-                      )}
+                    {/* Core Tech Stack */}
+                    <div>
+                      <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                        {lang === "es" ? "Stack Tecnológico Principal" : "Core Tech Stack"}
+                      </h4>
+                      <div className="flex flex-wrap gap-1.5">
+                        {selectedProject.techs.map((tech, index) => (
+                          <span key={index} className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
+              )}
 
-                <div className="space-y-6">
-                  {/* Preview Image */}
-                  <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-white/15 bg-slate-950 shadow-md">
-                    <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-auto object-cover" />
+              {projectModalTab === "modules" && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                      {lang === "es" ? "Módulos y Capacidades Operativas" : "Operational Modules & Features"}
+                    </h4>
+                    <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                      {selectedProject.features.length} {lang === "es" ? "módulos verificados" : "verified modules"}
+                    </span>
                   </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    {selectedProject.features.map((feature, index) => (
+                      <div
+                        key={index}
+                        className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 flex items-start gap-3 hover:border-cyan-500/30 transition-colors"
+                      >
+                        <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
+                          <Check className="w-4 h-4" />
+                        </div>
+                        <p className="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed">
+                          {feature}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-                  {/* Core Tech Stack */}
+              {projectModalTab === "architecture" && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                      {lang === "es" ? "Estructura de Directorios & Responsabilidades" : "Directory Architecture & Responsibilities"}
+                    </h4>
+                    <span className="text-[11px] font-mono text-cyan-600 dark:text-cyan-400 font-bold">
+                      Clean Architecture
+                    </span>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/70 dark:bg-slate-950/70 p-5 space-y-3 font-mono text-xs">
+                    {Object.entries(selectedProject.architecture).map(([path, desc], index) => (
+                      <div key={index} className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-200/50 dark:border-white/5 pb-2.5 last:border-0 last:pb-0 gap-1 sm:gap-4">
+                        <span className="text-cyan-700 dark:text-cyan-400 font-bold tracking-tight">{path}</span>
+                        <span className="text-slate-600 dark:text-slate-300 font-sans text-xs sm:text-right">{desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {projectModalTab === "security" && (
+                <div className="space-y-6">
                   <div>
                     <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-                      {lang === "es" ? "Stack Tecnológico Principal" : "Core Tech Stack"}
+                      {lang === "es" ? "Arquitectura de Seguridad y Políticas" : "Security Architecture & Policies"}
                     </h4>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {selectedProject.security.map((sec, index) => (
+                        <div
+                          key={index}
+                          className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 flex items-start gap-3"
+                        >
+                          <div className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5">
+                            <ShieldCheck className="w-4 h-4" />
+                          </div>
+                          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                            {sec}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                      {lang === "es" ? "Ecosistema Tecnológico Completo" : "Full Technology Ecosystem"}
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
                       {selectedProject.techs.map((tech, index) => (
-                        <span key={index} className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200">
+                        <span key={index} className="px-3 py-1.5 text-xs font-bold rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 shadow-sm">
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
-
-            {projectModalTab === "modules" && (
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                    {lang === "es" ? "Módulos y Capacidades Operativas" : "Operational Modules & Features"}
-                  </h4>
-                  <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-                    {selectedProject.features.length} {lang === "es" ? "módulos verificados" : "verified modules"}
-                  </span>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                  {selectedProject.features.map((feature, index) => (
-                    <div
-                      key={index}
-                      className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 flex items-start gap-3 hover:border-cyan-500/30 transition-colors"
-                    >
-                      <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
-                        <Check className="w-4 h-4" />
-                      </div>
-                      <p className="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed">
-                        {feature}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {projectModalTab === "architecture" && (
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                    {lang === "es" ? "Estructura de Directorios & Responsabilidades" : "Directory Architecture & Responsibilities"}
-                  </h4>
-                  <span className="text-[11px] font-mono text-cyan-600 dark:text-cyan-400 font-bold">
-                    Clean Architecture
-                  </span>
-                </div>
-                <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/70 dark:bg-slate-950/70 p-5 space-y-3 font-mono text-xs">
-                  {Object.entries(selectedProject.architecture).map(([path, desc], index) => (
-                    <div key={index} className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-200/50 dark:border-white/5 pb-2.5 last:border-0 last:pb-0 gap-1 sm:gap-4">
-                      <span className="text-cyan-700 dark:text-cyan-400 font-bold tracking-tight">{path}</span>
-                      <span className="text-slate-600 dark:text-slate-300 font-sans text-xs sm:text-right">{desc}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {projectModalTab === "security" && (
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-                    {lang === "es" ? "Arquitectura de Seguridad y Políticas" : "Security Architecture & Policies"}
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {selectedProject.security.map((sec, index) => (
-                      <div
-                        key={index}
-                        className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 flex items-start gap-3"
-                      >
-                        <div className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5">
-                          <ShieldCheck className="w-4 h-4" />
-                        </div>
-                        <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                          {sec}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-                    {lang === "es" ? "Ecosistema Tecnológico Completo" : "Full Technology Ecosystem"}
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.techs.map((tech, index) => (
-                      <span key={index} className="px-3 py-1.5 text-xs font-bold rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 shadow-sm">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
 
             {/* Modal Footer / Actions */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-200/80 dark:border-white/10 pt-4 mt-2">
-              <div className="text-xs text-slate-400 dark:text-slate-500 hidden sm:block">
-                {selectedProject.isFlagship && "★ Sistema Institucional en Producción Activa"}
+            <div className="shrink-0 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-200/80 dark:border-white/10 p-4 sm:p-6 bg-slate-50/70 dark:bg-slate-950/40">
+              <div className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block font-medium">
+                {selectedProject.isFlagship && "★ " + (lang === "es" ? "Sistema Institucional en Producción Activa" : "Institutional System in Active Production")}
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto justify-end">
                 <button
+                  type="button"
                   onClick={() => setSelectedProject(null)}
-                  className="w-full sm:w-auto px-6 py-2.5 rounded-full border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer text-center"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer text-center"
                 >
                   {lang === "es" ? "Cerrar" : "Close"}
                 </button>
@@ -1952,7 +1967,7 @@ function App() {
                     href={selectedProject.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-xs shadow-lg shadow-cyan-500/20 text-center flex items-center justify-center gap-1.5 hover:scale-105 transition-all cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-xs shadow-lg shadow-cyan-500/20 text-center flex items-center justify-center gap-1.5 hover:scale-105 transition-all cursor-pointer"
                   >
                     <span>{lang === "es" ? "Ver Demo en Vivo" : "View Live Demo"}</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -1967,11 +1982,17 @@ function App() {
 
       {/* Curriculum Vitae Modal */}
       {isCvModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-xl transition-opacity duration-300">
-          <div className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl border border-slate-200 dark:border-white/15 bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-slate-100 p-5 sm:p-8 shadow-2xl flex flex-col gap-6 backdrop-blur-2xl">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-xl transition-opacity duration-300"
+          onClick={() => setIsCvModalOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-3xl border border-slate-200 dark:border-white/15 bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-slate-100 shadow-2xl backdrop-blur-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
 
             {/* Header */}
-            <div className="flex items-start justify-between border-b border-slate-200/80 dark:border-white/10 pb-4">
+            <div className="shrink-0 flex items-start justify-between border-b border-slate-200/80 dark:border-white/10 p-6 sm:p-8 pb-4">
               <div className="flex items-center gap-3">
                 <div className="p-3 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-cyan-500/20 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 shrink-0">
                   <FileText className="w-6 h-6 sm:w-7 sm:h-7" />
@@ -1997,7 +2018,7 @@ function App() {
 
               <button
                 onClick={() => setIsCvModalOpen(false)}
-                className="p-2 rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="p-2 rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer shrink-0 ml-4"
                 aria-label="Close CV Modal"
               >
                 <X className="w-5 h-5" />
@@ -2005,7 +2026,7 @@ function App() {
             </div>
 
             {/* Top Toolbar / Action Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-slate-100/80 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10">
+            <div className="shrink-0 px-6 sm:px-8 py-3.5 border-b border-slate-200/80 dark:border-white/10 bg-slate-50/70 dark:bg-slate-950/40 flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 <span>{lang === "es" ? "Documento listo para descarga o lectura" : "Document ready for download or view"}</span>
@@ -2032,7 +2053,7 @@ function App() {
             </div>
 
             {/* Modal Content Sections */}
-            <div className="space-y-6">
+            <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 modal-scrollbar min-h-0">
 
               {/* Contact Info Pills */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
@@ -2114,7 +2135,7 @@ function App() {
                 </div>
               </div>
 
-              {/* Professional Experience */}
+              {/* Work Experience Timeline */}
               <div>
                 <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4 flex items-center gap-2">
                   <Briefcase className="w-4 h-4 text-cyan-500" />
